@@ -1,51 +1,62 @@
 import React from "react";
 import { StyleSheet, Text, View, TextInput } from "react-native";
 import MainContainer from "./Containers/MainContainer";
-import { createStore, applyMiddleware } from "redux";
-import ReduxThunk from "redux-thunk";
-import { logger } from "redux-logger";
-import Reducers from "./Reducers/index.js";
+import { createStore, applyMiddleware, compose } from "redux";
+import thunk from "redux-thunk";
+import { rootReducer } from "./Reducers/index.js";
 import { Provider } from "react-redux";
+import { AsyncStorage } from "react-native";
+import reactotron from "reactotron-react-native";
 
-export default class App extends React.Component {
-  state = {
-    loggedInUser: ""
-  };
+//
+// reactotron
+if (__DEV__) {
+  import("./ReactotronConfig").then(() => console.log("Reactotron Configured"));
+}
+//
+const storeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+//
+const store = createStore(rootReducer, storeEnhancers(applyMiddleware(thunk)));
 
+export { store };
+
+window.store = store.getState();
+
+class App extends React.Component {
   componentDidMount() {
-    return fetch("http://localhost:3000/users/5")
-      .then(response => response.json())
-      .then(responseJson => {
-        this.setState(
-          {
-            isLoading: false,
-            loggedInUser: responseJson
-          },
-          function() {}
-        );
-        console.log(this.state.loggedInUser);
-      })
-      .catch(error => {
-        console.error(error);
-      });
+    AsyncStorage.getItem("loggedInUser").then(json => {
+      try {
+        const token = JSON.parse(json);
+        console.log("token:", token);
+      } catch (e) {
+        console.log(e);
+      }
+    });
   }
-
-  handleSignUp = data => {
-    console.log("sign up form callback", data);
-  };
 
   render() {
     return (
-      // <Provider
-      //   store={createStore(Reducers, {}, applyMiddleware(ReduxThunk, logger))}
-      // >
       <View style={styles.container}>
-        <MainContainer handleSignUp={this.handleSignUp} />
+        <Provider store={store}>
+          <MainContainer />
+        </Provider>
       </View>
-      // </Provider>
     );
   }
 }
+
+export default App;
+
+// const mdp = dispatch => {
+//   return {
+//     fetchData: () => dispatch(getData())
+//   };
+// };
+
+// export default connect(
+//   null,
+//   mdp
+// )(App);
 
 const styles = StyleSheet.create({
   container: {

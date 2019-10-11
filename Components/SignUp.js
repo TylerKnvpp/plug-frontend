@@ -9,18 +9,23 @@ import {
   SafeAreaView,
   KeyboardAvoidingView
 } from "react-native";
+import { connect } from "react-redux";
 import CButton from "./CButton";
+import { userSignUp } from "../Actions/auth";
 
 class SignUp extends React.Component {
   state = {
-    name: "",
-    email: "",
-    password: ""
+    user: {
+      full_name: "",
+      username: "",
+      password: ""
+    }
   };
 
   handlePress = e => {
     e.preventDefault();
-    this.props.handleSignUp(this.state);
+    this.props.signUpUser({ user: this.state });
+    console.log(this.state);
   };
 
   render() {
@@ -33,18 +38,18 @@ class SignUp extends React.Component {
             source={require("../assets/Logo-White.png")}
           />
           <View style={styles.formContainer}>
-            <Text style={styles.label}>Name:</Text>
+            <Text style={styles.label}>Full Name:</Text>
             <TextInput
               style={styles.input}
-              onChangeText={name => this.setState({ name })}
-              value={this.state.name}
+              onChangeText={full_name => this.setState({ full_name })}
+              value={this.state.full_name}
             />
-            <Text style={styles.label}>Email:</Text>
+            <Text style={styles.label}>Username:</Text>
 
             <TextInput
               style={styles.input}
-              onChangeText={email => this.setState({ email })}
-              value={this.state.email}
+              onChangeText={username => this.setState({ username })}
+              value={this.state.username}
             />
             <Text style={styles.label}>Password:</Text>
 
@@ -63,6 +68,17 @@ class SignUp extends React.Component {
     );
   }
 }
+
+const mdp = dispatch => {
+  return {
+    signUpUser: event => dispatch(userSignUp(event))
+  };
+};
+
+export default connect(
+  null,
+  mdp
+)(SignUp);
 
 const styles = StyleSheet.create({
   button: {
@@ -112,5 +128,3 @@ const styles = StyleSheet.create({
     backgroundColor: "#25aae1"
   }
 });
-
-export default SignUp;
