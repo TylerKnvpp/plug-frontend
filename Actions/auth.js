@@ -1,8 +1,11 @@
-import { USER_SIGN_UP, USER_LOGIN } from "../Constants/actionCreators";
+import {
+  USER_SIGN_UP,
+  USER_LOGIN,
+  FETCH_USER
+} from "../Constants/actionCreators";
 import { AsyncStorage } from "react-native";
 
 export function userSignUp(user) {
-  console.log(user);
   return function(dispatch) {
     return fetch("http://localhost:3000/users", {
       method: "POST",
@@ -16,7 +19,6 @@ export function userSignUp(user) {
       .then(res => {
         //
         const signedUpUser = JSON.stringify(res);
-        console.log(signedUpUser);
         //
         AsyncStorage.setItem("loggedInUser", signedUpUser);
         //
@@ -40,11 +42,20 @@ export function userLogin(user) {
       .then(res => {
         const loggedInUser = JSON.stringify(res);
         //
-        console.log(loggedInUser);
         AsyncStorage.setItem("loggedInUser", loggedInUser);
         //
         dispatch({ type: USER_LOGIN, payload: res });
         //
+      });
+  };
+}
+
+export function getUserProfile(userID) {
+  return function(dispatch) {
+    return fetch(`http://localhost:3000/users/${userID}`)
+      .then(resp => resp.json())
+      .then(data => {
+        dispatch({ type: FETCH_USER, payload: data });
       });
   };
 }

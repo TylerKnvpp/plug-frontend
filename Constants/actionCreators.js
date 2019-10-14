@@ -5,3 +5,4 @@ export const AUTH_REQUEST = "AUTH_REQUEST";
 
 export const USER_SIGN_UP = "USER_SIGN_UP";
 export const USER_LOGIN = "USER_LOGIN";
+export const FETCH_USER = "FETCH_USER";

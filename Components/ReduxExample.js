@@ -2,7 +2,6 @@
 // import { View, Text, Image, StyleSheet } from "react-native";
 
 // const ReduxExample = props => {
-//   console.log(props.hello.image);
 
 //   return (
 //     <View style={styles.container}>

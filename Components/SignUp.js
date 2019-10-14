@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  AsyncStorage,
   Button,
   Text,
   Image,
@@ -7,6 +8,7 @@ import {
   TextInput,
   View,
   SafeAreaView,
+  StatusBar,
   KeyboardAvoidingView
 } from "react-native";
 import { connect } from "react-redux";
@@ -14,6 +16,20 @@ import CButton from "./CButton";
 import { userSignUp } from "../Actions/auth";
 
 class SignUp extends React.Component {
+  static navigationOptions = {
+    // title: "Sign Up",
+    headerStyle: {
+      backgroundColor: "#010112",
+      elevation: 0,
+      shadowOpacity: 0,
+      borderBottomWidth: 0
+    },
+    headerTintColor: "#fff",
+    headerTitleStyle: {
+      fontWeight: "bold"
+    }
+  };
+
   state = {
     user: {
       full_name: "",
@@ -25,12 +41,16 @@ class SignUp extends React.Component {
   handlePress = e => {
     e.preventDefault();
     this.props.signUpUser({ user: this.state });
-    console.log(this.state);
+
+    if (AsyncStorage.getItem("loggedInUser")) {
+      this.props.navigation.navigate("Plans");
+    }
   };
 
   render() {
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
+        <StatusBar barStyle="light-content" backgroundColor="#6a51ae" />
         <SafeAreaView>
           <Image
             resizeMode="contain"
@@ -62,7 +82,11 @@ class SignUp extends React.Component {
           </View>
           <CButton text="Submit" onPress={this.handlePress} />
 
-          <Button title="Or Login" color="#25aae1" onPress={() => null} />
+          <Button
+            title="Or Login"
+            color="#25aae1"
+            onPress={() => this.props.navigation.navigate("LoginScreen")}
+          />
         </SafeAreaView>
       </KeyboardAvoidingView>
     );
@@ -88,6 +112,7 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   container: {
+    backgroundColor: "#010112",
     flex: 1,
     alignItems: "center"
   },

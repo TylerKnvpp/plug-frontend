@@ -4,15 +4,16 @@ import { connect } from "react-redux";
 
 class Profile extends React.Component {
   render() {
-    let oneProfile = this.props.users.find(user => user.id === 22);
+    // let oneProfile = this.props.users.find(user => user.id === 5);
 
     return (
       <View>
-        {this.props.users.length > 0 ? (
+        {/* {this.props.users.length > 0 ? (
           <Text style={styles.header}>{oneProfile.full_name}</Text>
         ) : (
           <Text style={styles.header}>Loading</Text>
-        )}
+        )} */}
+        <Text style={styles.header}>Hello</Text>
       </View>
     );
   }

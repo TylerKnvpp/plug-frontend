@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  AsyncStorage,
   Button,
   Text,
   Image,
@@ -7,13 +8,28 @@ import {
   TextInput,
   View,
   SafeAreaView,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  StatusBar
 } from "react-native";
 import { connect } from "react-redux";
 import CButton from "./CButton";
 import { userLogin } from "../Actions/auth";
 
 class Login extends React.Component {
+  static navigationOptions = {
+    // title: "Login",
+    headerStyle: {
+      backgroundColor: "#010112",
+      elevation: 0,
+      shadowOpacity: 0,
+      borderBottomWidth: 0
+    },
+    headerTintColor: "#fff",
+    headerTitleStyle: {
+      fontWeight: "bold"
+    }
+  };
+
   state = {
     username: "",
     password: ""
@@ -22,11 +38,16 @@ class Login extends React.Component {
   handlePress = e => {
     e.preventDefault();
     this.props.userLogin(this.state);
+
+    if (AsyncStorage.getItem("loggedInUser")) {
+      this.props.navigation.navigate("Plans");
+    }
   };
 
   render() {
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
+        <StatusBar barStyle="light-content" backgroundColor="#6a51ae" />
         <SafeAreaView>
           <Image
             resizeMode="contain"
@@ -34,7 +55,7 @@ class Login extends React.Component {
             source={require("../assets/Logo-White.png")}
           />
 
-          <Text style={styles.header}>Log In!</Text>
+          {/* <Text style={styles.header}>Log In!</Text> */}
           <View style={styles.formContainer}>
             {/* Username */}
             <Text style={styles.label}>Username:</Text>
@@ -53,9 +74,13 @@ class Login extends React.Component {
               secureTextEntry={true}
             />
           </View>
-          <CButton text="Submit" onPress={this.handlePress} />
+          <CButton text="Login" onPress={this.handlePress} />
 
-          <Button title="Or Sign Up" color="#25aae1" onPress={() => null} />
+          <Button
+            title="Or Sign Up"
+            color="#25aae1"
+            onPress={() => this.props.navigation.navigate("SignUpScreen")}
+          />
         </SafeAreaView>
       </KeyboardAvoidingView>
     );
@@ -92,7 +117,8 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    alignItems: "center"
+    alignItems: "center",
+    backgroundColor: "#010112"
   },
   label: {
     color: "grey",

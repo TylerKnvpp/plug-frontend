@@ -10,15 +10,14 @@ import Login from "../Components/Login";
 
 class MainContainer extends React.Component {
   componentDidMount() {
-    this.props.getData();
+    // this.props.getData();
   }
 
   render() {
-    // console.log(this.props);
     return (
       <View style={styles.container}>
         {/* <SignUp /> */}
-        <Login />
+        {/* <Login /> */}
         {/* <Profile /> */}
       </View>
     );

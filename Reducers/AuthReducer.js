@@ -1,4 +1,8 @@
-import { USER_SIGN_UP, USER_LOGIN } from "../Constants/actionCreators";
+import {
+  USER_SIGN_UP,
+  USER_LOGIN,
+  FETCH_USER
+} from "../Constants/actionCreators";
 import { AsyncStorage } from "react-native";
 
 const INITIAL_STATE = {
@@ -19,8 +23,10 @@ function authReducer(state = INITIAL_STATE, action) {
       return {
         ...state,
         id: action.payload.user.id,
-        token: action.payload.user.token
+        token: action.payload.user.token,
+        user: action.payload.user
       };
+
     default:
       return state;
   }

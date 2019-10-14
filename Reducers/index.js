@@ -1,16 +1,18 @@
 import { combineReducers } from "redux";
 import { authReducer } from "./AuthReducer";
-import INITIAL_FETCH from "../Constants/actionCreators";
+import { FETCH_USER } from "../Constants/actionCreators";
 
 const INIT_STATE = {
-  users: []
+  user: {}
 };
 
 export function fetchReducer(state = INIT_STATE, action) {
   switch (action.type) {
-    case "INITIAL_FETCH":
-      return { ...state, users: action.payload };
-
+    case FETCH_USER:
+      return {
+        ...state,
+        user: action.payload
+      };
     default:
       break;
   }
