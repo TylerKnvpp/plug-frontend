@@ -71,7 +71,6 @@ class InviteCategorySelector extends React.Component {
   render() {
     return (
       <SafeAreaView>
-        {/* <Text style={styles.header}>What's the plan?</Text> */}
         <Text style={styles.instructions}>
           To get started, please select one of the following plan types.
         </Text>
@@ -219,8 +218,8 @@ const styles = StyleSheet.create({
   },
   header: {
     color: "white",
-    fontWeight: "800",
-    fontSize: 18,
+    fontWeight: "900",
+    fontSize: 24,
     marginRight: "auto",
     marginLeft: "auto",
     marginBottom: 40,

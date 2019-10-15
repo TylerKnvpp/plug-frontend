@@ -1,17 +1,18 @@
 import React from "react";
-import { View, TextInput, StyleSheet } from "react-native";
+import { View, TextInput, StyleSheet, Text } from "react-native";
 import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 
 class LocationSelector extends React.Component {
   render() {
     return (
       <View>
+        <Text style={styles.header}>Where are you going?</Text>
         <TextInput
           style={styles.input}
-          placeholder="Please search for your location"
+          placeholder="Name or Address of the location"
           placeholderTextColor="grey"
         />
-        <MapView
+        {/* <MapView
           provider={PROVIDER_GOOGLE}
           initialRegion={{
             latitude: 37.78825,
@@ -19,7 +20,7 @@ class LocationSelector extends React.Component {
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0421
           }}
-        />
+        /> */}
       </View>
     );
   }
@@ -37,5 +38,11 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     borderColor: "gray",
     borderWidth: 1
+  },
+  header: {
+    fontSize: 24,
+    fontWeight: "900",
+    color: "white",
+    marginBottom: 10
   }
 });

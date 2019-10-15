@@ -28,7 +28,10 @@ class DateTime extends React.Component {
 
     return (
       <View>
+        <Text style={styles.header}>When are you going?</Text>
+
         <CButton
+          theme="secondary"
           style={styles.button}
           text="Show DatePicker"
           onPress={this.showDateTimePicker}
@@ -47,4 +50,11 @@ class DateTime extends React.Component {
 
 export default DateTime;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  header: {
+    fontSize: 24,
+    fontWeight: "900",
+    color: "white",
+    marginBottom: 10
+  }
+});

@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import { TouchableOpacity, Text, StyleSheet } from "react-native";
 
 const PRIMARY_COLOR = "#25aae1";
-const SECONDARY_COLOR = "#6c757d";
+const SECONDARY_COLOR = "#0befe5";
+const TERTIARY_COLOR = "#051025";
 
 const styles = StyleSheet.create({
   // Container Styles
@@ -43,7 +44,7 @@ const styles = StyleSheet.create({
   textDefault: {
     fontSize: 16,
     fontWeight: "800",
-    color: "#fff"
+    color: TERTIARY_COLOR
   },
   textPrimary: {},
   textPrimaryOutline: {
