@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 import { authReducer } from "./AuthReducer";
-import { FETCH_USER } from "../Constants/actionCreators";
+import { FETCH_USER, UPDATE_PROFILE } from "../Constants/actionCreators";
 
 const INIT_STATE = {
   user: {}
@@ -9,6 +9,11 @@ const INIT_STATE = {
 export function fetchReducer(state = INIT_STATE, action) {
   switch (action.type) {
     case FETCH_USER:
+      return {
+        ...state,
+        user: action.payload
+      };
+    case UPDATE_PROFILE:
       return {
         ...state,
         user: action.payload

@@ -49,7 +49,11 @@ class SignUp extends React.Component {
 
   render() {
     return (
-      <KeyboardAvoidingView behavior="padding" style={styles.container}>
+      <KeyboardAvoidingView
+        behavior="position"
+        style={styles.container}
+        enabled="true"
+      >
         <StatusBar barStyle="light-content" backgroundColor="#6a51ae" />
         <SafeAreaView>
           <Image

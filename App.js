@@ -13,23 +13,17 @@ if (__DEV__) {
 }
 const storeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(rootReducer, storeEnhancers(applyMiddleware(thunk)));
-export { store };
-window.store = store.getState();
+//
+store.subscribe(render);
+function render() {
+  // 3.1) Get the current store state
+  const state = store.getState();
+
+  // 3.2) Extract the data you want
+  const newValue = state.toString();
+}
 
 class App extends React.Component {
-  // componentDidMount() {
-  //   AsyncStorage.getItem("loggedInUser").then(json => {
-  //     try {
-  //       const user = JSON.parse(json);
-  //       if (user) {
-  //         // this.props.fetchProfile(user.id);
-
-  //       }
-  //     } catch (e) {
-  //     }
-  //   });
-  // }
-
   render() {
     return (
       <Provider store={store}>

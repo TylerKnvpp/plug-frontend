@@ -3,15 +3,21 @@ import {
   AsyncStorage,
   Button,
   Text,
+  Image,
   StyleSheet,
-  SafeAreaView
+  TextInput,
+  View,
+  SafeAreaView,
+  KeyboardAvoidingView,
+  StatusBar
 } from "react-native";
 import { connect } from "react-redux";
 import { getUserProfile } from "../Actions/auth";
+import logoutUser from "../Actions/index";
 
-class PlanScreen extends React.Component {
+class Home extends React.Component {
   static navigationOptions = ({ navigation }) => ({
-    title: "MY PLANS",
+    title: "My Plans",
     headerRight: (
       <Button
         onPress={() => navigation.navigate("ProfileScreen")}
@@ -20,23 +26,17 @@ class PlanScreen extends React.Component {
       />
     ),
     headerStyle: {
-      backgroundColor: "#010112",
-      elevation: 0,
-      shadowOpacity: 0,
-      borderBottomWidth: 0
+      backgroundColor: "#010112"
     },
     headerTintColor: "#fff",
     headerTitleStyle: {
-      fontWeight: "900"
+      fontWeight: "bold"
     }
   });
 
-  state = {
-    user: {}
-  };
-
   handlePress = e => {
     AsyncStorage.clear();
+    this.props.logoutUser;
     this.props.navigation.navigate("AuthLoading");
   };
 
@@ -51,21 +51,9 @@ class PlanScreen extends React.Component {
         console.log(e);
       }
     });
-
-    const newUser = { ...this.props.user };
-    if (newUser !== this.state.user) {
-      this.setState({
-        user: newUser
-      });
-    }
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return nextProps.user != this.props.user;
   }
 
   render() {
-    // console.log("plans screen props", this.props.user);
     return (
       <SafeAreaView style={styles.container}>
         <Text style={styles.header}>Welcome {this.props.user.full_name}! </Text>
@@ -77,7 +65,8 @@ class PlanScreen extends React.Component {
 
 const mdp = dispatch => {
   return {
-    fetchProfile: data => dispatch(getUserProfile(data))
+    fetchProfile: data => dispatch(getUserProfile(data)),
+    logoutUser: () => dispatch(logoutUser())
   };
 };
 
@@ -90,7 +79,7 @@ const msp = state => {
 export default connect(
   msp,
   mdp
-)(PlanScreen);
+)(Home);
 
 const styles = StyleSheet.create({
   container: {
@@ -101,7 +90,7 @@ const styles = StyleSheet.create({
   header: {
     fontWeight: "900",
     fontSize: 40,
-    marginTop: 50,
+    marginTop: 200,
     color: "white"
   }
 });

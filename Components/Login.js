@@ -46,7 +46,7 @@ class Login extends React.Component {
 
   render() {
     return (
-      <KeyboardAvoidingView behavior="padding" style={styles.container}>
+      <KeyboardAvoidingView behavior="padding" style={styles.container} enabled>
         <StatusBar barStyle="light-content" backgroundColor="#6a51ae" />
         <SafeAreaView>
           <Image
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
     borderWidth: 1
   },
   formContainer: {
-    marginBottom: 40
+    flex: 1
   },
   fitToText: {
     flexDirection: "row",
