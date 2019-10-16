@@ -5,6 +5,7 @@ import SignUp from "../Components/SignUp";
 import PlanScreen from "../Components/PlanScreen";
 import Profile from "../Components/Profile";
 import AuthLoadingScreen from "../Screens/AuthLoadingScreen";
+import UsersIndexScreen from "../Screens/UsersIndexScreen";
 import InviteFormContainer from "../Containers/InviteFormContainer";
 
 // Implementation of HomeScreen, OtherScreen, SignInScreen, AuthLoadingScreen
@@ -12,7 +13,8 @@ import InviteFormContainer from "../Containers/InviteFormContainer";
 
 const AppStack = createStackNavigator({
   Plans: PlanScreen,
-  ProfileScreen: Profile
+  ProfileScreen: Profile,
+  UsersScreen: UsersIndexScreen
 });
 
 const AuthStack = createStackNavigator({

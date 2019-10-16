@@ -1,7 +1,7 @@
-1. create redux dispatch for handleSubmit of categories
+1. friend requests page
 
-2. figure out why plans object is being passed blank
+2. accept / deny requests
 
-3. post plan to db
+3. friends page
 
-4. implement has_friendship
+4. add friends to invites

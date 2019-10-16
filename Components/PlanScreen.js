@@ -70,7 +70,6 @@ class PlanScreen extends React.Component {
       <SafeAreaView style={styles.container}>
         <Text style={styles.header}>Welcome {this.props.user.full_name}! </Text>
         <Text style={styles.header}>Id: {this.props.user.id}! </Text>
-
         <Button title="Log Out" onPress={this.handlePress} />
       </SafeAreaView>
     );

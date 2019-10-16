@@ -6,6 +6,9 @@ import { rootReducer } from "./Reducers/index.js";
 import { Provider } from "react-redux";
 import { AsyncStorage } from "react-native";
 import AppNavigator from "./Navigators/IndexNavigator";
+import { createBottomTabNavigator } from "react-navigation-tabs";
+import PlansScreen from "./Screens/PlansScreen.js";
+import { TabNavigator } from "./Navigators/TabNavigator.js";
 
 // reactotron
 if (__DEV__) {

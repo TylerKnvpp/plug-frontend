@@ -14,7 +14,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 20,
     marginHorizontal: 20,
-    marginVertical: 10
+    marginVertical: 10,
+    padding: 10
   },
   containerPrimary: {
     backgroundColor: PRIMARY_COLOR,

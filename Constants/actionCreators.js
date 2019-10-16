@@ -10,3 +10,7 @@ export const UPDATE_PROFILE = "UPDATE_PROFILE";
 
 // POST
 export const POST_INVITE = "POST_INVITE";
+
+// USERS
+export const FETCH_USERS = "FETCH_USERS";
+export const FRIEND_REQUEST = "FRIEND_REQUEST";

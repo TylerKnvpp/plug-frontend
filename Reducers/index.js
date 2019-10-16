@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
 import { authReducer } from "./AuthReducer";
+import { UserReducer } from "./UserReducer";
 import { FETCH_USER, UPDATE_PROFILE } from "../Constants/actionCreators";
 import { inviteReducer } from "./InviteReducer";
 
@@ -28,5 +29,6 @@ export function fetchReducer(state = INIT_STATE, action) {
 export const rootReducer = combineReducers({
   fetch: fetchReducer,
   auth: authReducer,
-  invite: inviteReducer
+  invite: inviteReducer,
+  users: UserReducer
 });
