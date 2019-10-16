@@ -14,7 +14,7 @@ class PlanScreen extends React.Component {
     title: "MY PLANS",
     headerRight: (
       <Button
-        onPress={() => navigation.navigate("ProfileScreen")}
+        onPress={() => navigation.navigate("Invite")}
         title="Profile"
         color="#fff"
       />
@@ -69,6 +69,8 @@ class PlanScreen extends React.Component {
     return (
       <SafeAreaView style={styles.container}>
         <Text style={styles.header}>Welcome {this.props.user.full_name}! </Text>
+        <Text style={styles.header}>Id: {this.props.user.id}! </Text>
+
         <Button title="Log Out" onPress={this.handlePress} />
       </SafeAreaView>
     );

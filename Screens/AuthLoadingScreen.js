@@ -7,6 +7,8 @@ import {
   StyleSheet,
   View
 } from "react-native";
+import { connect } from "react-redux";
+import { getUserProfile } from "../Actions/auth";
 
 class AuthLoadingScreen extends React.Component {
   componentDidMount() {
@@ -16,10 +18,10 @@ class AuthLoadingScreen extends React.Component {
   // Fetch the token from storage then navigate to our appropriate place
   _bootstrapAsync = async () => {
     const loggedInUser = await AsyncStorage.getItem("loggedInUser");
-
+    loggedInUser ? this.props.getUser(loggedInUser.id) : null;
     // This will switch to the App screen or Auth screen and this loading
     // screen will be unmounted and thrown away.
-    this.props.navigation.navigate(loggedInUser ? "Form" : "LoginScreen");
+    this.props.navigation.navigate(loggedInUser ? "Plans" : "LoginScreen");
   };
 
   // Render any loading content that you like here
@@ -38,7 +40,16 @@ class AuthLoadingScreen extends React.Component {
   }
 }
 
-export default AuthLoadingScreen;
+const mdp = dispatch => {
+  return {
+    getUser: id => dispatch(getUserProfile(id))
+  };
+};
+
+export default connect(
+  null,
+  mdp
+)(AuthLoadingScreen);
 
 const styles = StyleSheet.create({
   image: {

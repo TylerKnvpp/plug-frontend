@@ -2,6 +2,8 @@ import React from "react";
 import InviteCategorySelector from "../Components/InviteCategorySelector";
 import InviteForm from "../Components/InviteForm";
 import { SafeAreaView, StyleSheet, Text } from "react-native";
+import { connect } from "react-redux";
+import { postInvite } from "../Actions/invite";
 
 class InviteFormContainer extends React.Component {
   static navigationOptions = {
@@ -19,10 +21,7 @@ class InviteFormContainer extends React.Component {
   };
 
   state = {
-    category: "",
-    time: "",
-    location: "",
-    details: ""
+    category: ""
   };
 
   handleCategorySelector = type => {
@@ -31,15 +30,24 @@ class InviteFormContainer extends React.Component {
     });
   };
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return nextState.category != this.state.category;
-  }
+  handleSubmit = plan => {
+    const cat = this.state.category;
+    const user = { ...this.props.user };
+    const createdPlan = {
+      user_id: user.id,
+      category: cat.category,
+      time: plan.time,
+      location: plan.location,
+      details: plan.details
+    };
+    this.props.postInvite(createdPlan);
+  };
 
   render() {
     return (
       <SafeAreaView style={styles.container}>
         {this.state.category ? (
-          <InviteForm />
+          <InviteForm handleSubmit={this.handleSubmit} />
         ) : (
           <InviteCategorySelector
             handleCategorySelector={this.handleCategorySelector}
@@ -50,7 +58,22 @@ class InviteFormContainer extends React.Component {
   }
 }
 
-export default InviteFormContainer;
+const mdp = dispatch => {
+  return {
+    postInvite: invite => dispatch(postInvite(invite))
+  };
+};
+
+const msp = state => {
+  return {
+    user: state.fetch.user
+  };
+};
+
+export default connect(
+  msp,
+  mdp
+)(InviteFormContainer);
 
 const styles = StyleSheet.create({
   header: {
