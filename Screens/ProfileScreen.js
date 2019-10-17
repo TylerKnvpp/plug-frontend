@@ -20,9 +20,7 @@ class ProfileScreen extends React.Component {
   render() {
     return (
       <View>
-        {/* <MainContainer> */}
         <Profile />
-        {/* </MainContainer> */}
       </View>
     );
   }

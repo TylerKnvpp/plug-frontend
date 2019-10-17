@@ -5,6 +5,7 @@ import { TouchableOpacity, Text, StyleSheet } from "react-native";
 const PRIMARY_COLOR = "#25aae1";
 const SECONDARY_COLOR = "#0befe5";
 const TERTIARY_COLOR = "#051025";
+const DANGER_COLOR = "#ff3d8c";
 
 const styles = StyleSheet.create({
   // Container Styles
@@ -22,6 +23,13 @@ const styles = StyleSheet.create({
     borderColor: PRIMARY_COLOR
   },
   containerPrimaryOutline: {
+    backgroundColor: "transparent"
+  },
+  containerDanger: {
+    backgroundColor: DANGER_COLOR,
+    borderColor: DANGER_COLOR
+  },
+  containerDangerOutline: {
     backgroundColor: "transparent"
   },
   containerSecondary: {
@@ -50,6 +58,10 @@ const styles = StyleSheet.create({
   textPrimary: {},
   textPrimaryOutline: {
     color: PRIMARY_COLOR
+  },
+  textDanger: {},
+  textDangerOutline: {
+    color: DANGER_COLOR
   },
   textSecondary: {},
   textSecondaryOutline: {
@@ -94,6 +106,24 @@ const getStyles = ({ size, theme, outline, disabled }) => {
     }
   }
 
+  if (theme === "danger") {
+    containerStyles.push(styles.containerDanger);
+    textStyles.push(styles.textDanger);
+
+    if (outline) {
+      containerStyles.push(styles.containerDangerOutline);
+      textStyles.push(styles.textDangerOutline);
+    }
+  } else {
+    containerStyles.push(styles.containerPrimary);
+    textStyles.push(styles.textPrimary);
+
+    if (outline) {
+      containerStyles.push(styles.containerPrimaryOutline);
+      textStyles.push(styles.textPrimaryOutline);
+    }
+  }
+
   if (disabled) {
     containerStyles.push(styles.containerDisabled);
     textStyles.push(styles.textDisabled);
@@ -107,7 +137,7 @@ class CButton extends React.Component {
     text: PropTypes.string.isRequired,
     onPress: PropTypes.func.isRequired,
     size: PropTypes.oneOf(["small", "default", "large"]),
-    theme: PropTypes.oneOf(["primary", "secondary"]),
+    theme: PropTypes.oneOf(["primary", "secondary", "danger"]),
     outline: PropTypes.bool,
     disabled: PropTypes.bool
   };

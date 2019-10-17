@@ -9,6 +9,7 @@ import AuthLoadingScreen from "../Screens/AuthLoadingScreen";
 import UsersIndexScreen from "../Screens/UsersIndexScreen";
 import InviteFormContainer from "../Containers/InviteFormContainer";
 import InvitesScreen from "../Screens/InvitesScreen";
+import FriendRequestsScreen from "../Screens/FriendRequestsScreen";
 
 const AuthStack = createStackNavigator({
   LoginScreen: Login,
@@ -27,7 +28,8 @@ const PlansStack = createStackNavigator({
 });
 
 const UsersStack = createStackNavigator({
-  Users: UsersIndexScreen
+  Users: UsersIndexScreen,
+  FriendRequests: FriendRequestsScreen
 });
 
 const ProfileStack = createStackNavigator({

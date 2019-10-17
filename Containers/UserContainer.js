@@ -33,19 +33,20 @@ class UserContainer extends React.Component {
   };
 
   filterCollection = () => {
-    // if (this.state.users > 0) {
-    //   //   console.log(this.state.users);
-    //   return this.state.users.filter(user =>
-    //     user.username.toLowerCase().includes(this.state.search.toLowerCase())
-    //   );
-    // }
+    if (this.state.users.length !== 0) {
+      const filteredArray = [...this.state.users];
+      //   console.log("filter", filteredArray);
+      return filteredArray;
+      //   return filteredArray.filter(user => {
+      //     user.full_name.toUpperCase().includes(this.state.search.toUpperCase());
+      //   });
+    }
   };
 
   render() {
     let renderUsers;
-
-    if (this.state.users.length !== 0) {
-      renderUsers = this.state.users.map(userObj => {
+    if (this.state.users.length > 0) {
+      renderUsers = this.filterCollection().map(userObj => {
         return <UserIndexCard key={userObj.id} user={userObj} />;
       });
     }
@@ -55,7 +56,7 @@ class UserContainer extends React.Component {
         <TextInput
           style={styles.input}
           placeholder="Search"
-          placeholderTextColor="black"
+          placeholderTextColor="white"
           onChangeText={this.handleChange}
         />
         {this.props.users.length > 0 ? renderUsers : <Text>Loading...</Text>}
@@ -77,12 +78,14 @@ export default connect(
 
 const styles = StyleSheet.create({
   input: {
-    backgroundColor: "#fff",
-    color: "#000",
+    backgroundColor: "#000",
+    color: "#fff",
     fontWeight: "700",
     fontSize: 18,
     borderRightColor: "#010112",
     borderLeftColor: "#010112",
+    borderTopColor: "#000",
+    borderBottomColor: "#000",
     // borderRadius: 5,
     height: 60,
     width: "auto",

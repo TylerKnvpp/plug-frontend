@@ -3,6 +3,7 @@ import { authReducer } from "./AuthReducer";
 import { UserReducer } from "./UserReducer";
 import { FETCH_USER, UPDATE_PROFILE } from "../Constants/actionCreators";
 import { inviteReducer } from "./InviteReducer";
+import { FriendshipReducer } from "./FriendshipReducer";
 
 const INIT_STATE = {
   user: {}
@@ -30,5 +31,6 @@ export const rootReducer = combineReducers({
   fetch: fetchReducer,
   auth: authReducer,
   invite: inviteReducer,
-  users: UserReducer
+  users: UserReducer,
+  friends: FriendshipReducer
 });

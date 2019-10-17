@@ -75,105 +75,121 @@ class InviteCategorySelector extends React.Component {
           To get started, please select one of the following plan types.
         </Text>
         <View style={styles.categoryContainer}>
-          <TouchableOpacity
-            name="brunch"
-            style={styles.category}
-            onPress={this.handlePressBrunch}
-            nativeID="brunch"
-          >
-            <Image
-              resizeMode="contain"
-              style={styles.image}
-              source={require("../assets/brunch.png")}
-            />
-            <Text style={styles.selector} name="brunch">
-              BRUNCH
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.category}
-            onPress={this.handlePressHappyHour}
-            value="happy-hour"
-          >
-            <Image
-              resizeMode="contain"
-              style={styles.image}
-              source={require("../assets/happy-hour.png")}
-            />
-            <Text style={styles.selector}>HAPPY HOUR</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.category}
-            onPress={this.handlePressDinner}
-            value="dinner"
-          >
-            <Image
-              resizeMode="contain"
-              style={styles.image}
-              source={require("../assets/dinner.png")}
-            />
-            <Text style={styles.selector}>DINNER</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.category}
-            onPress={this.handlePressPregame}
-            value="pregame"
-          >
-            <Image
-              resizeMode="contain"
-              style={styles.image}
-              source={require("../assets/pregame.png")}
-            />
-            <Text style={styles.selector}>PREGAME</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.category}
-            onPress={this.handlePressParty}
-            value="party"
-          >
-            <Image
-              resizeMode="contain"
-              style={styles.image}
-              source={require("../assets/party.png")}
-            />
-            <Text style={styles.selector}>PARTY</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.category}
-            onPress={this.handlePressGoOut}
-            value="go-out"
-          >
-            <Image
-              resizeMode="contain"
-              style={styles.image}
-              source={require("../assets/go-out.png")}
-            />
-            <Text style={styles.selector}>GO OUT</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.category}
-            onPress={this.handlePressPostgame}
-            value="postgame"
-          >
-            <Image
-              resizeMode="contain"
-              style={styles.image}
-              source={require("../assets/postgame.png")}
-            />
-            <Text style={styles.selector}>POSTGAME</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.category}
-            onPress={this.handlePressOther}
-            value="other"
-          >
-            <Image
-              resizeMode="contain"
-              style={styles.image}
-              source={require("../assets/other.png")}
-            />
-            <Text style={styles.selector}>OTHER</Text>
-          </TouchableOpacity>
+          <View style={styles.typeContainer}>
+            <TouchableOpacity
+              name="brunch"
+              style={styles.category}
+              onPress={this.handlePressBrunch}
+              nativeID="brunch"
+            >
+              <Image
+                resizeMode="contain"
+                style={styles.image}
+                source={require("../assets/brunch.png")}
+              />
+              <Text style={styles.selector} name="brunch">
+                BRUNCH
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.typeContainer}>
+            <TouchableOpacity
+              style={styles.category}
+              onPress={this.handlePressHappyHour}
+              value="happy-hour"
+            >
+              <Image
+                resizeMode="contain"
+                style={styles.image}
+                source={require("../assets/happy-hour.png")}
+              />
+              <Text style={styles.selector}>HAPPY HOUR</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.typeContainer}>
+            <TouchableOpacity
+              style={styles.category}
+              onPress={this.handlePressDinner}
+              value="dinner"
+            >
+              <Image
+                resizeMode="contain"
+                style={styles.image}
+                source={require("../assets/dinner.png")}
+              />
+              <Text style={styles.selector}>DINNER</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.typeContainer}>
+            <TouchableOpacity
+              style={styles.category}
+              onPress={this.handlePressPregame}
+              value="pregame"
+            >
+              <Image
+                resizeMode="contain"
+                style={styles.image}
+                source={require("../assets/pregame.png")}
+              />
+              <Text style={styles.selector}>PREGAME</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.typeContainer}>
+            <TouchableOpacity
+              style={styles.category}
+              onPress={this.handlePressParty}
+              value="party"
+            >
+              <Image
+                resizeMode="contain"
+                style={styles.image}
+                source={require("../assets/party.png")}
+              />
+              <Text style={styles.selector}>PARTY</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.typeContainer}>
+            <TouchableOpacity
+              style={styles.category}
+              onPress={this.handlePressGoOut}
+              value="go-out"
+            >
+              <Image
+                resizeMode="contain"
+                style={styles.image}
+                source={require("../assets/go-out.png")}
+              />
+              <Text style={styles.selector}>GO OUT</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.typeContainer}>
+            <TouchableOpacity
+              style={styles.category}
+              onPress={this.handlePressPostgame}
+              value="postgame"
+            >
+              <Image
+                resizeMode="contain"
+                style={styles.image}
+                source={require("../assets/postgame.png")}
+              />
+              <Text style={styles.selector}>POSTGAME</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.typeContainer}>
+            <TouchableOpacity
+              style={styles.category}
+              onPress={this.handlePressOther}
+              value="other"
+            >
+              <Image
+                resizeMode="contain"
+                style={styles.image}
+                source={require("../assets/other.png")}
+              />
+              <Text style={styles.selector}>OTHER</Text>
+            </TouchableOpacity>
+          </View>
         </View>
         <CButton text="Next" onPress={this.handleNext} style={styles.cbutton} />
       </SafeAreaView>
@@ -184,9 +200,15 @@ class InviteCategorySelector extends React.Component {
 export default InviteCategorySelector;
 
 const styles = StyleSheet.create({
+  typeContainer: {
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    flexDirection: "row"
+  },
   categoryContainer: {
-    marginBottom: 40,
-    marginTop: 20
+    flexDirection: "column",
+    marginBottom: 40
+    // marginTop: 20
   },
   instructions: {
     textAlign: "center",
@@ -197,9 +219,9 @@ const styles = StyleSheet.create({
     color: "white"
   },
   category: {
-    display: "flex",
+    flexWrap: "wrap",
     alignContent: "center",
-    justifyContent: "center",
+    justifyContent: "space-between",
     marginBottom: "auto",
     marginTop: "auto",
     marginLeft: "auto",
@@ -208,8 +230,8 @@ const styles = StyleSheet.create({
   selector: {
     alignContent: "center",
     justifyContent: "center",
-    marginBottom: "auto",
-    marginTop: "auto",
+    marginBottom: 0,
+    marginTop: 0,
     marginLeft: "auto",
     marginRight: "auto",
     color: "white",
@@ -235,6 +257,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
+    flexWrap: "wrap",
+
+    justifyContent: "space-between",
+    flexDirection: "row",
     backgroundColor: "#010112"
   },
   label: {
@@ -245,8 +271,9 @@ const styles = StyleSheet.create({
     alignContent: "center",
     justifyContent: "center",
     marginBottom: "auto",
-    marginTop: "auto",
-    marginLeft: "auto",
+
+    marginTop: 0,
+    marginLeft: 0,
     marginRight: 200,
     // marginRight: "auto",
     // marginTop: 60,

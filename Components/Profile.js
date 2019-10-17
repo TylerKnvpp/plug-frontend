@@ -95,10 +95,13 @@ class Profile extends React.Component {
       this.state.company ||
       this.state.school
     ) {
-      const userid = parseInt(this.props.user.id);
+      // copy user object from redux
+      const propsCopy = { ...this.props.user };
+      // copy local state to update user object
       const userData = { user: this.state };
+
       const user = {
-        id: userid,
+        id: propsCopy.user.id,
         data: userData
       };
       this.props.handleUpdate(user);
@@ -106,6 +109,7 @@ class Profile extends React.Component {
   };
 
   render() {
+    console.log(this.props.user);
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.container} enabled>
         <StatusBar barStyle="light-content" backgroundColor="#6a51ae" />
