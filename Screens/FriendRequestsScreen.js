@@ -5,16 +5,16 @@ import FriendRequestContainer from "../Containers/FriendRequestContainer";
 class FriendRequestsScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: "Friend Requests",
-    headerRight: (
-      <Button
-        onPress={() => {
-          AsyncStorage.clear();
-          navigation.navigate("AuthLoading");
-        }}
-        title="Logout"
-        color="#fff"
-      />
-    ),
+    // headerRight: (
+    //   <Button
+    //     onPress={() => {
+    //       AsyncStorage.clear();
+    //       navigation.navigate("AuthLoading");
+    //     }}
+    //     title="Logout"
+    //     color="#fff"
+    //   />
+    // ),
     headerStyle: {
       backgroundColor: "#010112",
       elevation: 0,
@@ -40,6 +40,6 @@ export default FriendRequestsScreen;
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#010112",
-    marginBottom: 30
+    height: "100%"
   }
 });

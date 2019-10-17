@@ -1,3 +1,4 @@
+import React from "react";
 import { createAppContainer, createSwitchNavigator } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import { createBottomTabNavigator } from "react-navigation-tabs";
@@ -10,6 +11,8 @@ import UsersIndexScreen from "../Screens/UsersIndexScreen";
 import InviteFormContainer from "../Containers/InviteFormContainer";
 import InvitesScreen from "../Screens/InvitesScreen";
 import FriendRequestsScreen from "../Screens/FriendRequestsScreen";
+import FriendsScreen from "../Screens/FriendsScreen";
+import Icon from "@expo/vector-icons/FontAwesome";
 
 const AuthStack = createStackNavigator({
   LoginScreen: Login,
@@ -23,11 +26,17 @@ const InvitesStack = createStackNavigator({
 
 const PlansStack = createStackNavigator({
   Plans: {
-    screen: PlansScreen
+    screen: Profile,
+    navigationOptions: () => {
+      tabBarIcon: ({ tintColor }) => (
+        <Icon name="user" color={tintColor} size={24} />
+      );
+    }
   }
 });
 
-const UsersStack = createStackNavigator({
+const FriendsStack = createStackNavigator({
+  Friends: FriendsScreen,
   Users: UsersIndexScreen,
   FriendRequests: FriendRequestsScreen
 });
@@ -40,49 +49,26 @@ const TabNav = createBottomTabNavigator(
   {
     Plans: PlansStack,
     Invite: InvitesStack,
-    Users: UsersStack,
+    Users: FriendsStack,
     Profile: ProfileStack
   },
   {
-    initialRouteName: "Plans"
-  }
-);
+    initialRouteName: "Plans",
 
-const AppNavigator = createSwitchNavigator(
-  {
-    AuthLoading: AuthLoadingScreen,
-    TabNavigator: TabNav,
-    Auth: AuthStack
-  },
-
-  {
-    initialRouteName: "AuthLoading"
-  },
-  {
-    //For React Navigation 2.+ change defaultNavigationOptions->navigationOptions
-    defaultNavigationOptions: ({ navigation }) => ({
-      tabBarIcon: ({ focused, horizontal, tintColor }) => {
-        const { routeName } = navigation.state;
-        let IconComponent = Ionicons;
-        let iconName;
-        if (routeName === "Plans") {
-          iconName = `ios-information-circle${focused ? "" : "-outline"}`;
-          // Sometimes we want to add badges to some icons.
-          // You can check the implementation below.
-        } else if (routeName === "Users") {
-          iconName = `ios-options${focused ? "" : "-outline"}`;
-        }
-
-        // You can return any component that you like here!
-        return <IconComponent name={iconName} size={25} color={tintColor} />;
-      }
-    }),
     tabBarOptions: {
-      backgroundColor: "black",
-      activeTintColor: "red",
-      inactiveTintColor: "gray"
+      activeTintColor: "#25aae1",
+      inactiveTintColor: "gray",
+      style: {
+        backgroundColor: "#010112"
+      }
     }
   }
 );
+
+const AppNavigator = createSwitchNavigator({
+  AuthLoading: AuthLoadingScreen,
+  TabNavigator: TabNav,
+  Auth: AuthStack
+});
 
 export default createAppContainer(AppNavigator);

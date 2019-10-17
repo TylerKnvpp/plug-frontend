@@ -1,4 +1,5 @@
 import React from "react";
+import { StyleSheet } from "react-native";
 import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import { rootReducer } from "./Reducers/index.js";

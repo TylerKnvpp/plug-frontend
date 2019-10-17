@@ -7,24 +7,7 @@ import { fetchUsers } from "../Actions/friendship";
 class UsersIndexScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: "Users",
-    headerLeft: (
-      <Button
-        onPress={() => {
-          navigation.navigate("FriendRequests");
-        }}
-        title="Requests"
-        color="#fff"
-      />
-    ),
-    headerRight: (
-      <Button
-        onPress={() => {
-          navigation.navigate("Users");
-        }}
-        title="Search"
-        color="#fff"
-      />
-    ),
+
     headerStyle: {
       backgroundColor: "#010112",
       elevation: 0,

@@ -2,7 +2,8 @@ import {
   FETCH_USERS,
   FRIEND_REQUEST,
   FETCH_FRIEND_REQUESTS,
-  ACCEPT_FRIEND_REQUEST
+  ACCEPT_FRIEND_REQUEST,
+  FETCH_FRIENDS
 } from "../Constants/actionCreators";
 
 export function fetchUsers() {
@@ -61,6 +62,17 @@ export function acceptFriendRequest(users) {
       .then(res => {
         console.log(res);
         dispatch({ type: ACCEPT_FRIEND_REQUEST, payload: res });
+      });
+  };
+}
+
+export function fetchFriends(id) {
+  return function(dispatch) {
+    return fetch(`http://localhost:3000/users/${id}/friends`)
+      .then(resp => resp.json(id))
+      .then(res => {
+        console.log(res);
+        dispatch({ type: FETCH_FRIENDS, payload: res });
       });
   };
 }
