@@ -6,50 +6,7 @@ import CButton from "./CButton";
 import { connect } from "react-redux";
 import { addUser } from "../Actions/friendship";
 
-// const UserIndexCard = (user, sender) => {
-//   //   console.log(user);
-
-//   handlePress = id => {
-//     console.log(id);
-//     console.log(sender);
-//     // const request = {
-//     //   receiver: id,
-//     //   sender: 0
-//     // };
-//   };
-
-//   return (
-//     <View key={user.user.id} style={styles.container}>
-//       <View style={styles.infoContainer}>
-//         <View style={styles.imageCropper}>
-//           <Image
-//             style={styles.image}
-//             resizeMode="cover"
-//             source={require("../assets/images/profile.jpg")}
-//           />
-//         </View>
-//         <View style={styles.textContainer}>
-//           <Text style={styles.header}>{user.user.full_name}</Text>
-//           <Text style={styles.label}>@{user.user.username}</Text>
-//         </View>
-//         <CButton
-//           key={user.user.id}
-//           text="Add Friend"
-//           size="default"
-//           onPress={() => {
-//             this.handlePress(user.user.id);
-//           }}
-//           style={styles.button}
-//           dataId={user.user.id}
-//         />
-//       </View>
-//     </View>
-//   );
-// };
-
 class UserIndexCard extends React.Component {
-  //   console.log(user);
-
   handlePress = id => {
     // copy prop object for user
     const copy = { ...this.props.sender };

@@ -50,9 +50,9 @@ export function userLogin(user) {
   };
 }
 
-export function getUserProfile(userID) {
+export function getUserProfile(id) {
   return function(dispatch) {
-    return fetch(`http://localhost:3000/users/${userID}`)
+    return fetch(`http://localhost:3000/users/${id}`)
       .then(resp => resp.json())
       .then(data => {
         dispatch({ type: FETCH_USER, payload: data });

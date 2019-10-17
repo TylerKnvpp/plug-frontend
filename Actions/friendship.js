@@ -22,7 +22,7 @@ export function addUser(request) {
     })
       .then(res => res.json())
       .then(res => {
-        console.log(res);
+        // console.log(res);
         dispatch({ type: FRIEND_REQUEST, payload: res });
       });
   };

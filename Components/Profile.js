@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  AsyncStorage,
   View,
   Button,
   SafeAreaView,
@@ -13,14 +14,18 @@ import {
 import { connect } from "react-redux";
 import CButton from "../Components/CButton";
 import { updateProfile } from "../Actions/index";
+import { getUserProfile } from "../Actions/auth";
 
 class Profile extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: "EDIT PROFILE",
     headerRight: (
       <Button
-        onPress={() => navigation.navigate("Profile")}
-        title="Settings"
+        onPress={() => {
+          AsyncStorage.clear();
+          navigation.navigate("AuthLoading");
+        }}
+        title="Logout"
         color="#fff"
       />
     ),
@@ -37,7 +42,7 @@ class Profile extends React.Component {
   });
 
   state = {
-    user: {},
+    id: null,
     city: "",
     occupation: "",
     company: "",
@@ -45,13 +50,43 @@ class Profile extends React.Component {
   };
 
   componentDidMount() {
-    const newUser = { ...this.props.user };
-    if (newUser !== this.state.user) {
+    this._retrieveData();
+    // console.log(this.state);
+    // console.log(this.props.user);
+  }
+
+  componentDidUpdate() {
+    if (!this.state.city) {
+      const userProps = { ...this.props.user };
       this.setState({
-        user: newUser
+        id: userProps.user.id,
+        city: userProps.user.city,
+        occupation: userProps.user.occupation,
+        company: userProps.user.company,
+        school: userProps.user.school
       });
     }
+    console.log("shouldve updated", this.state);
   }
+
+  _retrieveData = async () => {
+    try {
+      const value = await AsyncStorage.getItem("loggedInUser");
+      if (value !== null) {
+        // We have data!!
+        const parsed = JSON.parse(value);
+        if (value) {
+          // this.props.getUser(parsed.id);
+          this.setState({
+            id: parsed.id
+          });
+        }
+        return parsed;
+      }
+    } catch (error) {
+      // Error retrieving data
+    }
+  };
 
   handleSubmit = e => {
     if (
@@ -62,7 +97,6 @@ class Profile extends React.Component {
     ) {
       const userid = parseInt(this.props.user.id);
       const userData = { user: this.state };
-      console.log(userData);
       const user = {
         id: userid,
         data: userData
@@ -72,7 +106,6 @@ class Profile extends React.Component {
   };
 
   render() {
-    console.log("profile", this.state);
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.container} enabled>
         <StatusBar barStyle="light-content" backgroundColor="#6a51ae" />
@@ -161,13 +194,14 @@ class Profile extends React.Component {
 
 const msp = state => {
   return {
-    user: state.fetch.user
+    user: state.fetch
   };
 };
 
 const mdp = dispatch => {
   return {
-    handleUpdate: data => dispatch(updateProfile(data))
+    handleUpdate: data => dispatch(updateProfile(data)),
+    getUser: data => dispatch(getUserProfile(data))
   };
 };
 

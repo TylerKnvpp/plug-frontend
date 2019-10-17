@@ -3,10 +3,11 @@ import { ScrollView } from "react-native";
 import UserContainer from "../Containers/UserContainer";
 import { connect } from "react-redux";
 import { fetchUsers } from "../Actions/friendship";
+import { Ionicons } from "@expo/vector-icons";
 
 class UsersIndexScreen extends React.Component {
   static navigationOptions = {
-    title: "USERS",
+    title: "Users",
     headerStyle: {
       backgroundColor: "#010112",
       elevation: 0,
