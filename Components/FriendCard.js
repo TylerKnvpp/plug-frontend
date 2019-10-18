@@ -8,7 +8,6 @@ import { addUser } from "../Actions/friendship";
 
 class FriendCard extends React.Component {
   render() {
-    console.log("friend card");
     return (
       <View key={this.props.user.id} style={styles.container}>
         <View style={styles.infoContainer}>

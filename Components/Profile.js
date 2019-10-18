@@ -50,10 +50,9 @@ class Profile extends React.Component {
   };
 
   componentDidMount() {
-    console.log("in mount", this.props.user);
+    // console.log("in mount", this.props.user);
     // if (!this.state.city) {
     // const userProps = { ...this.props.user };
-
     // this.setState({
     //   id: userProps.id,
     //   city: userProps.city,
@@ -105,6 +104,7 @@ class Profile extends React.Component {
         data: userData
       };
       this.props.handleUpdate(user);
+      alert("Your profile has been updated.");
     }
   };
 

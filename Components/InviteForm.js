@@ -2,9 +2,24 @@ import React from "react";
 import { Text, View, StyleSheet, TextInput, Button } from "react-native";
 import DateTimePicker from "react-native-modal-datetime-picker";
 import CButton from "./CButton";
-// import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
+import { connect } from "react-redux";
+import { collectInviteStateDetails, postInvite } from "../Actions/invite";
 
 class InviteForm extends React.Component {
+  static navigationOptions = {
+    title: "Details",
+    headerStyle: {
+      backgroundColor: "#010112",
+      elevation: 0,
+      shadowOpacity: 0,
+      borderBottomWidth: 0
+    },
+    headerTintColor: "#fff",
+    headerTitleStyle: {
+      fontWeight: "bold"
+    }
+  };
+
   state = {
     time: "",
     location: "",
@@ -27,8 +42,15 @@ class InviteForm extends React.Component {
   };
 
   handleSubmit = e => {
-    const plan = { ...this.state };
-    this.props.handleSubmit(plan);
+    const plan = {
+      time: this.state.time,
+      location: this.state.location,
+      details: this.state.details,
+      category: this.props.fullInvite.inviteCategory
+    };
+    this.props.postInvite(plan);
+    alert("Your plan has been created!");
+    this.props.navigation.navigate("Plans");
   };
 
   render() {
@@ -78,14 +100,33 @@ class InviteForm extends React.Component {
   }
 }
 
-export default InviteForm;
+const mdp = dispatch => {
+  return {
+    collectInviteStateDetails: details =>
+      dispatch(collectInviteStateDetails(details)),
+    postInvite: invite => dispatch(postInvite(invite))
+  };
+};
+
+const msp = state => {
+  return {
+    fullInvite: state.invite
+  };
+};
+
+export default connect(
+  msp,
+  mdp
+)(InviteForm);
 
 const styles = StyleSheet.create({
   map: {
     ...StyleSheet.absoluteFillObject
   },
   container: {
-    marginTop: 30
+    flex: 1,
+    alignItems: "center",
+    backgroundColor: "#010112"
   },
   multiLineInput: {
     color: "white",
@@ -116,6 +157,7 @@ const styles = StyleSheet.create({
     borderWidth: 1
   },
   header: {
+    marginTop: 30,
     fontSize: 24,
     fontWeight: "900",
     color: "white",

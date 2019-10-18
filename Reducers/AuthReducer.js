@@ -30,7 +30,6 @@ function authReducer(state = INITIAL_STATE, action) {
         user: action.payload
       };
     case FETCH_USER:
-      console.log("payload", action.payload.username);
       return {
         ...state,
         userObj: action.payload

@@ -13,6 +13,8 @@ import InvitesScreen from "../Screens/InvitesScreen";
 import FriendRequestsScreen from "../Screens/FriendRequestsScreen";
 import FriendsScreen from "../Screens/FriendsScreen";
 import { Ionicons } from "@expo/vector-icons";
+import InviteCategorySelector from "../Components/InviteCategorySelector";
+import InviteForm from "../Components/InviteForm";
 
 const AuthStack = createStackNavigator({
   LoginScreen: Login,
@@ -20,8 +22,9 @@ const AuthStack = createStackNavigator({
 });
 
 const InvitesStack = createStackNavigator({
-  Form: InviteFormContainer,
-  Invites: InvitesScreen
+  Invites: InvitesScreen,
+  Category: InviteCategorySelector,
+  InviteForm: InviteForm
 });
 
 const PlansStack = createStackNavigator({

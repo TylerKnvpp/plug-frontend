@@ -1,6 +1,11 @@
-import POST_INVITE from "../Actions/index";
+import {
+  POST_INVITE,
+  COLLECT_INVITE_CATEGORY_STATE,
+  COLLECT_INVITE_DETAILS_STATE
+} from "../Constants/actionCreators";
 
 export function postInvite(invite) {
+  console.log(invite);
   return function(dispatch) {
     return fetch("http://localhost:3000/invites", {
       method: "POST",
@@ -16,3 +21,13 @@ export function postInvite(invite) {
       });
   };
 }
+
+export const collectInviteStateCategory = data => ({
+  type: COLLECT_INVITE_CATEGORY_STATE,
+  payload: data
+});
+
+export const collectInviteStateDetails = data => ({
+  type: "COLLECT_INVITE_DETAILS_STATE",
+  payload: data
+});

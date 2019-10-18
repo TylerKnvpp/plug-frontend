@@ -25,9 +25,13 @@ class InviteFormContainer extends React.Component {
   };
 
   handleCategorySelector = type => {
-    this.setState({
-      category: type
-    });
+    if (this.state.category) {
+      this.setState({
+        category: type
+      });
+      this.props.handleNext(this.state);
+    }
+    this.props.navigation.navigate("InviteForm");
   };
 
   handleSubmit = plan => {
