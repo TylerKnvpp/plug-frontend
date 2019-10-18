@@ -44,11 +44,12 @@ class InviteForm extends React.Component {
   handleSubmit = e => {
     if (this.state.time && this.state.location && this.state.details) {
       const invite = {
+        user_id: this.props.user.id,
         time: this.state.time,
         location: this.state.location,
         details: this.state.details,
-        category: this.props.fullInvite.inviteCategory
-        // invitedUsers: this.props.fullInvite.invitedUsers
+        category: this.props.fullInvite.inviteCategory,
+        invitedUsers: this.props.fullInvite.invitedUsers
       };
       this.props.postInvite(invite);
       alert("Your invite has been sent!");
@@ -120,6 +121,7 @@ const mdp = dispatch => {
 
 const msp = state => {
   return {
+    user: state.auth.userObj,
     fullInvite: state.invite
   };
 };
