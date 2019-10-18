@@ -50,43 +50,44 @@ class Profile extends React.Component {
   };
 
   componentDidMount() {
-    this._retrieveData();
+    // this._retrieveData();
     // console.log(this.state);
-    // console.log(this.props.user);
+    console.log(this.props.user);
   }
 
   componentDidUpdate() {
     if (!this.state.city) {
       const userProps = { ...this.props.user };
+
       this.setState({
-        id: userProps.user.id,
-        city: userProps.user.city,
-        occupation: userProps.user.occupation,
-        company: userProps.user.company,
-        school: userProps.user.school
+        id: userProps.id,
+        city: userProps.city,
+        occupation: userProps.occupation,
+        company: userProps.company,
+        school: userProps.school
       });
     }
     console.log("shouldve updated", this.state);
   }
 
-  _retrieveData = async () => {
-    try {
-      const value = await AsyncStorage.getItem("loggedInUser");
-      if (value !== null) {
-        // We have data!!
-        const parsed = JSON.parse(value);
-        if (value) {
-          // this.props.getUser(parsed.id);
-          this.setState({
-            id: parsed.id
-          });
-        }
-        return parsed;
-      }
-    } catch (error) {
-      // Error retrieving data
-    }
-  };
+  // _retrieveData = async () => {
+  //   try {
+  //     const value = await AsyncStorage.getItem("loggedInUser");
+  //     if (value !== null) {
+  //       // We have data!!
+  //       const parsed = JSON.parse(value);
+  //       if (value) {
+  //         // this.props.getUser(parsed.id);
+  //         this.setState({
+  //           id: parsed.id
+  //         });
+  //       }
+  //       return parsed;
+  //     }
+  //   } catch (error) {
+  //     // Error retrieving data
+  //   }
+  // };
 
   handleSubmit = e => {
     if (
@@ -101,7 +102,7 @@ class Profile extends React.Component {
       const userData = { user: this.state };
 
       const user = {
-        id: propsCopy.user.id,
+        id: propsCopy.id,
         data: userData
       };
       this.props.handleUpdate(user);
@@ -198,7 +199,7 @@ class Profile extends React.Component {
 
 const msp = state => {
   return {
-    user: state.fetch
+    user: state.auth.user
   };
 };
 

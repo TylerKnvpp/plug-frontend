@@ -7,7 +7,8 @@ import { AsyncStorage } from "react-native";
 
 const INITIAL_STATE = {
   id: null,
-  token: {}
+  token: {},
+  user: {}
 };
 
 function authReducer(state = INITIAL_STATE, action) {
@@ -26,7 +27,11 @@ function authReducer(state = INITIAL_STATE, action) {
         token: action.payload.user.token,
         user: action.payload.user
       };
-
+    case FETCH_USER:
+      return {
+        ...state,
+        user: action.payload
+      };
     default:
       return state;
   }

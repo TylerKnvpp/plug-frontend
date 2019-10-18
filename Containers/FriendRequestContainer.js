@@ -17,13 +17,14 @@ class FriendRequestContainer extends React.Component {
   }
 
   componentDidUpdate() {
-    console.log(this.props.requests);
-    const requestCopy = [...this.props.requests.pending_requests];
-
-    if (this.state.requests.length === 0) {
-      this.setState({
-        requests: requestCopy
-      });
+    const requestCopy = { ...this.props.requests };
+    console.log("copy", requestCopy.pending_received);
+    if (requestCopy.pending_received.length > 0) {
+      if (this.state.requests.length === 0) {
+        this.setState({
+          requests: requestCopy.pending_received
+        });
+      }
     }
   }
 

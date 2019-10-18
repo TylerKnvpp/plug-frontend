@@ -10,18 +10,28 @@ class FriendsContainer extends React.Component {
     search: ""
   };
 
+  componentDidMount() {
+    const user = { ...this.props.user };
+    this.props.fetchFriends(user.id);
+  }
+
   componentDidUpdate() {
+    // const user = { ...this.props.user };
+    // this.props.fetchFriends(user.id);
     //   pull user collection down from redux
-    const userCollection = [...this.props.friends];
+    const userCollection = { ...this.props.friends };
     // sort user collection
-    const sortedUsers = userCollection.sort((a, b) =>
-      a.firstname !== b.full_name ? (a.full_name < b.full_name ? -1 : 1) : 0
-    );
-    // conditional to avoid infinite loop + setState
-    if (this.state.friends.length === 0) {
-      this.setState({
-        friends: sortedUsers
-      });
+    console.log("uc", userCollection);
+    if (userCollection.friends.length !== 0) {
+      const sortedUsers = userCollection.friends.sort((a, b) =>
+        a.firstname !== b.full_name ? (a.full_name < b.full_name ? -1 : 1) : 0
+      );
+      // conditional to avoid infinite loop + setState
+      if (this.state.friends.length === 0) {
+        this.setState({
+          friends: sortedUsers
+        });
+      }
     }
   }
 
@@ -69,13 +79,20 @@ class FriendsContainer extends React.Component {
 
 const msp = state => {
   return {
-    friends: state.fetch.user.friends
+    user: state.auth.user,
+    friends: state.friends.updatedFriendsCollection
+  };
+};
+
+const mdp = dispatch => {
+  return {
+    fetchFriends: id => dispatch(fetchFriends(id))
   };
 };
 
 export default connect(
   msp,
-  null
+  mdp
 )(FriendsContainer);
 
 const styles = StyleSheet.create({

@@ -20,12 +20,11 @@ class AuthLoadingScreen extends React.Component {
   _bootstrapAsync = async () => {
     const loggedInUser = await AsyncStorage.getItem("loggedInUser");
     const parsed = JSON.parse(loggedInUser);
-    loggedInUser ? this.props.getUser(parsed.id) : null;
-    // loggedInUser ? this.props.fetchRequests(parsed.id) : null;
-
+    loggedInUser ? this.props.getUserProfile(parsed.id) : null;
+    console.log(this.props.userData);
     // This will switch to the App screen or Auth screen and this loading
     // screen will be unmounted and thrown away.
-    this.props.navigation.navigate(loggedInUser ? "Friends" : "LoginScreen");
+    this.props.navigation.navigate(loggedInUser ? "Invite" : "LoginScreen");
   };
 
   // Render any loading content that you like here
@@ -46,13 +45,19 @@ class AuthLoadingScreen extends React.Component {
 
 const mdp = dispatch => {
   return {
-    getUser: id => dispatch(getUserProfile(id)),
+    getUserProfile: id => dispatch(getUserProfile(id)),
     fetchRequests: id => dispatch(fetchFriendRequests(id))
   };
 };
 
+const msp = state => {
+  return {
+    userData: state.auth
+  };
+};
+
 export default connect(
-  null,
+  msp,
   mdp
 )(AuthLoadingScreen);
 
