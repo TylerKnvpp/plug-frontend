@@ -12,7 +12,7 @@ import InviteFormContainer from "../Containers/InviteFormContainer";
 import InvitesScreen from "../Screens/InvitesScreen";
 import FriendRequestsScreen from "../Screens/FriendRequestsScreen";
 import FriendsScreen from "../Screens/FriendsScreen";
-import Icon from "@expo/vector-icons/FontAwesome";
+import { Ionicons } from "@expo/vector-icons";
 
 const AuthStack = createStackNavigator({
   LoginScreen: Login,
@@ -29,7 +29,7 @@ const PlansStack = createStackNavigator({
     screen: Profile,
     navigationOptions: () => {
       tabBarIcon: ({ tintColor }) => (
-        <Icon name="user" color={tintColor} size={24} />
+        <Ionicons name="ios-contact" color={tintColor} size={24} />
       );
     }
   }
@@ -47,15 +47,44 @@ const ProfileStack = createStackNavigator({
 
 const TabNav = createBottomTabNavigator(
   {
-    Plans: PlansStack,
-    Invite: InvitesStack,
-    Users: FriendsStack,
-    Profile: ProfileStack
+    Plans: {
+      screen: PlansStack,
+      navigationOptions: {
+        tabBarIcon: ({ tintColor }) => (
+          <Ionicons name="ios-mail-unread" size={30} color="#fff" />
+        )
+      }
+    },
+    Invite: {
+      screen: InvitesStack,
+      navigationOptions: {
+        tabBarIcon: ({ tintColor }) => (
+          <Ionicons name="ios-send" size={30} color="#fff" />
+        )
+      }
+    },
+    Friends: {
+      screen: FriendsStack,
+      navigationOptions: {
+        tabBarIcon: ({ tintColor }) => (
+          <Ionicons name="ios-contacts" size={30} color="#fff" />
+        )
+      }
+    },
+    Profile: {
+      screen: ProfileStack,
+      navigationOptions: {
+        tabBarIcon: ({ tintColor }) => (
+          <Ionicons name="ios-contact" size={30} color="#fff" />
+        )
+      }
+    }
   },
   {
     initialRouteName: "Plans",
 
     tabBarOptions: {
+      showIcon: true,
       activeTintColor: "#25aae1",
       inactiveTintColor: "gray",
       style: {

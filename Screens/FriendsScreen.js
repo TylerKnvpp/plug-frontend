@@ -3,26 +3,47 @@ import { ScrollView, Button, StyleSheet } from "react-native";
 import UserContainer from "../Containers/UserContainer";
 import { connect } from "react-redux";
 import FriendsContainer from "../Containers/FriendsContainer";
+import { Ionicons } from "@expo/vector-icons";
+
+// class SearchIcon extends React.Component {
+//   handlePress = e => {
+//     this.props.navigation.navigate("Users");
+//   };
+//   render() {
+//     return (
+//       <Ionicons
+//         name="ios-search"
+//         style={{ marginRight: 20 }}
+//         size={24}
+//         color="white"
+//       />
+//     );
+//   }
+// }
 
 class FriendsScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: "Friends",
     headerLeft: (
-      <Button
+      <Ionicons
+        name="ios-person-add"
+        style={{ marginLeft: 20 }}
+        size={30}
+        color="white"
         onPress={() => {
           navigation.navigate("FriendRequests");
         }}
-        title="Requests"
-        color="#fff"
       />
     ),
     headerRight: (
-      <Button
+      <Ionicons
+        name="ios-search"
+        style={{ marginRight: 20 }}
+        size={24}
+        color="white"
         onPress={() => {
           navigation.navigate("Users");
         }}
-        title="Search"
-        color="#fff"
       />
     ),
     headerStyle: {
