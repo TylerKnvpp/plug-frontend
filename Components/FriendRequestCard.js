@@ -17,8 +17,6 @@ class FriendRequestCard extends React.Component {
       user_id: user,
       friend: id
     };
-    // console.log(request);
-    // console.log(this.props.acceptFriendRequest);
     this.props.acceptFriendRequest(request);
   };
 

@@ -28,7 +28,6 @@ export function addUser(request) {
     })
       .then(res => res.json())
       .then(res => {
-        // console.log(res);
         dispatch({ type: FRIEND_REQUEST, payload: res });
       });
   };
@@ -45,7 +44,6 @@ export function fetchFriendRequests(id) {
 }
 
 export function acceptFriendRequest(users) {
-  console.log(users);
   return function(dispatch) {
     return fetch(
       `http://localhost:3000/users/${users.user_id}/friends/${users.friend}/add-friend/`,
@@ -60,7 +58,6 @@ export function acceptFriendRequest(users) {
     )
       .then(res => res.json(users))
       .then(res => {
-        console.log(res);
         dispatch({ type: ACCEPT_FRIEND_REQUEST, payload: res });
       });
   };
@@ -71,7 +68,6 @@ export function fetchFriends(id) {
     return fetch(`http://localhost:3000/users/${id}/friends`)
       .then(resp => resp.json(id))
       .then(res => {
-        console.log(res);
         dispatch({ type: FETCH_FRIENDS, payload: res });
       });
   };

@@ -12,7 +12,6 @@ export function postInvite(invite) {
     })
       .then(res => res.json())
       .then(data => {
-        // console.log(data);
         dispatch({ type: POST_INVITE, payload: data });
       });
   };

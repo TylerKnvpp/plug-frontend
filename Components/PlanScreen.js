@@ -65,7 +65,6 @@ class PlanScreen extends React.Component {
   }
 
   render() {
-    // console.log("plans screen props", this.props.user);
     return (
       <SafeAreaView style={styles.container}>
         <Text style={styles.header}>Welcome {this.props.user.full_name}! </Text>

@@ -50,15 +50,33 @@ class Profile extends React.Component {
   };
 
   componentDidMount() {
-    // this._retrieveData();
-    // console.log(this.state);
-    console.log(this.props.user);
+    console.log("in mount", this.props.user);
+    // if (!this.state.city) {
+    // const userProps = { ...this.props.user };
+
+    // this.setState({
+    //   id: userProps.id,
+    //   city: userProps.city,
+    //   occupation: userProps.occupation,
+    //   company: userProps.company,
+    //   school: userProps.school
+    // });
+    // }
+    // console.log("shouldve updated", this.state);
+  }
+
+  componentWillUnmount() {
+    this.setState({
+      city: "",
+      occupation: "",
+      company: "",
+      school: ""
+    });
   }
 
   componentDidUpdate() {
     if (!this.state.city) {
       const userProps = { ...this.props.user };
-
       this.setState({
         id: userProps.id,
         city: userProps.city,
@@ -69,25 +87,6 @@ class Profile extends React.Component {
     }
     console.log("shouldve updated", this.state);
   }
-
-  // _retrieveData = async () => {
-  //   try {
-  //     const value = await AsyncStorage.getItem("loggedInUser");
-  //     if (value !== null) {
-  //       // We have data!!
-  //       const parsed = JSON.parse(value);
-  //       if (value) {
-  //         // this.props.getUser(parsed.id);
-  //         this.setState({
-  //           id: parsed.id
-  //         });
-  //       }
-  //       return parsed;
-  //     }
-  //   } catch (error) {
-  //     // Error retrieving data
-  //   }
-  // };
 
   handleSubmit = e => {
     if (
@@ -110,7 +109,6 @@ class Profile extends React.Component {
   };
 
   render() {
-    console.log(this.props.user);
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.container} enabled>
         <StatusBar barStyle="light-content" backgroundColor="#6a51ae" />
@@ -199,7 +197,7 @@ class Profile extends React.Component {
 
 const msp = state => {
   return {
-    user: state.auth.user
+    user: state.auth.userObj
   };
 };
 

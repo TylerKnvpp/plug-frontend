@@ -19,7 +19,6 @@
 
 //   handleDatePicked = date => {
 //     this.props.handleConfirm(date);
-//     // console.log("A date has been picked: ", date);
 //     this.hideDateTimePicker();
 //   };
 

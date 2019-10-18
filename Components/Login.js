@@ -37,10 +37,10 @@ class Login extends React.Component {
 
   handlePress = e => {
     e.preventDefault();
-    this.props.userLogin(this.state);
+    if (this.state.username && this.state.password) {
+      this.props.userLogin(this.state);
 
-    if (AsyncStorage.getItem("loggedInUser")) {
-      this.props.navigation.navigate("Plans");
+      this.props.navigation.navigate("Invite");
     }
   };
 
@@ -87,6 +87,12 @@ class Login extends React.Component {
   }
 }
 
+const msp = state => {
+  return {
+    user: state.auth.userObj
+  };
+};
+
 const mdp = dispatch => {
   return {
     userLogin: data => dispatch(userLogin(data))
@@ -94,7 +100,7 @@ const mdp = dispatch => {
 };
 
 export default connect(
-  null,
+  msp,
   mdp
 )(Login);
 

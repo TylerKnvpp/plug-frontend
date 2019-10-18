@@ -42,7 +42,15 @@ export function userLogin(user) {
       .then(res => {
         const loggedInUser = JSON.stringify(res);
         //
-        AsyncStorage.setItem("loggedInUser", loggedInUser);
+        _storeData = async () => {
+          try {
+            await AsyncStorage.setItem("loggedInUser", loggedInUser);
+          } catch (error) {
+            // Error saving data
+            console.log(error);
+          }
+        };
+        this._storeData();
         //
         dispatch({ type: USER_LOGIN, payload: res });
         //

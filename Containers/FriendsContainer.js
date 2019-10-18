@@ -12,16 +12,15 @@ class FriendsContainer extends React.Component {
 
   componentDidMount() {
     const user = { ...this.props.user };
+    console.log("user id", user.id);
     this.props.fetchFriends(user.id);
   }
 
   componentDidUpdate() {
-    // const user = { ...this.props.user };
-    // this.props.fetchFriends(user.id);
     //   pull user collection down from redux
     const userCollection = { ...this.props.friends };
     // sort user collection
-    console.log("uc", userCollection);
+    // console.log("uc", userCollection.friends);
     if (userCollection.friends.length !== 0) {
       const sortedUsers = userCollection.friends.sort((a, b) =>
         a.firstname !== b.full_name ? (a.full_name < b.full_name ? -1 : 1) : 0
@@ -54,8 +53,6 @@ class FriendsContainer extends React.Component {
   };
 
   render() {
-    console.log("friends statae", this.state);
-
     let renderUsers;
     if (this.state.friends.length > 0) {
       renderUsers = this.filterCollection().map(userObj => {
@@ -79,7 +76,7 @@ class FriendsContainer extends React.Component {
 
 const msp = state => {
   return {
-    user: state.auth.user,
+    user: state.auth.userObj,
     friends: state.friends.updatedFriendsCollection
   };
 };

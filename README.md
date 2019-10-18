@@ -12,10 +12,9 @@
 
 5. View Your invites & accept + deny them
 
-Navigator:
+6. clicking on a user opens a modal
 
-1. create stacks for each tab
+Issues:
 
-2. create bottom tab nav with switch navigator with stacks as screens
-
-3. add to app navigator
+- Profile page wont update to corresponding user until refresh
+- Search

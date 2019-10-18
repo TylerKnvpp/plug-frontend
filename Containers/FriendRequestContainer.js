@@ -18,7 +18,6 @@ class FriendRequestContainer extends React.Component {
 
   componentDidUpdate() {
     const requestCopy = { ...this.props.requests };
-    console.log("copy", requestCopy.pending_received);
     if (requestCopy.pending_received.length > 0) {
       if (this.state.requests.length === 0) {
         this.setState({
@@ -29,8 +28,6 @@ class FriendRequestContainer extends React.Component {
   }
 
   render() {
-    // console.log(this.state.requests);
-
     const renderRequests = this.state.requests.map(requestObj => {
       return <FriendRequestCard key={requestObj.id} request={requestObj} />;
     });

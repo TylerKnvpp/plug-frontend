@@ -40,10 +40,12 @@ class SignUp extends React.Component {
 
   handlePress = e => {
     e.preventDefault();
-    this.props.signUpUser({ user: this.state });
+    if (this.state.full_name && this.state.username && this.state.password) {
+      this.props.signUpUser({ user: this.state });
 
-    if (AsyncStorage.getItem("loggedInUser")) {
-      this.props.navigation.navigate("Plans");
+      if (AsyncStorage.getItem("loggedInUser")) {
+        this.props.navigation.navigate("AuthLoadingScreen");
+      }
     }
   };
 
