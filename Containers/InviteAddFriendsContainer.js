@@ -2,12 +2,14 @@ import React from "react";
 import { View, TextInput, Text, StyleSheet } from "react-native";
 import { connect } from "react-redux";
 import { fetchFriends } from "../Actions/friendship";
-import FriendCard from "../Components/FriendCard";
+import { collectInviteStateUsersInvited } from "../Actions/invite";
+import InviteAddFriendsCard from "../Components/InviteAddFriendsCard";
 
-class FriendsContainer extends React.Component {
+class InviteAddFriendsContainer extends React.Component {
   state = {
     friends: [],
-    search: ""
+    search: "",
+    invitedUsers: []
   };
 
   componentDidMount() {
@@ -32,6 +34,17 @@ class FriendsContainer extends React.Component {
     }
   }
 
+  handleSelectedUsers = id => {
+    // create updated collection with each new user
+    const newCollection = [...this.state.invitedUsers, id];
+    // set state
+    this.setState({
+      invitedUsers: newCollection
+    });
+    // dispatch to redux reducer
+    this.props.collectInviteStateUsersInvited(this.state.invitedUsers);
+  };
+
   handleChange = textValue => {
     textValue = textValue.toLowerCase();
     this.setState({
@@ -53,7 +66,13 @@ class FriendsContainer extends React.Component {
     let renderUsers;
     if (this.state.friends.length > 0) {
       renderUsers = this.filterCollection().map(userObj => {
-        return <FriendCard key={userObj.id} user={userObj} />;
+        return (
+          <InviteAddFriendsCard
+            key={userObj.id}
+            user={userObj}
+            handleSelectedUser={this.handleSelectedUsers}
+          />
+        );
       });
     }
 
@@ -80,14 +99,16 @@ const msp = state => {
 
 const mdp = dispatch => {
   return {
-    fetchFriends: id => dispatch(fetchFriends(id))
+    fetchFriends: id => dispatch(fetchFriends(id)),
+    collectInviteStateUsersInvited: id =>
+      dispatch(collectInviteStateUsersInvited(id))
   };
 };
 
 export default connect(
   msp,
   mdp
-)(FriendsContainer);
+)(InviteAddFriendsContainer);
 
 const styles = StyleSheet.create({
   input: {

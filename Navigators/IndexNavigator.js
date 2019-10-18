@@ -15,6 +15,7 @@ import FriendsScreen from "../Screens/FriendsScreen";
 import { Ionicons } from "@expo/vector-icons";
 import InviteCategorySelector from "../Components/InviteCategorySelector";
 import InviteForm from "../Components/InviteForm";
+import InviteAddFriendsScreen from "../Screens/InviteAddFriendsScreen";
 
 const AuthStack = createStackNavigator({
   LoginScreen: Login,
@@ -24,6 +25,7 @@ const AuthStack = createStackNavigator({
 const InvitesStack = createStackNavigator({
   Invites: InvitesScreen,
   Category: InviteCategorySelector,
+  AddFriends: InviteAddFriendsScreen,
   InviteForm: InviteForm
 });
 

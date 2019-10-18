@@ -8,7 +8,7 @@ import { collectInviteStateCategory } from "../Actions/invite";
 
 class InviteScreen extends React.Component {
   static navigationOptions = {
-    title: "Category",
+    // title: "Category",
     headerStyle: {
       backgroundColor: "#010112",
       elevation: 0,
@@ -29,7 +29,7 @@ class InviteScreen extends React.Component {
     // console.log(category.category);
     this.props.collectInviteStateCategory(category.category);
 
-    this.props.navigation.navigate("InviteForm");
+    this.props.navigation.navigate("AddFriends");
   };
 
   // handleSubmit = plan => {

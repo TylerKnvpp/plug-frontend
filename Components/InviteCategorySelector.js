@@ -5,7 +5,8 @@ import {
   StyleSheet,
   View,
   SafeAreaView,
-  TouchableOpacity
+  TouchableOpacity,
+  Alert
 } from "react-native";
 import CButton from "./CButton";
 
@@ -65,12 +66,15 @@ class InviteCategorySelector extends React.Component {
   handleNext = e => {
     if (this.state.category) {
       this.props.handleCategorySelector(this.state);
+    } else {
+      Alert.alert("Please select a category.");
     }
   };
 
   render() {
     return (
       <SafeAreaView>
+        <Text style={styles.header}>What's the plan?</Text>
         <Text style={styles.instructions}>
           To get started, please select one of the following plan types.
         </Text>
@@ -241,10 +245,10 @@ const styles = StyleSheet.create({
   header: {
     color: "white",
     fontWeight: "900",
-    fontSize: 24,
+    fontSize: 18,
     marginRight: "auto",
     marginLeft: "auto",
-    marginBottom: 40,
+    marginTop: 20,
     alignItems: "center",
     justifyContent: "center"
   },

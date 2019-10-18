@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View, StyleSheet, TextInput, Button } from "react-native";
+import { Text, View, StyleSheet, TextInput, Button, Alert } from "react-native";
 import DateTimePicker from "react-native-modal-datetime-picker";
 import CButton from "./CButton";
 import { connect } from "react-redux";
@@ -42,15 +42,25 @@ class InviteForm extends React.Component {
   };
 
   handleSubmit = e => {
-    const plan = {
-      time: this.state.time,
-      location: this.state.location,
-      details: this.state.details,
-      category: this.props.fullInvite.inviteCategory
-    };
-    this.props.postInvite(plan);
-    alert("Your plan has been created!");
-    this.props.navigation.navigate("Plans");
+    if (this.state.time && this.state.location && this.state.details) {
+      const invite = {
+        time: this.state.time,
+        location: this.state.location,
+        details: this.state.details,
+        category: this.props.fullInvite.inviteCategory
+        // invitedUsers: this.props.fullInvite.invitedUsers
+      };
+      this.props.postInvite(invite);
+      alert("Your invite has been sent!");
+      this.props.navigation.navigate("Plans");
+      this.setState({
+        time: "",
+        location: "",
+        details: ""
+      });
+    } else {
+      Alert.alert("Please fill out all the required fields.");
+    }
   };
 
   render() {
