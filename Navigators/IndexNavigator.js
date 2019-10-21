@@ -33,7 +33,7 @@ const InvitesStack = createStackNavigator({
 
 const PlansStack = createStackNavigator({
   Plans: {
-    screen: Profile,
+    screen: PlansScreen,
     navigationOptions: () => {
       tabBarIcon: ({ tintColor }) => (
         <Ionicons name="ios-contact" color={tintColor} size={24} />

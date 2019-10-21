@@ -102,7 +102,7 @@ class PendingInvitesContainer extends React.Component {
               <Image
                 resizeMode="contain"
                 style={styles.image}
-                source={require("../assets/images/BRUNCHICON.png")}
+                source={require("../assets/images/brunch.png")}
               />
               <Text style={styles.brunch}>BRUNCH</Text>
             </View>
@@ -115,7 +115,7 @@ class PendingInvitesContainer extends React.Component {
               <Image
                 resizeMode="contain"
                 style={styles.image}
-                source={require("../assets/images/HAPPYHOURICON.png")}
+                source={require("../assets/images/happy-hour.png")}
               />
               <Text style={styles.happyHour}>HAPPY HOUR</Text>
             </View>
@@ -128,7 +128,7 @@ class PendingInvitesContainer extends React.Component {
               <Image
                 resizeMode="contain"
                 style={styles.image}
-                source={require("../assets/images/DINNERICON.png")}
+                source={require("../assets/images/dinner.png")}
               />
               <Text style={styles.dinner}>DINNER</Text>
             </View>
@@ -141,7 +141,7 @@ class PendingInvitesContainer extends React.Component {
               <Image
                 resizeMode="contain"
                 style={styles.image}
-                source={require("../assets/images/PREGAMEICON.png")}
+                source={require("../assets/images/pregame.png")}
               />
               <Text style={styles.pregame}>PREGAME</Text>
             </View>
@@ -154,7 +154,7 @@ class PendingInvitesContainer extends React.Component {
               <Image
                 resizeMode="contain"
                 style={styles.image}
-                source={require("../assets/images/PARTYICON.png")}
+                source={require("../assets/images/party.png")}
               />
               <Text style={styles.party}>PARTY</Text>
             </View>
@@ -167,7 +167,7 @@ class PendingInvitesContainer extends React.Component {
               <Image
                 resizeMode="contain"
                 style={styles.image}
-                source={require("../assets/images/GOOUTICON.png")}
+                source={require("../assets/images/go-out.png")}
               />
               <Text style={styles.goOut}>GO OUT</Text>
             </View>
@@ -180,7 +180,7 @@ class PendingInvitesContainer extends React.Component {
               <Image
                 resizeMode="contain"
                 style={styles.image}
-                source={require("../assets/images/POSTGAMEICON.png")}
+                source={require("../assets/images/postgame.png")}
               />
               <Text style={styles.postgame}>POSTGAME</Text>
             </View>
@@ -193,7 +193,7 @@ class PendingInvitesContainer extends React.Component {
               <Image
                 resizeMode="contain"
                 style={styles.image}
-                source={require("../assets/images/OTHERICON.png")}
+                source={require("../assets/images/other.png")}
               />
               <Text style={styles.other}>OTHER</Text>
             </View>
