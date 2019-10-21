@@ -11,11 +11,14 @@ class PendingInvitesContainer extends React.Component {
 
   componentDidUpdate() {
     if (this.props.invites) {
+      console.log("invites", this.props.invites);
       const invitesCopy = [...this.props.invites];
-      const filtered = invitesCopy.filter(obj => obj.id === obj.id);
+      const filtered = invitesCopy.filter(
+        obj => obj.accepted === null && obj.denied === null
+      );
       if (this.state.invites.length === 0) {
         this.setState({
-          invites: invitesCopy
+          invites: filtered
         });
       }
     }
