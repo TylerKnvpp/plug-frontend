@@ -60,11 +60,9 @@ class PlanCard extends React.Component {
     const eventTime = moment(this.props.invite.time).format("hh:mm a");
     const howLongUntil = moment(this.props.invite.time).fromNow();
     //
-    console.log(this.props.invite.category);
-    const requireAsset = `../assets/images/${this.props.invite.category}.png`;
+
     return (
       <View style={styles.container}>
-        {/*  */}
         <View style={styles.timeContainer}>
           <Text
             style={styles.timeInfo}

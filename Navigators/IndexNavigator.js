@@ -17,6 +17,7 @@ import InviteCategorySelector from "../Components/InviteCategorySelector";
 import InviteForm from "../Components/InviteForm";
 import InviteAddFriendsScreen from "../Screens/InviteAddFriendsScreen";
 import PendingInvitesScreen from "../Screens/PendingInvitesScreen";
+import InviteModal from "../Components/InviteModal";
 
 const AuthStack = createStackNavigator({
   LoginScreen: Login,
@@ -101,7 +102,7 @@ const TabNav = createBottomTabNavigator(
   }
 );
 
-const AppNavigator = createSwitchNavigator(
+const MainNavigator = createSwitchNavigator(
   {
     AuthLoading: AuthLoadingScreen,
     TabNavigator: TabNav,
@@ -109,6 +110,21 @@ const AppNavigator = createSwitchNavigator(
   },
   {
     initialRouteName: "AuthLoading"
+  }
+);
+
+const AppNavigator = createSwitchNavigator(
+  {
+    Main: {
+      screen: MainNavigator
+    },
+    InviteModal: {
+      screen: InviteModal
+    }
+  },
+  {
+    mode: "modal",
+    headerMode: "none"
   }
 );
 

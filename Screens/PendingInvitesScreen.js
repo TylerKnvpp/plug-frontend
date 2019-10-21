@@ -19,6 +19,17 @@ class PendingInvitesScreen extends React.Component {
         }}
       />
     ),
+    headerLeft: (
+      <Ionicons
+        name="ios-add"
+        style={{ marginRight: 20 }}
+        size={24}
+        color="white"
+        onPress={() => {
+          navigation.navigate("InviteModal");
+        }}
+      />
+    ),
     headerStyle: {
       backgroundColor: "#010112",
       elevation: 0,
@@ -50,7 +61,7 @@ class PendingInvitesScreen extends React.Component {
   render() {
     return (
       <ScrollView style={styles.container}>
-        <PendingInvitesContainer /*user={this.state.user}*/ />
+        <PendingInvitesContainer />
       </ScrollView>
     );
   }
