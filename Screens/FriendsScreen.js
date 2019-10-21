@@ -5,22 +5,6 @@ import { connect } from "react-redux";
 import FriendsContainer from "../Containers/FriendsContainer";
 import { Ionicons } from "@expo/vector-icons";
 
-// class SearchIcon extends React.Component {
-//   handlePress = e => {
-//     this.props.navigation.navigate("Users");
-//   };
-//   render() {
-//     return (
-//       <Ionicons
-//         name="ios-search"
-//         style={{ marginRight: 20 }}
-//         size={24}
-//         color="white"
-//       />
-//     );
-//   }
-// }
-
 class FriendsScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: "Friends",
@@ -58,10 +42,6 @@ class FriendsScreen extends React.Component {
     }
   });
 
-  componentDidMount() {
-    // this.props.fetchUsers();
-  }
-
   render() {
     return (
       <ScrollView style={styles.container}>
@@ -71,16 +51,7 @@ class FriendsScreen extends React.Component {
   }
 }
 
-const mdp = dispatch => {
-  return {
-    // fetchUsers: () => dispatch(fetchUsers())
-  };
-};
-
-export default connect(
-  null,
-  mdp
-)(FriendsScreen);
+export default FriendsScreen;
 
 const styles = StyleSheet.create({
   container: {

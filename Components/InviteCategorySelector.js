@@ -9,6 +9,8 @@ import {
   Alert
 } from "react-native";
 import CButton from "./CButton";
+// import { connect } from 'react-redux'
+// import { collectInviteStateCategory } from "../Actions/invite";
 
 class InviteCategorySelector extends React.Component {
   state = {
@@ -200,6 +202,14 @@ class InviteCategorySelector extends React.Component {
     );
   }
 }
+
+// const mdp = dispatch => {
+//   return {
+//     // postInvite: invite => dispatch(postInvite(invite))
+//     collectInviteStateCategory: category =>
+//       dispatch(collectInviteStateCategory(category))
+//   };
+// };
 
 export default InviteCategorySelector;
 

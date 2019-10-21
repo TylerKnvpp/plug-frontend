@@ -22,11 +22,12 @@ class AuthLoadingScreen extends React.Component {
     if (loggedInUser) {
       const parsed = JSON.parse(loggedInUser);
       console.log("async", parsed.id);
+
       loggedInUser ? this.props.getUserProfile(parsed.id) : null;
     }
     // This will switch to the App screen or Auth screen and this loading
     // screen will be unmounted and thrown away.
-    this.props.navigation.navigate(loggedInUser ? "Invite" : "LoginScreen");
+    this.props.navigation.navigate(loggedInUser ? "Profile" : "LoginScreen");
   };
 
   // Render any loading content that you like here

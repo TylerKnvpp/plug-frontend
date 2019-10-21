@@ -35,7 +35,6 @@ class UserContainer extends React.Component {
   filterCollection = () => {
     if (this.state.users.length !== 0) {
       const filteredArray = [...this.state.users];
-      //   console.log("filter", filteredArray);
       return filteredArray;
       //   return filteredArray.filter(user => {
       //     user.full_name.toUpperCase().includes(this.state.search.toUpperCase());

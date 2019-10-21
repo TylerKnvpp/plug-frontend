@@ -16,6 +16,7 @@ import { Ionicons } from "@expo/vector-icons";
 import InviteCategorySelector from "../Components/InviteCategorySelector";
 import InviteForm from "../Components/InviteForm";
 import InviteAddFriendsScreen from "../Screens/InviteAddFriendsScreen";
+import PendingInvitesScreen from "../Screens/PendingInvitesScreen";
 
 const AuthStack = createStackNavigator({
   LoginScreen: Login,
@@ -23,6 +24,7 @@ const AuthStack = createStackNavigator({
 });
 
 const InvitesStack = createStackNavigator({
+  PendingInvites: PendingInvitesScreen,
   Invites: InvitesScreen,
   Category: InviteCategorySelector,
   AddFriends: InviteAddFriendsScreen,
@@ -56,7 +58,7 @@ const TabNav = createBottomTabNavigator(
       screen: PlansStack,
       navigationOptions: {
         tabBarIcon: ({ tintColor }) => (
-          <Ionicons name="ios-mail-unread" size={30} color="#fff" />
+          <Ionicons name="ios-mail-unread" size={30} color={tintColor} />
         )
       }
     },
@@ -64,7 +66,7 @@ const TabNav = createBottomTabNavigator(
       screen: InvitesStack,
       navigationOptions: {
         tabBarIcon: ({ tintColor }) => (
-          <Ionicons name="ios-send" size={30} color="#fff" />
+          <Ionicons name="ios-send" size={30} color={tintColor} />
         )
       }
     },
@@ -72,7 +74,7 @@ const TabNav = createBottomTabNavigator(
       screen: FriendsStack,
       navigationOptions: {
         tabBarIcon: ({ tintColor }) => (
-          <Ionicons name="ios-contacts" size={30} color="#fff" />
+          <Ionicons name="ios-contacts" size={30} color={tintColor} />
         )
       }
     },
@@ -80,7 +82,7 @@ const TabNav = createBottomTabNavigator(
       screen: ProfileStack,
       navigationOptions: {
         tabBarIcon: ({ tintColor }) => (
-          <Ionicons name="ios-contact" size={30} color="#fff" />
+          <Ionicons name="ios-contact" size={30} color={tintColor} />
         )
       }
     }

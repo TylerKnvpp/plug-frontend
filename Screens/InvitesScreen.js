@@ -26,8 +26,7 @@ class InviteScreen extends React.Component {
   };
 
   handleCategorySelector = category => {
-    // console.log(category.category);
-    this.props.collectInviteStateCategory(category.category);
+    this.props.collectInviteStateCategory(category);
 
     this.props.navigation.navigate("AddFriends");
   };

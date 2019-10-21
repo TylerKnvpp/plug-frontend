@@ -18,11 +18,9 @@ function authReducer(state = INITIAL_STATE, action) {
       return {
         ...state,
         id: action.payload.user.id,
-        // username: action.payload.username,
         token: action.payload.user.token
       };
     case USER_LOGIN:
-      // console.log("login payload", action.payload.id);
       return {
         ...state,
         id: action.payload.id,

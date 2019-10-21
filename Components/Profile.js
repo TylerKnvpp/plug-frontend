@@ -50,7 +50,6 @@ class Profile extends React.Component {
   };
 
   componentDidMount() {
-    // console.log("in mount", this.props.user);
     // if (!this.state.city) {
     // const userProps = { ...this.props.user };
     // this.setState({
@@ -61,7 +60,6 @@ class Profile extends React.Component {
     //   school: userProps.school
     // });
     // }
-    // console.log("shouldve updated", this.state);
   }
 
   componentWillUnmount() {
@@ -84,7 +82,6 @@ class Profile extends React.Component {
         school: userProps.school
       });
     }
-    console.log("shouldve updated", this.state);
   }
 
   handleSubmit = e => {

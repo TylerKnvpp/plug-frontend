@@ -11,11 +11,11 @@ const INIT_STATE = {
 
 export function fetchReducer(state = INIT_STATE, action) {
   switch (action.type) {
-    case FETCH_USER:
-      return {
-        ...state,
-        user: action.payload
-      };
+    // case FETCH_USER:
+    //   return {
+    //     ...state,
+    //     user: action.payload
+    //   };
     case UPDATE_PROFILE:
       return {
         ...state,

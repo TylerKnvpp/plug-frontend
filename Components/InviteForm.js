@@ -66,7 +66,6 @@ class InviteForm extends React.Component {
 
   render() {
     const date = new Date();
-
     return (
       <View style={styles.container}>
         <Text style={styles.header}>Where are you going?</Text>
