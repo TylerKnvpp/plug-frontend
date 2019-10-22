@@ -7,9 +7,7 @@ class SignUpScreen extends React.Component {
   render() {
     return (
       <View>
-        {/* <MainContainer> */}
         <SignUp />
-        {/* </MainContainer> */}
       </View>
     );
   }

@@ -49,19 +49,6 @@ class Profile extends React.Component {
     school: ""
   };
 
-  componentDidMount() {
-    // if (!this.state.city) {
-    // const userProps = { ...this.props.user };
-    // this.setState({
-    //   id: userProps.id,
-    //   city: userProps.city,
-    //   occupation: userProps.occupation,
-    //   company: userProps.company,
-    //   school: userProps.school
-    // });
-    // }
-  }
-
   componentWillUnmount() {
     this.setState({
       city: "",
@@ -72,15 +59,18 @@ class Profile extends React.Component {
   }
 
   componentDidUpdate() {
-    if (!this.state.city) {
+    if (this.props.user) {
       const userProps = { ...this.props.user };
-      this.setState({
-        id: userProps.id,
-        city: userProps.city,
-        occupation: userProps.occupation,
-        company: userProps.company,
-        school: userProps.school
-      });
+      console.log(userProps);
+      if (this.state.city === null) {
+        this.setState({
+          id: userProps.id,
+          city: userProps.city,
+          occupation: userProps.occupation,
+          company: userProps.company,
+          school: userProps.school
+        });
+      }
     }
   }
 
