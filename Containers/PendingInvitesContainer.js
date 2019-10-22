@@ -9,9 +9,9 @@ class PendingInvitesContainer extends React.Component {
     invites: []
   };
 
-  componentDidUpdate() {
+  componentDidMount() {
     if (this.props.invites) {
-      console.log("invites", this.props.invites);
+      // console.log("invites", this.props.invites);
       const invitesCopy = [...this.props.invites];
       const filtered = invitesCopy.filter(
         obj => obj.accepted === null && obj.denied === null
@@ -23,6 +23,8 @@ class PendingInvitesContainer extends React.Component {
       }
     }
   }
+
+  componentDidUpdate() {}
 
   render() {
     // const renderEvents = this.state.invites.map(inviteObj => {
@@ -207,7 +209,7 @@ class PendingInvitesContainer extends React.Component {
 
 const msp = state => {
   return {
-    invites: state.invite.pendingInvites
+    invites: state.invite.renderInvites
   };
 };
 

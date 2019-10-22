@@ -12,7 +12,7 @@ if (__DEV__) {
 }
 const storeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(rootReducer, storeEnhancers(applyMiddleware(thunk)));
-
+console.disableYellowBox = true;
 class App extends React.Component {
   render() {
     return (

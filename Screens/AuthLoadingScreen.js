@@ -10,6 +10,7 @@ import {
 import { connect } from "react-redux";
 import { getUserProfile } from "../Actions/auth";
 import { fetchFriendRequests } from "../Actions/friendship";
+import { fetchUserPlans } from "../Actions/invite";
 
 class AuthLoadingScreen extends React.Component {
   componentDidMount() {
@@ -24,6 +25,7 @@ class AuthLoadingScreen extends React.Component {
       console.log("async", parsed.id);
 
       loggedInUser ? this.props.getUserProfile(parsed.id) : null;
+      loggedInUser ? this.props.fetchUserPlans(parsed.id) : null;
     }
     // This will switch to the App screen or Auth screen and this loading
     // screen will be unmounted and thrown away.
@@ -48,6 +50,7 @@ class AuthLoadingScreen extends React.Component {
 
 const mdp = dispatch => {
   return {
+    fetchUserPlans: id => dispatch(fetchUserPlans(id)),
     getUserProfile: id => dispatch(getUserProfile(id)),
     fetchRequests: id => dispatch(fetchFriendRequests(id))
   };

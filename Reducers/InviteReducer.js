@@ -3,14 +3,18 @@ import {
   COLLECT_INVITE_CATEGORY_STATE,
   COLLECT_INVITE_DETAILS_STATE,
   COLLECT_INVITE_INVITED_USERS_STATE,
-  FETCH_USER_INVITES
+  FETCH_USER_INVITES,
+  FETCH_USER_PLANS,
+  ACCEPT_INVITE
 } from "../Constants/actionCreators";
 
 const INIT_STATE = {
   inviteCategory: "",
   inviteDetails: {},
   invitedUsers: [],
-  pendingInvites: []
+  pendingInvites: [],
+  renderInvites: [],
+  acceptedInvites: []
 };
 
 function inviteReducer(state = INIT_STATE, action) {
@@ -33,6 +37,15 @@ function inviteReducer(state = INIT_STATE, action) {
     case POST_INVITE:
       return { ...state, invites: action.payload };
     case FETCH_USER_INVITES:
+      return { ...state, pendingInvites: action.payload };
+    case FETCH_USER_PLANS:
+      // console.log("payload", action.payload.acceptedPlans);
+      return {
+        ...state,
+        renderInvites: action.payload.invitesToRender,
+        acceptedInvites: action.payload.acceptedPlans
+      };
+    case ACCEPT_INVITE:
       return { ...state, pendingInvites: action.payload };
       break;
     default:

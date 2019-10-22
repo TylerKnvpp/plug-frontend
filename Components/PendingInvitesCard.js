@@ -20,13 +20,13 @@ import moment from "moment";
 class PendingInvitesCard extends React.Component {
   handleAccept = id => {
     // copy prop object for user
-    const copy = { ...this.props.sender };
+    const inviteCopy = { ...this.props.invite };
     // extract id
-    const user = copy.user.id;
+    const user = inviteCopy.id;
     // create object to send to db
     const request = {
       user_id: user,
-      friend: id
+      invite_id: this.props.invite.id
     };
     this.props.acceptFriendRequest(request);
   };
@@ -61,11 +61,9 @@ class PendingInvitesCard extends React.Component {
     this.setState({ modalVisible: visible });
   }
 
-  // setModalVisible(visible) {
-  //   this.setState({ modalVisible: visible });
-  // }
-
   render() {
+    console.log(this.props.invite.plans);
+
     const days = [
       "Sunday",
       "Monday",

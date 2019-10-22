@@ -2,7 +2,9 @@ import { fetchUsers } from "../Actions/friendship";
 import { FETCH_USERS } from "../Constants/actionCreators";
 
 const INIT_STATE = {
-  users: []
+  users: [],
+  usersInvites: [],
+  usersPlans: []
 };
 
 function UserReducer(state = INIT_STATE, action) {

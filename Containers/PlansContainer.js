@@ -3,21 +3,20 @@ import { View, TextInput, Image, Text, StyleSheet } from "react-native";
 import { connect } from "react-redux";
 import PlanCard from "../Components/PlanCard";
 import { fetchUserInvites } from "../Actions/invite";
+import { fetchUserPlans } from "../Actions/invite";
 
 class PlansContainer extends React.Component {
   state = {
     invites: []
   };
 
-  componentDidUpdate() {
+  componentDidMount() {
     if (this.props.invites) {
-      console.log("invites", this.props.invites);
-      const invitesCopy = [...this.props.invites];
-      const filtered = invitesCopy.filter(obj => obj.accepted === true);
-      //   filtered = filtered.
+      const acceptedInvites = [...this.props.invites];
       if (this.state.invites.length === 0) {
+        // setting state
         this.setState({
-          invites: filtered
+          invites: acceptedInvites
         });
       }
     }
@@ -42,19 +41,20 @@ class PlansContainer extends React.Component {
 
 const msp = state => {
   return {
-    invites: state.invite.pendingInvites
+    invites: state.invite.acceptedInvites,
+    user: state.auth.userObj
   };
 };
 
-// const mdp = dispatch => {
-//   return {
-//     fetchUserInvites: id => dispatch(fetchUserInvites(id))
-//   };
-// };
+const mdp = dispatch => {
+  return {
+    fetchUserPlans: id => dispatch(fetchUserPlans(id))
+  };
+};
 
 export default connect(
   msp,
-  null
+  mdp
 )(PlansContainer);
 
 const styles = StyleSheet.create({
