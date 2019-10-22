@@ -55,10 +55,6 @@ class PendingInvitesCard extends React.Component {
       });
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return nextState.modalVisible != this.state.modalVisible;
-  }
-
   handlePress = e => {
     e.preventDefault();
     this.setState({
