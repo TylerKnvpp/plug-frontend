@@ -13,27 +13,35 @@ import {
 // import { Card, ListItem, Button, Icon } from "react-native-elements";
 import CButton from "./CButton";
 import { connect } from "react-redux";
-import { acceptFriendRequest } from "../Actions/friendship";
+import { acceptInvite } from "../Actions/invite";
 import { Ionicons } from "@expo/vector-icons";
 import moment from "moment";
+import _ from "lodash";
 
 class PendingInvitesCard extends React.Component {
   handleAccept = id => {
-    // copy prop object for user
-    const inviteCopy = { ...this.props.invite };
-    // extract id
-    const user = inviteCopy.id;
+    // copy prop objects
+    const userClone = _.clone(this.props.sender);
+    const inviteClone = _.clone(this.props.invite);
+    const plansClone = userClone.plans;
+    // extract ids
+    const userID = userClone.id;
+    const inviteID = inviteClone.id;
+    // find corresponding plan
+    const plan = plansClone.find(plan => plan.invite_id === inviteID);
     // create object to send to db
     const request = {
-      user_id: user,
-      invite_id: this.props.invite.id
+      id: plan.id,
+      plan: {
+        accepted: true
+      }
     };
-    this.props.acceptFriendRequest(request);
+    this.props.acceptInvite(request);
+    this.setModalVisible(!this.state.modalVisible);
   };
 
   state = {
     user: "",
-    profilePicture: "",
     modalVisible: false
   };
 
@@ -47,14 +55,15 @@ class PendingInvitesCard extends React.Component {
       });
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextState.modalVisible != this.state.modalVisible;
+  }
+
   handlePress = e => {
     e.preventDefault();
-    this.setState(
-      {
-        modalVisible: !this.state.modalVisible
-      },
-      () => console.log(this.state.modalVisible)
-    );
+    this.setState({
+      modalVisible: !this.state.modalVisible
+    });
   };
 
   setModalVisible(visible) {
@@ -62,8 +71,6 @@ class PendingInvitesCard extends React.Component {
   }
 
   render() {
-    console.log(this.props.invite.plans);
-
     const days = [
       "Sunday",
       "Monday",
@@ -93,7 +100,9 @@ class PendingInvitesCard extends React.Component {
                 }}
               />
             </View>
-            <Text style={styles.senderInfo}>{this.state.user} & 6 others</Text>
+            <Text style={styles.senderInfo}>
+              {this.state.user} & {Math.floor(Math.random() * 10)} others
+            </Text>
           </View>
           <View style={styles.location}>
             <Ionicons
@@ -152,7 +161,7 @@ class PendingInvitesCard extends React.Component {
                     />
                   </View>
                   <Text style={modalstyle.groupName}>
-                    {this.state.user} & 6 others
+                    {this.state.user} & {Math.floor(Math.random() * 10)} others
                   </Text>
                   <View style={styles.sender}>
                     <View style={styles.imageCropper}>
@@ -194,7 +203,7 @@ class PendingInvitesCard extends React.Component {
                     }}
                   >
                     <Text style={modalstyle.categoryname}>
-                      {this.props.invite.category}
+                      {this.props.invite.category.toUpperCase()}
                     </Text>
                     <View style={modalstyle.location}>
                       <Ionicons
@@ -222,7 +231,7 @@ class PendingInvitesCard extends React.Component {
                     </View>
                   </View>
                   <View style={styles.revealContainer}>
-                    <CButton text="Accept" onPress={() => {}} />
+                    <CButton text="Accept" onPress={this.handleAccept} />
                     <CButton text="Decline" theme="danger" onPress={() => {}} />
                   </View>
                 </View>
@@ -249,13 +258,14 @@ class PendingInvitesCard extends React.Component {
 
 const msp = state => {
   return {
-    sender: state.fetch
+    sender: state.auth.userObj,
+    pendingInvites: state.invite.renderInvites
   };
 };
 
 const mdp = dispatch => {
   return {
-    acceptFriendRequest: data => dispatch(acceptFriendRequest(data))
+    acceptInvite: data => dispatch(acceptInvite(data))
   };
 };
 

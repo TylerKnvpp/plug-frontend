@@ -21,7 +21,9 @@ class PlanCard extends React.Component {
 
   state = {
     user: "",
-    profilePicture: ""
+    profilePicture: "",
+    category: "",
+    source: ""
   };
 
   componentDidMount() {
@@ -29,7 +31,9 @@ class PlanCard extends React.Component {
       .then(resp => resp.json())
       .then(res => {
         this.setState({
-          user: res.full_name
+          user: res.full_name,
+          category: this.props.invite.category,
+          source: `http://plug.nyc/wp-content/uploads/2019/10/${this.props.invite.category}.png`
         });
       });
   }
@@ -45,21 +49,227 @@ class PlanCard extends React.Component {
       "Saturday"
     ];
 
-    const categories = [
-      { category: "brunch", color: "#25aae1" },
-      { category: "happy-hour", color: "#FFFC00" },
-      { category: "dinner", color: "#F0277C" },
-      { category: "pregame", color: "#7A25E2" },
-      { category: "party", color: "#C4FD2A" },
-      { category: "go-out", color: "#25E197" },
-      { category: "postgame", color: "#00908E" },
-      { category: "other", color: "#fff" }
-    ];
     // MOMENT.JS PARSING
     const eventDay = moment(this.props.invite.time, "YYYY-MM-DDTHHmmss").day();
     const eventTime = moment(this.props.invite.time).format("hh:mm a");
     const howLongUntil = moment(this.props.invite.time).fromNow();
     //
+    console.log(this.state.category);
+
+    if (this.props.invite.category) {
+      const category = this.props.invite.category;
+      textStyle = function(options) {
+        switch (category) {
+          case "brunch":
+            return {
+              color: "#25aae1",
+              fontWeight: "900",
+              fontSize: 18,
+              marginTop: 10
+            };
+          case "happy-hour":
+            return {
+              color: "#FFFC00",
+              fontWeight: "900",
+              fontSize: 18,
+              marginTop: 10
+            };
+          case "dinner":
+            return {
+              color: "#F0277C",
+              fontWeight: "900",
+              fontSize: 18,
+              marginTop: 10
+            };
+          case "pregame":
+            return {
+              color: "#7A25E2",
+              fontWeight: "900",
+              fontSize: 18,
+              marginTop: 10
+            };
+          case "party":
+            return {
+              color: "#C4FD2A",
+              fontWeight: "900",
+              fontSize: 18,
+              marginTop: 10
+            };
+          case "go-out":
+            return {
+              color: "#25E197",
+              fontWeight: "900",
+              fontSize: 18,
+              marginTop: 10
+            };
+          case "postgame":
+            return {
+              color: "#00908E",
+              fontWeight: "900",
+              fontSize: 18,
+              marginTop: 10
+            };
+          case "other":
+            return {
+              color: "#fff",
+              fontWeight: "900",
+              fontSize: 18,
+              marginTop: 10
+            };
+          default:
+        }
+        return {
+          color: "#25aae1",
+          alignItems: "center",
+          flexDirection: "row",
+          backgroundColor: "transparent",
+          borderColor: "#25aae1",
+          borderWidth: 10,
+          borderRadius: 10,
+          marginLeft: "auto",
+          marginRight: "auto",
+          padding: 0,
+          width: "95%",
+          height: 180,
+          justifyContent: "space-evenly"
+        };
+      };
+    }
+
+    if (this.props.invite.category) {
+      const category = this.props.invite.category;
+      cardStyle = function(options) {
+        switch (category) {
+          case "brunch":
+            return {
+              alignItems: "center",
+              flexDirection: "row",
+              backgroundColor: "transparent",
+              borderColor: "#25aae1",
+              borderWidth: 10,
+              borderRadius: 10,
+              marginLeft: "auto",
+              marginRight: "auto",
+              padding: 0,
+              width: "95%",
+              height: 180,
+              justifyContent: "space-evenly"
+            };
+          case "happy-hour":
+            return {
+              alignItems: "center",
+              flexDirection: "row",
+              backgroundColor: "transparent",
+              borderColor: "#FFFC00",
+              borderWidth: 10,
+              borderRadius: 10,
+              marginLeft: "auto",
+              marginRight: "auto",
+              padding: 0,
+              width: "95%",
+              height: 180,
+              justifyContent: "space-evenly"
+            };
+          case "dinner":
+            return {
+              alignItems: "center",
+              flexDirection: "row",
+              backgroundColor: "transparent",
+              borderColor: "#F0277C",
+              borderWidth: 10,
+              borderRadius: 10,
+              marginLeft: "auto",
+              marginRight: "auto",
+              padding: 0,
+              width: "95%",
+              height: 180,
+              justifyContent: "space-evenly"
+            };
+          case "pregame":
+            return {
+              alignItems: "center",
+              flexDirection: "row",
+              backgroundColor: "transparent",
+              borderColor: "#7A25E2",
+              borderWidth: 10,
+              borderRadius: 10,
+              marginLeft: "auto",
+              marginRight: "auto",
+              padding: 0,
+              width: "95%",
+              height: 180,
+              justifyContent: "space-evenly"
+            };
+          case "party":
+            return {
+              alignItems: "center",
+              flexDirection: "row",
+              backgroundColor: "transparent",
+              borderColor: "C4FD2A",
+              borderWidth: 10,
+              borderRadius: 10,
+              marginLeft: "auto",
+              marginRight: "auto",
+              padding: 0,
+              width: "95%",
+              height: 180,
+              justifyContent: "space-evenly"
+            };
+          case "go-out":
+            return {
+              alignItems: "center",
+              flexDirection: "row",
+              backgroundColor: "transparent",
+              borderColor: "#25E197",
+              borderWidth: 10,
+              borderRadius: 10,
+              marginLeft: "auto",
+              marginRight: "auto",
+              padding: 0,
+              width: "95%",
+              height: 180,
+              justifyContent: "space-evenly"
+            };
+          case "postgame":
+            return {
+              alignItems: "center",
+              flexDirection: "row",
+              backgroundColor: "transparent",
+              borderColor: "#00908E",
+              borderWidth: 10,
+              borderRadius: 10,
+              marginLeft: "auto",
+              marginRight: "auto",
+              padding: 0,
+              width: "95%",
+              height: 180,
+              justifyContent: "space-evenly"
+            };
+          case "other":
+            return {
+              alignItems: "center",
+              flexDirection: "row",
+              backgroundColor: "transparent",
+              borderColor: "#fff",
+              borderWidth: 10,
+              borderRadius: 10,
+              marginLeft: "auto",
+              marginRight: "auto",
+              padding: 0,
+              width: "95%",
+              height: 180,
+              justifyContent: "space-evenly"
+            };
+          default:
+        }
+        return {
+          color: "#25aae1",
+          fontWeight: "900",
+          fontSize: 18,
+          marginTop: 10
+        };
+      };
+    }
 
     return (
       <View style={styles.container}>
@@ -70,14 +280,18 @@ class PlanCard extends React.Component {
           <Text style={styles.createdAt}>{howLongUntil}</Text>
         </View>
         {/* card */}
-        <View style={styles.card}>
+        <View style={cardStyle()}>
           <View style={styles.iconContainer}>
             <Image
               resizeMode="contain"
               style={styles.iconImage}
-              source={require(`../assets/images/dinner.png`)}
+              source={{
+                uri: this.state.source
+              }}
             />
-            <Text style={styles.dinner}>{this.props.invite.category}</Text>
+            <Text style={textStyle()}>
+              {this.props.invite.category.toUpperCase()}
+            </Text>
           </View>
           <View style={styles.detailContainer}>
             <View style={styles.sender}>
@@ -88,7 +302,7 @@ class PlanCard extends React.Component {
                 color="grey"
               />
               <Text style={styles.senderInfo}>
-                {this.state.user} & 6 others
+                {this.state.user} & {Math.floor(Math.random() * 10)} others
               </Text>
             </View>
 

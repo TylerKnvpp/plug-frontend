@@ -61,7 +61,7 @@ class Profile extends React.Component {
   componentDidUpdate() {
     if (this.props.user) {
       const userProps = { ...this.props.user };
-      console.log(userProps);
+      // console.log(userProps);
       if (this.state.city === null) {
         this.setState({
           id: userProps.id,

@@ -6,7 +6,8 @@ import {
   View,
   SafeAreaView,
   TouchableOpacity,
-  Alert
+  Alert,
+  Vibration
 } from "react-native";
 import CButton from "./CButton";
 // import { connect } from 'react-redux'
@@ -70,6 +71,8 @@ class InviteCategorySelector extends React.Component {
       this.props.handleCategorySelector(this.state);
     } else {
       Alert.alert("Please select a category.");
+
+      Vibration.vibrate();
     }
   };
 

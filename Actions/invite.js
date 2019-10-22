@@ -112,17 +112,18 @@ export function fetchUserPlans(id) {
 
 export function acceptInvite(data) {
   return function(dispatch) {
-    return fetch(`http://localhost:3000/invites/${data.invite.id}`, {
+    return fetch(`http://localhost:3000/plans/${data.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json"
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(data.plan)
     })
       .then(res => res.json())
-      .then(data => {
-        dispatch({ type: ACCEPT_INVITE, payload: data });
+      .then(response => {
+        console.log(response);
+        dispatch({ type: ACCEPT_INVITE, payload: response });
       });
   };
 }

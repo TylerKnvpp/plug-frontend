@@ -24,8 +24,6 @@ class PendingInvitesContainer extends React.Component {
     }
   }
 
-  componentDidUpdate() {}
-
   render() {
     // const renderEvents = this.state.invites.map(inviteObj => {
     //   return <PendingInvitesCard key={inviteObj.id} invite={inviteObj} />;
