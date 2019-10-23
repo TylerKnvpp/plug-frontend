@@ -49,12 +49,12 @@ class SignUp extends React.Component {
   render() {
     return (
       <KeyboardAvoidingView
-        behavior="position"
+        behavior="padding"
         style={styles.container}
         enabled="true"
       >
         <StatusBar barStyle="light-content" backgroundColor="#6a51ae" />
-        <SafeAreaView>
+        <SafeAreaView style={styles.form}>
           <Image
             resizeMode="contain"
             style={styles.image}
@@ -108,6 +108,9 @@ export default connect(
 )(SignUp);
 
 const styles = StyleSheet.create({
+  form: {
+    marginBottom: 10
+  },
   button: {
     color: "red"
   },
@@ -146,7 +149,7 @@ const styles = StyleSheet.create({
     borderWidth: 1
   },
   formContainer: {
-    marginBottom: 40
+    marginBottom: 10
   },
   fitToText: {
     flexDirection: "row",

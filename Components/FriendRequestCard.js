@@ -21,6 +21,12 @@ class FriendRequestCard extends React.Component {
   };
 
   render() {
+    if (this.props.request) {
+      const source = this.props.request.avatar;
+      avatarSource = function(options) {
+        return { uri: `${source}` };
+      };
+    }
     return (
       <View style={styles.container}>
         <View style={styles.infoContainer}>
@@ -28,33 +34,24 @@ class FriendRequestCard extends React.Component {
             <Image
               style={styles.image}
               resizeMode="cover"
-              source={require("../assets/images/profile.jpg")}
+              source={avatarSource()}
             />
           </View>
           <View style={styles.textContainer}>
             <Text style={styles.header}>{this.props.request.full_name}</Text>
             <Text style={styles.label}>@{this.props.request.username}</Text>
           </View>
-          <CButton
-            key={this.props.request.id}
-            text="+"
-            size="default"
-            onPress={() => {
-              this.handleAccept(this.props.request.id);
-            }}
-            style={styles.button}
-            dataId={this.props.request.id}
-          />
-          <CButton
-            key={this.props.request.id}
-            text="-"
-            size="default"
-            onPress={() => {
-              //   this.handlePress(this.props.request.id);
-            }}
-            theme="danger"
-            dataId={this.props.request.id}
-          />
+          <View style={styles.buttonContainer}>
+            <CButton
+              text="Add"
+              size="default"
+              onPress={() => {
+                this.handleAccept(this.props.request.id);
+              }}
+              style={styles.button}
+              dataId={this.props.request.id}
+            />
+          </View>
         </View>
       </View>
     );
@@ -169,6 +166,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-between"
   },
   buttonContainer: {
-    backgroundColor: "#25aae1"
+    marginLeft: 10,
+    flexDirection: "row",
+    justifyContent: "space-around"
   }
 });

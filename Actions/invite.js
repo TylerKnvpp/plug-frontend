@@ -122,7 +122,6 @@ export function acceptInvite(data) {
     })
       .then(res => res.json())
       .then(response => {
-        console.log(response);
         dispatch({ type: ACCEPT_INVITE, payload: response });
       });
   };

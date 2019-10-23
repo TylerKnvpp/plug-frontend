@@ -11,7 +11,6 @@ class PendingInvitesContainer extends React.Component {
 
   componentDidMount() {
     if (this.props.invites) {
-      // console.log("invites", this.props.invites);
       const invitesCopy = [...this.props.invites];
       const filtered = invitesCopy.filter(
         obj => obj.accepted === null && obj.denied === null
@@ -111,7 +110,7 @@ class PendingInvitesContainer extends React.Component {
         ) : null}
         {happyHourArray.length > 0 ? (
           <View style={styles.catContainer}>
-            <View style={styles.iconContainer}>
+            <View style={styles.hhContainer}>
               <Image
                 resizeMode="contain"
                 style={styles.image}
@@ -223,6 +222,13 @@ export default connect(
 )(PendingInvitesContainer);
 
 const styles = StyleSheet.create({
+  hhContainer: {
+    alignItems: "flex-start",
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    marginBottom: 10,
+    marginRight: 90
+  },
   iconContainer: {
     alignItems: "flex-start",
     flexDirection: "row",

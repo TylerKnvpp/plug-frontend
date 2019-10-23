@@ -12,13 +12,13 @@ class FriendRequestContainer extends React.Component {
   componentDidMount() {
     if (this.props.user) {
       const userProps = { ...this.props.user };
-      this.props.fetchFriendRequests(userProps.user.id);
+      this.props.fetchFriendRequests(userProps.id);
     }
   }
 
   componentDidUpdate() {
     const requestCopy = { ...this.props.requests };
-    if (requestCopy.pending_received) {
+    if (requestCopy.pending_received.length > 0) {
       if (this.state.requests.length === 0) {
         this.setState({
           requests: requestCopy.pending_received
@@ -45,7 +45,7 @@ class FriendRequestContainer extends React.Component {
 
 const msp = state => {
   return {
-    user: state.fetch,
+    user: state.auth.userObj,
     requests: state.friends.requests
   };
 };

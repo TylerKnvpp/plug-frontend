@@ -39,7 +39,6 @@ function inviteReducer(state = INIT_STATE, action) {
     case FETCH_USER_INVITES:
       return { ...state, pendingInvites: action.payload };
     case FETCH_USER_PLANS:
-      // console.log("payload", action.payload.acceptedPlans);
       return {
         ...state,
         renderInvites: action.payload.invitesToRender,

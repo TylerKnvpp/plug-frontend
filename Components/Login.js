@@ -40,7 +40,7 @@ class Login extends React.Component {
     if (this.state.username && this.state.password) {
       this.props.userLogin(this.state);
 
-      this.props.navigation.navigate("Invite");
+      this.props.navigation.navigate("AuthLoading");
     }
   };
 
@@ -74,13 +74,15 @@ class Login extends React.Component {
               secureTextEntry={true}
             />
           </View>
-          <CButton text="Login" onPress={this.handlePress} />
+          <View style={styles.buttonContainer}>
+            <CButton text="Login" onPress={this.handlePress} />
 
-          <Button
-            title="Or Sign Up"
-            color="#25aae1"
-            onPress={() => this.props.navigation.navigate("SignUpScreen")}
-          />
+            <Button
+              title="Or Sign Up"
+              color="#25aae1"
+              onPress={() => this.props.navigation.navigate("SignUpScreen")}
+            />
+          </View>
         </SafeAreaView>
       </KeyboardAvoidingView>
     );
@@ -160,6 +162,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between"
   },
   buttonContainer: {
-    backgroundColor: "#25aae1"
+    marginBottom: 50
   }
 });

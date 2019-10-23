@@ -61,7 +61,6 @@ class Profile extends React.Component {
   componentDidUpdate() {
     if (this.props.user) {
       const userProps = { ...this.props.user };
-      // console.log(userProps);
       if (this.state.city === null) {
         this.setState({
           id: userProps.id,
@@ -96,6 +95,13 @@ class Profile extends React.Component {
   };
 
   render() {
+    if (this.props.user) {
+      const source = this.props.user.avatar;
+      avatarSource = function(options) {
+        return { uri: `${source}` };
+      };
+    }
+
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.container} enabled>
         <StatusBar barStyle="light-content" backgroundColor="#6a51ae" />
@@ -104,10 +110,7 @@ class Profile extends React.Component {
             <Image
               resizeMode="contain"
               style={styles.image}
-              source={{
-                uri:
-                  "https://pbs.twimg.com/profile_images/461277151514222593/xYCOja56_400x400.jpeg"
-              }}
+              source={avatarSource()}
             />
           </View>
           <Button

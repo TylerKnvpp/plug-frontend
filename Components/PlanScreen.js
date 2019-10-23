@@ -60,10 +60,6 @@ class PlanScreen extends React.Component {
     }
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return nextProps.user != this.props.user;
-  }
-
   render() {
     return (
       <SafeAreaView style={styles.container}>

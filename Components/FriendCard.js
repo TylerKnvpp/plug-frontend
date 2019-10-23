@@ -8,6 +8,23 @@ import { addUser } from "../Actions/friendship";
 
 class FriendCard extends React.Component {
   render() {
+    // if (this.props.user) {
+    //   const random = Math.floor(Math.random(Math.floor(Math.random() * 12)));
+    //   const randomRandom = Math.floor(
+    //     Math.random(Math.floor(Math.random() * random))
+    //   );
+    //   source = function(option) {
+    //     return {
+    //       uri: `http://www.gravatar.com/avatar/ccb4a9130f39cc557543b${random}48360f43f?r=PG&s=256&default=identicon`
+    //     };
+    //   };
+    // }
+    if (this.props.user) {
+      const source = this.props.user.avatar;
+      avatarSource = function(options) {
+        return { uri: `${source}` };
+      };
+    }
     return (
       <View key={this.props.user.id} style={styles.container}>
         <View style={styles.infoContainer}>
@@ -15,7 +32,7 @@ class FriendCard extends React.Component {
             <Image
               style={styles.image}
               resizeMode="cover"
-              source={require("../assets/images/profile.jpg")}
+              source={avatarSource()}
             />
           </View>
           <View style={styles.textContainer}>

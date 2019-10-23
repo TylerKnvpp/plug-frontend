@@ -11,16 +11,24 @@ class UserIndexCard extends React.Component {
     // copy prop object for user
     const copy = { ...this.props.sender };
     // extract id
-    const senderID = copy.user.id;
+    const senderID = copy.id;
     // create object to send to db
     const request = {
       receiver: id,
       sender: senderID
     };
+
     this.props.sendFriendRequest(request);
   };
 
   render() {
+    if (this.props.user) {
+      const source = this.props.user.avatar;
+      avatarSource = function(options) {
+        return { uri: `${source}` };
+      };
+    }
+
     return (
       <View key={this.props.user.id} style={styles.container}>
         <View style={styles.infoContainer}>
@@ -28,7 +36,7 @@ class UserIndexCard extends React.Component {
             <Image
               style={styles.image}
               resizeMode="cover"
-              source={require("../assets/images/profile.jpg")}
+              source={avatarSource()}
             />
           </View>
           <View style={styles.textContainer}>
@@ -53,7 +61,7 @@ class UserIndexCard extends React.Component {
 
 const msp = state => {
   return {
-    sender: state.fetch
+    sender: state.auth.userObj
   };
 };
 
@@ -120,7 +128,7 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   imageCropper: {
-    borderColor: "#25aae1",
+    // borderColor: "#25aae1",
     borderWidth: 3,
     width: 75,
     height: 75,

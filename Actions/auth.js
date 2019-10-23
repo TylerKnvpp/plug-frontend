@@ -4,6 +4,7 @@ import {
   FETCH_USER
 } from "../Constants/actionCreators";
 import { AsyncStorage } from "react-native";
+import { fetchUserPlans } from "./invite";
 
 export function userSignUp(user) {
   return function(dispatch) {
@@ -41,7 +42,6 @@ export function userLogin(user) {
       .then(res => res.json())
       .then(res => {
         const loggedInUser = JSON.stringify(res);
-        //
         _storeData = async () => {
           try {
             await AsyncStorage.setItem("loggedInUser", loggedInUser);

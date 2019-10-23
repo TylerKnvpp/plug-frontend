@@ -54,7 +54,6 @@ class PlanCard extends React.Component {
     const eventTime = moment(this.props.invite.time).format("hh:mm a");
     const howLongUntil = moment(this.props.invite.time).fromNow();
     //
-    console.log(this.state.category);
 
     if (this.props.invite.category) {
       const category = this.props.invite.category;
@@ -271,6 +270,48 @@ class PlanCard extends React.Component {
       };
     }
 
+    if (this.props.invite.category) {
+      const category = this.props.invite.category;
+      cardIcon = function(options) {
+        switch (category) {
+          case "brunch": {
+            return require("../assets/images/brunch.png");
+            // return icon;
+          }
+          case "happy-hour": {
+            return require("../assets/images/happy-hour.png");
+            // return icon;
+          }
+          case "dinner": {
+            return require("../assets/images/dinner.png");
+            // return icon;
+          }
+          case "pregame": {
+            return require("../assets/images/pregame.png");
+            // return icon;
+          }
+          case "party": {
+            return require("../assets/images/party.png");
+            // return icon;
+          }
+          case "go-out": {
+            return require("../assets/images/go-out.png");
+            // return icon;
+          }
+          case "postgame": {
+            return require("../assets/images/postgame.png");
+            // return icon;
+          }
+          case "other": {
+            return require("../assets/images/other.png");
+            // return icon;
+          }
+          default:
+            break;
+        }
+      };
+    }
+
     return (
       <View style={styles.container}>
         <View style={styles.timeContainer}>
@@ -285,9 +326,7 @@ class PlanCard extends React.Component {
             <Image
               resizeMode="contain"
               style={styles.iconImage}
-              source={{
-                uri: this.state.source
-              }}
+              source={cardIcon()}
             />
             <Text style={textStyle()}>
               {this.props.invite.category.toUpperCase()}

@@ -373,7 +373,7 @@ const styles = StyleSheet.create({
   },
   imageCropper: {
     borderColor: "#25aae1",
-    borderWidth: 3,
+    borderWidth: 2,
     width: 50,
     height: 50,
     marginLeft: 0,
