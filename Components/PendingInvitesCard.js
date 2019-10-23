@@ -17,6 +17,7 @@ import { acceptInvite } from "../Actions/invite";
 import { Ionicons } from "@expo/vector-icons";
 import moment from "moment";
 import _ from "lodash";
+import * as WebBrowser from "expo-web-browser";
 
 class PendingInvitesCard extends React.Component {
   handleAccept = id => {
@@ -42,6 +43,8 @@ class PendingInvitesCard extends React.Component {
 
   state = {
     user: "",
+    avatar: "",
+    result: null,
     modalVisible: false
   };
 
@@ -50,7 +53,8 @@ class PendingInvitesCard extends React.Component {
       .then(resp => resp.json())
       .then(res => {
         this.setState({
-          user: res.full_name
+          user: res.full_name,
+          avatar: res.avatar
         });
       });
   }
@@ -65,6 +69,17 @@ class PendingInvitesCard extends React.Component {
   setModalVisible(visible) {
     this.setState({ modalVisible: visible });
   }
+
+  _handlePressButtonAsync = async () => {
+    this.setModalVisible(!this.state.modalVisible);
+    if (this.props.invite.location) {
+      // const searchTerm = `https://www.google.com/maps/search/${this.props.invite.location}`;
+      const searchTerm = `https://www.google.com/maps/search/`;
+
+      let result = await WebBrowser.openBrowserAsync(searchTerm);
+      this.setState({ result });
+    }
+  };
 
   render() {
     const days = [
@@ -81,6 +96,15 @@ class PendingInvitesCard extends React.Component {
     const eventTime = moment(this.props.invite.time).format("hh:mm a");
     const createdAt = moment(this.props.invite.created_at).fromNow();
     //
+
+    if (this.props.sender) {
+      const source = this.state.avatar;
+      avatarSource = function(options) {
+        return { uri: `${source}` };
+      };
+    }
+    //
+
     return (
       <View style={styles.container}>
         <TouchableOpacity style={styles.card} onPress={this.handlePress}>
@@ -90,10 +114,11 @@ class PendingInvitesCard extends React.Component {
               <Image
                 resizeMode="contain"
                 style={styles.image}
-                source={{
-                  uri:
-                    "https://pbs.twimg.com/profile_images/461277151514222593/xYCOja56_400x400.jpeg"
-                }}
+                source={avatarSource()}
+                // source={{
+                //   uri:
+                //     "https://pbs.twimg.com/profile_images/461277151514222593/xYCOja56_400x400.jpeg"
+                // }}
               />
             </View>
             <Text style={styles.senderInfo}>
@@ -150,47 +175,17 @@ class PendingInvitesCard extends React.Component {
                     <Image
                       resizeMode="contain"
                       style={modalstyle.image}
-                      source={{
-                        uri:
-                          "https://pbs.twimg.com/profile_images/461277151514222593/xYCOja56_400x400.jpeg"
-                      }}
+                      source={avatarSource()}
+                      // source={{
+                      //   uri:
+                      //     "https://pbs.twimg.com/profile_images/461277151514222593/xYCOja56_400x400.jpeg"
+                      // }}
                     />
                   </View>
                   <Text style={modalstyle.groupName}>
                     {this.state.user} & {Math.floor(Math.random() * 10)} others
                   </Text>
-                  <View style={styles.sender}>
-                    <View style={styles.imageCropper}>
-                      <Image
-                        resizeMode="contain"
-                        style={styles.image}
-                        source={{
-                          uri:
-                            "https://pbs.twimg.com/profile_images/461277151514222593/xYCOja56_400x400.jpeg"
-                        }}
-                      />
-                    </View>
-                    <View style={styles.imageCropper}>
-                      <Image
-                        resizeMode="contain"
-                        style={styles.image}
-                        source={{
-                          uri:
-                            "https://pbs.twimg.com/profile_images/461277151514222593/xYCOja56_400x400.jpeg"
-                        }}
-                      />
-                    </View>
-                    <View style={styles.imageCropper}>
-                      <Image
-                        resizeMode="contain"
-                        style={styles.image}
-                        source={{
-                          uri:
-                            "https://pbs.twimg.com/profile_images/461277151514222593/xYCOja56_400x400.jpeg"
-                        }}
-                      />
-                    </View>
-                  </View>
+                  <View style={styles.sender}></View>
                   <View
                     style={{
                       marginBottom: 30,
@@ -214,7 +209,7 @@ class PendingInvitesCard extends React.Component {
                       >{`${days[eventDay]} @ ${eventTime}`}</Text>
                     </View>
 
-                    <View style={modalstyle.location}>
+                    <TouchableOpacity style={modalstyle.location}>
                       <Ionicons
                         name="ios-pin"
                         style={{ marginRight: 20 }}
@@ -224,12 +219,17 @@ class PendingInvitesCard extends React.Component {
                       <Text style={modalstyle.headerInfo}>
                         {this.props.invite.location}
                       </Text>
-                    </View>
+                    </TouchableOpacity>
+                    <Text>
+                      {this.state.result && JSON.stringify(this.state.result)}
+                    </Text>
+                    <Button
+                      title="Get Directions"
+                      onPress={this._handlePressButtonAsync}
+                    />
                   </View>
-                  <View style={styles.revealContainer}>
-                    <CButton text="Accept" onPress={this.handleAccept} />
-                    <CButton text="Decline" theme="danger" onPress={() => {}} />
-                  </View>
+
+                  <CButton text="Accept" onPress={this.handleAccept} />
                 </View>
               </View>
               <TouchableOpacity

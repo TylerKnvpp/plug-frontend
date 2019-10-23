@@ -111,6 +111,7 @@ class Profile extends React.Component {
               resizeMode="contain"
               style={styles.image}
               source={avatarSource()}
+              // source={require("../assets/images/profile.jpg")}
             />
           </View>
           <Button

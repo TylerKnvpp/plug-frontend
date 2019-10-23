@@ -33,6 +33,7 @@ class FriendCard extends React.Component {
               style={styles.image}
               resizeMode="cover"
               source={avatarSource()}
+              // source={require("../assets/images/profile.jpg")}
             />
           </View>
           <View style={styles.textContainer}>

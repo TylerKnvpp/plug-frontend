@@ -20,12 +20,12 @@ class InviteAddFriendsCard extends React.Component {
     this.props.handleSelectedUser(id);
   };
   render() {
-    if (this.props.user) {
-      const source = this.props.user.avatar;
-      avatarSource = function(options) {
-        return { uri: `${source}` };
-      };
-    }
+    // if (this.props.user) {
+    //   const source = this.props.user.avatar;
+    //   avatarSource = function(options) {
+    //     return { uri: `${source}` };
+    //   };
+    // }
     return (
       <View key={this.props.user.id} style={styles.container}>
         <View style={styles.infoContainer}>
@@ -33,7 +33,8 @@ class InviteAddFriendsCard extends React.Component {
             <Image
               style={styles.image}
               resizeMode="cover"
-              source={avatarSource()}
+              // source={avatarSource()}
+              source={require("../assets/images/profile.jpg")}
             />
           </View>
           <View style={styles.textContainer}>

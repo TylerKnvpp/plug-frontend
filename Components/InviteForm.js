@@ -53,7 +53,7 @@ class InviteForm extends React.Component {
       };
       this.props.postInvite(invite);
       alert("Your invite has been sent!");
-      this.props.navigation.navigate("Plans");
+      this.props.navigation.push("Plans");
       this.setState({
         time: "",
         location: "",

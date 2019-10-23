@@ -11,7 +11,7 @@ class FriendRequestCard extends React.Component {
     // copy prop object for user
     const copy = { ...this.props.sender };
     // extract id
-    const user = copy.user.id;
+    const user = copy.id;
     // create object to send to db
     const request = {
       user_id: user,
@@ -60,7 +60,7 @@ class FriendRequestCard extends React.Component {
 
 const msp = state => {
   return {
-    sender: state.fetch
+    sender: state.auth.userObj
   };
 };
 
