@@ -21,6 +21,7 @@ function authReducer(state = INITIAL_STATE, action) {
         token: action.payload.user.token
       };
     case USER_LOGIN:
+      console.log("SET STATE");
       return {
         ...state,
         id: action.payload.id,

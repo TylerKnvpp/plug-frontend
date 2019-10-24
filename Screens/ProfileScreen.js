@@ -17,6 +17,11 @@ class ProfileScreen extends React.Component {
       fontWeight: "900"
     }
   };
+
+  componentDidMount() {
+    console.log("profile mounted");
+  }
+
   render() {
     return (
       <View>

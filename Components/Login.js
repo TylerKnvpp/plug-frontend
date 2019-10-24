@@ -38,9 +38,9 @@ class Login extends React.Component {
   handlePress = e => {
     e.preventDefault();
     if (this.state.username && this.state.password) {
-      this.props.userLogin(this.state);
-
-      this.props.navigation.navigate("AuthLoading");
+      this.props
+        .userLogin(this.state)
+        .then(() => this.props.navigation.navigate("AuthLoading"));
     }
   };
 

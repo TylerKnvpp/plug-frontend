@@ -3,6 +3,7 @@ import { View, TextInput, Text, StyleSheet } from "react-native";
 import { connect } from "react-redux";
 import { fetchUsers, fetchFriendRequests } from "../Actions/friendship";
 import FriendRequestCard from "../Components/FriendRequestCard";
+import _ from "lodash";
 
 class FriendRequestContainer extends React.Component {
   state = {
@@ -27,9 +28,28 @@ class FriendRequestContainer extends React.Component {
     }
   }
 
+  handleUpdateCollection = requestObj => {
+    if (this.state.requests) {
+      console.log(requestObj);
+      const requestCollectionClone = _.clone(this.state.requests);
+      const updatedRequestCollection = requestCollectionClone.filter(
+        request => request.id !== requestObj
+      );
+      this.setState({
+        requests: updatedRequestCollection
+      });
+    }
+  };
+
   render() {
     const renderRequests = this.state.requests.map(requestObj => {
-      return <FriendRequestCard key={requestObj.id} request={requestObj} />;
+      return (
+        <FriendRequestCard
+          key={requestObj.id}
+          request={requestObj}
+          handleUpdateCollection={this.handleUpdateCollection}
+        />
+      );
     });
     return (
       <View style={styles.container}>

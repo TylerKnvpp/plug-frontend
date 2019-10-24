@@ -17,6 +17,8 @@ class FriendRequestCard extends React.Component {
       user_id: user,
       friend: id
     };
+    const accepted = parseInt(id);
+    this.props.handleUpdateCollection(accepted);
     this.props.acceptFriendRequest(request);
   };
 

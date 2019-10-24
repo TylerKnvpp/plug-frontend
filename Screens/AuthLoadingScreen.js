@@ -13,23 +13,58 @@ import { fetchFriendRequests } from "../Actions/friendship";
 import { fetchUserPlans } from "../Actions/invite";
 
 class AuthLoadingScreen extends React.Component {
+  state = {
+    userID: null
+  };
+
   componentDidMount() {
+    console.log("DID MOUNT", this.state.userID);
     this._bootstrapAsync();
   }
 
-  // Fetch the token from storage then navigate to our appropriate place
+  componentWillUnmount() {
+    console.log("UNMOUNT");
+    // this._unmountAsync();
+    // this.props.navigation.navigate("profile");
+  }
+
+  componentDidUpdate(prevProps) {
+    // console.log(prevProps);
+    // console.log(this.props.auth);
+    if (this.props.auth !== prevProps.auth) {
+      console.log("update", this.props.auth);
+      this.props.navigation.navigate("Profile");
+    }
+  }
+
+  // Fetch the token from storage then navigate to our appropriate screen
   _bootstrapAsync = async () => {
     const loggedInUser = await AsyncStorage.getItem("loggedInUser");
     if (loggedInUser) {
       const parsed = JSON.parse(loggedInUser);
       console.log("async", parsed.id);
-
-      loggedInUser ? this.props.getUserProfile(parsed.id) : null;
-      loggedInUser ? this.props.fetchUserPlans(parsed.id) : null;
+      this.props.getUserProfile(parsed.id);
+      this.props.fetchUserPlans(parsed.id);
+      this.setState({
+        userID: parsed.id
+      });
+      this.props.navigation.navigate("Profile");
+    } else {
+      this.props.navigation.navigate("LoginScreen");
     }
     // This will switch to the App screen or Auth screen and this loading
     // screen will be unmounted and thrown away.
-    this.props.navigation.navigate(loggedInUser ? "Profile" : "LoginScreen");
+  };
+
+  // // Fetch the token from storage then navigate to our appropriate screen
+  _unmountAsync = async () => {
+    const loggedInUser = await AsyncStorage.getItem("loggedInUser");
+    console.log("unmount async", loggedInUser);
+    if (loggedInUser) {
+      this.props.navigatation.navigate("Profile");
+    } else {
+      this.props.navigatation.navigate("Login");
+    }
   };
 
   // Render any loading content that you like here
@@ -58,7 +93,8 @@ const mdp = dispatch => {
 
 const msp = state => {
   return {
-    userData: state.auth.userObj
+    userData: state.auth.userObj,
+    auth: state.auth.id
   };
 };
 
