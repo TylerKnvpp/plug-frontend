@@ -123,7 +123,10 @@ class PendingInvitesCard extends React.Component {
               />
             </View>
             <Text style={styles.senderInfo}>
-              {this.state.user} & {Math.floor(Math.random() * 10)} others
+              {this.state.user.length > 10
+                ? this.state.user.substring(0, 10).concat("...")
+                : this.state.user}{" "}
+              & {Math.floor(Math.random() * 10)} others
             </Text>
           </View>
           <View style={styles.location}>

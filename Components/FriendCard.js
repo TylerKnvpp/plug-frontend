@@ -1,24 +1,36 @@
 import React from "react";
-import { View, Text, StyleSheet, Image, Button } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  Modal,
+  Button,
+  TouchableOpacity
+} from "react-native";
 // import { Image } from "react-native";
 // import { Card, ListItem, Button, Icon } from "react-native-elements";
 import CButton from "./CButton";
 import { connect } from "react-redux";
 import { addUser } from "../Actions/friendship";
+import { Ionicons } from "@expo/vector-icons";
 
 class FriendCard extends React.Component {
+  state = {
+    modalVisible: false
+  };
+
+  handleOpen = () => {
+    this.setState({
+      modalVisible: !this.state.modalVisible
+    });
+  };
+
+  setModalVisible(visible) {
+    this.setState({ modalVisible: visible });
+  }
+
   render() {
-    // if (this.props.user) {
-    //   const random = Math.floor(Math.random(Math.floor(Math.random() * 12)));
-    //   const randomRandom = Math.floor(
-    //     Math.random(Math.floor(Math.random() * random))
-    //   );
-    //   source = function(option) {
-    //     return {
-    //       uri: `http://www.gravatar.com/avatar/ccb4a9130f39cc557543b${random}48360f43f?r=PG&s=256&default=identicon`
-    //     };
-    //   };
-    // }
     if (this.props.user) {
       const source = this.props.user.avatar;
       avatarSource = function(options) {
@@ -27,7 +39,10 @@ class FriendCard extends React.Component {
     }
     return (
       <View key={this.props.user.id} style={styles.container}>
-        <View style={styles.infoContainer}>
+        <TouchableOpacity
+          style={styles.infoContainer}
+          onPress={this.handleOpen}
+        >
           <View style={styles.imageCropper}>
             <Image
               style={styles.image}
@@ -40,7 +55,114 @@ class FriendCard extends React.Component {
             <Text style={styles.header}>{this.props.user.full_name}</Text>
             <Text style={styles.label}>@{this.props.user.username}</Text>
           </View>
-        </View>
+        </TouchableOpacity>
+        {this.state.modalVisible ? (
+          <Modal
+            animationType={"slide"}
+            transparent={false}
+            visible={this.state.modalVisible}
+            onRequestClose={() => {
+              alert("Modal has been closed.");
+            }}
+          >
+            <View style={modalstyle.container}>
+              <View style={modalstyle.detailsContainer}>
+                <TouchableOpacity
+                  onPress={() => {
+                    this.setModalVisible(!this.state.modalVisible);
+                  }}
+                >
+                  <Ionicons
+                    name="ios-arrow-down"
+                    style={{ marginLeft: 300 }}
+                    size={40}
+                    color="white"
+                  />
+                </TouchableOpacity>
+                <View style={modalstyle.align}>
+                  <View style={modalstyle.imageCropper}>
+                    <Image
+                      resizeMode="contain"
+                      style={modalstyle.image}
+                      source={avatarSource()}
+                      // source={{
+                      //   uri:
+                      //     "https://pbs.twimg.com/profile_images/461277151514222593/xYCOja56_400x400.jpeg"
+                      // }}
+                    />
+                  </View>
+                  <Text style={modalstyle.groupName}>
+                    {this.props.user.full_name}
+                  </Text>
+                  <Text style={modalstyle.username}>
+                    @{this.props.user.username}
+                  </Text>
+                  <View style={styles.sender}></View>
+                  <View
+                    style={{
+                      marginBottom: 30,
+                      marginTop: 30,
+                      alignItems: "center"
+                    }}
+                  >
+                    <View style={modalstyle.location}>
+                      <Ionicons
+                        name="ios-pin"
+                        style={{ marginRight: 15 }}
+                        size={30}
+                        color="grey"
+                      />
+                      <Text style={modalstyle.headerInfo}>
+                        {this.props.user.city}
+                      </Text>
+                    </View>
+
+                    <View style={modalstyle.location}>
+                      <Ionicons
+                        name="ios-school"
+                        style={{ marginRight: 15 }}
+                        size={30}
+                        color="grey"
+                      />
+                      <Text style={modalstyle.headerInfo}>
+                        {this.props.user.school}
+                      </Text>
+                    </View>
+
+                    <View style={modalstyle.location}>
+                      <Ionicons
+                        name="ios-briefcase"
+                        style={{ marginRight: 20 }}
+                        size={30}
+                        color="grey"
+                      />
+                      <Text style={modalstyle.headerInfo}>
+                        {this.props.user.company}
+                      </Text>
+                    </View>
+
+                    {/* <Button
+                      title="Get Directions"
+                      onPress={this._handlePressButtonAsync}
+                    /> */}
+                  </View>
+                </View>
+              </View>
+              <TouchableOpacity
+                style={{ marginTop: 150 }}
+                onPress={() => {
+                  this.setModalVisible(!this.state.modalVisible);
+                }}
+              >
+                <Text
+                  style={{ color: "white", fontWeight: "900", fontSize: 24 }}
+                >
+                  CLOSE
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </Modal>
+        ) : null}
       </View>
     );
   }
@@ -155,5 +277,73 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     backgroundColor: "#25aae1"
+  }
+});
+
+const modalstyle = StyleSheet.create({
+  categoryname: {
+    color: "#25aae1",
+    fontSize: 30,
+    fontWeight: "900",
+    marginBottom: 20
+  },
+  headerInfo: {
+    color: "white",
+    fontSize: 24,
+    fontWeight: "900",
+    marginTop: 3
+    // marginBottom: 10
+    // marginBottom: 20,
+    // marginLeft: "auto",
+    // marginRight: "auto"
+  },
+  location: {
+    flexDirection: "row",
+    alignItems: "flex-start",
+
+    marginBottom: 20
+  },
+  groupName: {
+    color: "white",
+    fontWeight: "900",
+    fontSize: 24,
+    marginTop: 20,
+    marginBottom: 10
+  },
+  username: {
+    color: "grey",
+    fontWeight: "900",
+    fontSize: 18
+  },
+  align: {
+    alignItems: "center"
+  },
+  detailsContainer: {
+    marginTop: 65
+  },
+  container: {
+    alignItems: "center",
+    backgroundColor: "#010112",
+    flex: 1
+  },
+  imageCropper: {
+    borderColor: "#25aae1",
+    borderWidth: 3,
+    width: 150,
+    height: 150,
+    marginLeft: 0,
+    marginRight: 15,
+    // marginTop: 20,
+    // marginBottom: 10,
+    position: "relative",
+    overflow: "hidden",
+    borderRadius: 150
+  },
+  image: {
+    display: "flex",
+    margin: "auto",
+    marginLeft: "0%",
+    height: "100%",
+    width: "auto"
   }
 });

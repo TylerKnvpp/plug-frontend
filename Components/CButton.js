@@ -137,7 +137,7 @@ class CButton extends React.Component {
     text: PropTypes.string.isRequired,
     onPress: PropTypes.func.isRequired,
     size: PropTypes.oneOf(["small", "default", "large"]),
-    theme: PropTypes.oneOf(["primary", "secondary", "danger"]),
+    theme: PropTypes.oneOf(["primary", "secondary", "danger", "disabled"]),
     outline: PropTypes.bool,
     disabled: PropTypes.bool
   };

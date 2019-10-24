@@ -37,6 +37,7 @@ class InviteAddFriendsContainer extends React.Component {
   handleSelectedUsers = id => {
     // create updated collection with each new user
     const newCollection = [...this.state.invitedUsers, id];
+    console.log(newCollection);
     // set state
     this.setState({
       invitedUsers: newCollection
