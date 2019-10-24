@@ -5,8 +5,21 @@ import { View, Text, StyleSheet, Image, Button } from "react-native";
 import CButton from "./CButton";
 import { connect } from "react-redux";
 import { addUser } from "../Actions/friendship";
+import _ from "lodash";
 
 class UserIndexCard extends React.Component {
+  state = {
+    friend: false
+  };
+
+  componentDidMount() {
+    if (this.props.friend) {
+      this.setState({
+        friend: this.props.friend
+      });
+    }
+  }
+
   handlePress = id => {
     // copy prop object for user
     const copy = { ...this.props.sender };
@@ -44,16 +57,27 @@ class UserIndexCard extends React.Component {
             <Text style={styles.header}>{this.props.user.full_name}</Text>
             <Text style={styles.label}>@{this.props.user.username}</Text>
           </View>
-          <CButton
-            key={this.props.user.id}
-            text="Add Friend"
-            size="default"
-            onPress={() => {
-              this.handlePress(this.props.user.id);
-            }}
-            style={styles.button}
-            dataId={this.props.user.id}
-          />
+          {this.state.friend ? (
+            <CButton
+              theme="disabled"
+              text="Friends ✓"
+              size="default"
+              onPress={() => {}}
+              style={styles.button}
+              disabled="true"
+            />
+          ) : (
+            <CButton
+              key={this.props.user.id}
+              text="Add Friend"
+              size="default"
+              onPress={() => {
+                this.handlePress(this.props.user.id);
+              }}
+              style={styles.button}
+              dataId={this.props.user.id}
+            />
+          )}
         </View>
       </View>
     );

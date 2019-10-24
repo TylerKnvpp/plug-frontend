@@ -15,54 +15,70 @@ import CButton from "./CButton";
 
 class InviteCategorySelector extends React.Component {
   state = {
-    category: ""
+    category: "",
+    brunch: false,
+    happyHour: false,
+    dinner: false,
+    pregame: false,
+    party: false,
+    goOut: false,
+    postgame: false,
+    other: false
   };
 
   handlePressBrunch = e => {
     this.setState({
-      category: "brunch"
+      category: "brunch",
+      brunch: !this.state.brunch
     });
   };
 
   handlePressHappyHour = e => {
     this.setState({
-      category: "happy-hour"
+      category: "happy-hour",
+      happyHour: !this.state.happyHour
     });
   };
 
   handlePressDinner = e => {
     this.setState({
-      category: "dinner"
+      category: "dinner",
+      dinner: !this.state.dinner
     });
   };
 
   handlePressPregame = e => {
     this.setState({
-      category: "pregame"
+      category: "pregame",
+      pregame: !this.state.pregame
     });
   };
 
   handlePressParty = e => {
     this.setState({
-      category: "party"
+      category: "party",
+      party: !this.state.party
     });
   };
 
   handlePressGoOut = e => {
     this.setState({
-      category: "go-out"
+      category: "go-out",
+      goOut: !this.state.goOut
     });
   };
 
   handlePressPostgame = e => {
     this.setState({
-      category: "postgame"
+      category: "postgame",
+      postgame: !this.state.postgame
     });
   };
 
   handlePressOther = e => {
     this.setState({
-      category: "other"
+      category: "other",
+      other: !this.state.other
     });
   };
 

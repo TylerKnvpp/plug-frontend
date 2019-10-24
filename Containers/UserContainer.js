@@ -3,6 +3,7 @@ import { View, TextInput, Text, StyleSheet } from "react-native";
 import { connect } from "react-redux";
 import { fetchUsers } from "../Actions/friendship";
 import UserIndexCard from "../Components/UserIndexCard";
+import _ from "lodash";
 
 class UserContainer extends React.Component {
   state = {
@@ -46,7 +47,15 @@ class UserContainer extends React.Component {
     let renderUsers;
     if (this.state.users.length > 0) {
       renderUsers = this.filterCollection().map(userObj => {
-        return <UserIndexCard key={userObj.id} user={userObj} />;
+        if (
+          userObj.friends.find(friend => friend.id === this.props.sender.id)
+        ) {
+          return (
+            <UserIndexCard key={userObj.id} user={userObj} friend="true" />
+          );
+        } else {
+          return <UserIndexCard key={userObj.id} user={userObj} />;
+        }
       });
     }
 
@@ -66,7 +75,8 @@ class UserContainer extends React.Component {
 
 const msp = state => {
   return {
-    users: state.users.users
+    users: state.users.users,
+    sender: state.auth.userObj
   };
 };
 
