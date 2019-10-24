@@ -2,7 +2,7 @@ import React from "react";
 import { View, TextInput, Image, Text, StyleSheet } from "react-native";
 import { connect } from "react-redux";
 import PendingInvitesCard from "../Components/PendingInvitesCard";
-import { fetchUserInvites } from "../Actions/invite";
+import _ from "lodash";
 
 class PendingInvitesContainer extends React.Component {
   state = {
@@ -21,6 +21,17 @@ class PendingInvitesContainer extends React.Component {
     }
   }
 
+  handleUpdateCollection = inviteObj => {
+    if (this.state.invites) {
+      const invitesCopy = _.clone(this.state.invites);
+      const parsed = parseInt(inviteObj);
+      const newCollection = invitesCopy.filter(invite => invite.id !== parsed);
+      this.setState({
+        invites: newCollection
+      });
+    }
+  };
+
   render() {
     // const renderEvents = this.state.invites.map(inviteObj => {
     //   return <PendingInvitesCard key={inviteObj.id} invite={inviteObj} />;
@@ -37,7 +48,13 @@ class PendingInvitesContainer extends React.Component {
 
     const brunchArray = copy.filter(invite => invite.category === "brunch");
     const renderBrunch = brunchArray.map(inviteObj => {
-      return <PendingInvitesCard key={inviteObj.id} invite={inviteObj} />;
+      return (
+        <PendingInvitesCard
+          key={inviteObj.id}
+          invite={inviteObj}
+          handleUpdateCollection={this.handleUpdateCollection}
+        />
+      );
     });
 
     const happyHourArray = copy1.filter(
@@ -45,30 +62,60 @@ class PendingInvitesContainer extends React.Component {
     );
 
     const renderHappyHour = happyHourArray.map(inviteObj => {
-      return <PendingInvitesCard key={inviteObj.id} invite={inviteObj} />;
+      return (
+        <PendingInvitesCard
+          key={inviteObj.id}
+          invite={inviteObj}
+          handleUpdateCollection={this.handleUpdateCollection}
+        />
+      );
     });
 
     const dinnerArray = copy2.filter(invite => invite.category === "dinner");
 
     const renderDinner = dinnerArray.map(inviteObj => {
-      return <PendingInvitesCard key={inviteObj.id} invite={inviteObj} />;
+      return (
+        <PendingInvitesCard
+          key={inviteObj.id}
+          invite={inviteObj}
+          handleUpdateCollection={this.handleUpdateCollection}
+        />
+      );
     });
 
     const pregameArray = copy3.filter(invite => invite.category === "pregame");
 
     const renderPregame = pregameArray.map(inviteObj => {
-      return <PendingInvitesCard key={inviteObj.id} invite={inviteObj} />;
+      return (
+        <PendingInvitesCard
+          key={inviteObj.id}
+          invite={inviteObj}
+          handleUpdateCollection={this.handleUpdateCollection}
+        />
+      );
     });
 
     const partyArray = copy4.filter(invite => invite.category === "party");
     const renderParty = partyArray.map(inviteObj => {
-      return <PendingInvitesCard key={inviteObj.id} invite={inviteObj} />;
+      return (
+        <PendingInvitesCard
+          key={inviteObj.id}
+          invite={inviteObj}
+          handleUpdateCollection={this.handleUpdateCollection}
+        />
+      );
     });
 
     const goOutArray = copy5.filter(invite => invite.category === "go-out");
 
     const renderGoOut = goOutArray.map(inviteObj => {
-      return <PendingInvitesCard key={inviteObj.id} invite={inviteObj} />;
+      return (
+        <PendingInvitesCard
+          key={inviteObj.id}
+          invite={inviteObj}
+          handleUpdateCollection={this.handleUpdateCollection}
+        />
+      );
     });
 
     const postgameArray = copy6.filter(
@@ -76,12 +123,24 @@ class PendingInvitesContainer extends React.Component {
     );
 
     const renderPostgame = postgameArray.map(inviteObj => {
-      return <PendingInvitesCard key={inviteObj.id} invite={inviteObj} />;
+      return (
+        <PendingInvitesCard
+          key={inviteObj.id}
+          invite={inviteObj}
+          handleUpdateCollection={this.handleUpdateCollection}
+        />
+      );
     });
     const otherArray = copy7.filter(invite => invite.category === "other");
 
     const renderOther = otherArray.map(inviteObj => {
-      return <PendingInvitesCard key={inviteObj.id} invite={inviteObj} />;
+      return (
+        <PendingInvitesCard
+          key={inviteObj.id}
+          invite={inviteObj}
+          handleUpdateCollection={this.handleUpdateCollection}
+        />
+      );
     });
 
     // const renderRequests = copy8.map(inviteObj => {

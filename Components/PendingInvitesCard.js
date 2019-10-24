@@ -37,8 +37,9 @@ class PendingInvitesCard extends React.Component {
         accepted: true
       }
     };
-    this.props.acceptInvite(request);
     this.setModalVisible(!this.state.modalVisible);
+    this.props.acceptInvite(request);
+    this.props.handleUpdateCollection(inviteClone.id);
   };
 
   state = {
