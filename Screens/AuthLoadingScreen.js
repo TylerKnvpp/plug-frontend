@@ -34,7 +34,7 @@ class AuthLoadingScreen extends React.Component {
 
   render() {
     return (
-      <View>
+      <View style={styles.container}>
         <ActivityIndicator />
         <StatusBar barStyle="default" />
         <Image
@@ -68,6 +68,9 @@ export default connect(
 )(AuthLoadingScreen);
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "#010112"
+  },
   image: {
     marginLeft: "auto",
     marginRight: "auto",

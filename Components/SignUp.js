@@ -1,6 +1,6 @@
 import React from "react";
 import {
-  AsyncStorage,
+  Alert,
   Button,
   Text,
   Image,
@@ -41,8 +41,11 @@ class SignUp extends React.Component {
   handlePress = e => {
     e.preventDefault();
     if (this.state.full_name && this.state.username && this.state.password) {
-      this.props.signUpUser({ user: this.state });
-      this.props.navigation.navigate("Profile");
+      this.props
+        .signUpUser({ user: this.state })
+        .then(() => this.props.navigation.navigate("AuthLoading"));
+    } else {
+      Alert.alert("Please fill out all fields.");
     }
   };
 

@@ -1,6 +1,6 @@
 import React from "react";
 import {
-  AsyncStorage,
+  Alert,
   Button,
   Text,
   Image,
@@ -41,6 +41,8 @@ class Login extends React.Component {
       this.props
         .userLogin(this.state)
         .then(() => this.props.navigation.navigate("AuthLoading"));
+    } else {
+      Alert.alert("Please fill out both fields.");
     }
   };
 

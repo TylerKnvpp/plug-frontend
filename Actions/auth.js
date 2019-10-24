@@ -21,7 +21,15 @@ export function userSignUp(user) {
         //
         const signedUpUser = JSON.stringify(res);
         //
-        AsyncStorage.setItem("loggedInUser", signedUpUser);
+        _storeData = async () => {
+          try {
+            await AsyncStorage.setItem("loggedInUser", signedUpUser);
+          } catch (error) {
+            // Error saving data
+            console.log(error);
+          }
+        };
+        this._storeData();
         //
         dispatch({ type: USER_SIGN_UP, payload: res });
         //
