@@ -204,7 +204,7 @@ class PlanCard extends React.Component {
               alignItems: "center",
               flexDirection: "row",
               backgroundColor: "transparent",
-              borderColor: "C4FD2A",
+              borderColor: "#C4FD2A",
               borderWidth: 10,
               borderRadius: 10,
               marginLeft: "auto",
