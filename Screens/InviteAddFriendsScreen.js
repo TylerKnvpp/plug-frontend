@@ -18,15 +18,6 @@ class InviteAddFriendsScreen extends React.Component {
           navigation.navigate("InviteForm");
         }}
       />
-      //   <Ionicons
-      //     name="ios-arrow-forward"
-      //     style={{ marginRight: 20 }}
-      //     size={24}
-      //     color="white"
-      //     onPress={() => {
-      //       navigation.navigate("Users");
-      //     }}
-      //   />
     ),
     headerStyle: {
       backgroundColor: "#010112",
@@ -40,10 +31,6 @@ class InviteAddFriendsScreen extends React.Component {
     }
   });
 
-  componentDidMount() {
-    // this.props.fetchUsers();
-  }
-
   render() {
     return (
       <ScrollView style={styles.container}>
@@ -53,15 +40,15 @@ class InviteAddFriendsScreen extends React.Component {
   }
 }
 
-const mdp = dispatch => {
-  return {
-    // fetchUsers: () => dispatch(fetchUsers())
-  };
-};
+// const mdp = dispatch => {
+//   return {
+//     // fetchUsers: () => dispatch(fetchUsers())
+//   };
+// };
 
 export default connect(
   null,
-  mdp
+  null
 )(InviteAddFriendsScreen);
 
 const styles = StyleSheet.create({

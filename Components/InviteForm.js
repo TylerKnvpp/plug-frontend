@@ -4,6 +4,7 @@ import DateTimePicker from "react-native-modal-datetime-picker";
 import CButton from "./CButton";
 import { connect } from "react-redux";
 import { collectInviteStateDetails, postInvite } from "../Actions/invite";
+import { StackActions, NavigationActions } from "react-navigation";
 
 class InviteForm extends React.Component {
   static navigationOptions = {
@@ -53,7 +54,7 @@ class InviteForm extends React.Component {
       };
       this.props.postInvite(invite);
       alert("Your invite has been sent!");
-      this.props.navigation.push("Plans");
+      this.props.navigation.navigate("Plans");
       this.setState({
         time: "",
         location: "",

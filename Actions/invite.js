@@ -5,13 +5,14 @@ import {
   COLLECT_INVITE_INVITED_USERS_STATE,
   FETCH_USER_INVITES,
   FETCH_USER_PLANS,
-  ACCEPT_INVITE
+  ACCEPT_INVITE,
+  URL
 } from "../Constants/actionCreators";
 import _ from "lodash";
 
 export function postInvite(invite) {
   return function(dispatch) {
-    return fetch("http://localhost:3000/invites", {
+    return fetch(`${URL}invites`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -43,7 +44,7 @@ export const collectInviteStateUsersInvited = data => ({
 
 export function fetchUserInvites(id) {
   return function(dispatch) {
-    return fetch(`http://localhost:3000/users/${id}`)
+    return fetch(`${URL}users/${id}`)
       .then(resp => resp.json())
       .then(res => {
         dispatch({ type: FETCH_USER_INVITES, payload: res.invites });
@@ -53,7 +54,7 @@ export function fetchUserInvites(id) {
 
 export function fetchUserPlans(id) {
   return function(dispatch) {
-    return fetch(`http://localhost:3000/users/${id}`)
+    return fetch(`${URL}users/${id}`)
       .then(resp => resp.json())
       .then(res => {
         // lodash copy of entire response
@@ -112,7 +113,7 @@ export function fetchUserPlans(id) {
 
 export function acceptInvite(data) {
   return function(dispatch) {
-    return fetch(`http://localhost:3000/plans/${data.id}`, {
+    return fetch(`${URL}plans/${data.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

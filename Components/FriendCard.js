@@ -5,12 +5,8 @@ import {
   StyleSheet,
   Image,
   Modal,
-  Button,
   TouchableOpacity
 } from "react-native";
-// import { Image } from "react-native";
-// import { Card, ListItem, Button, Icon } from "react-native-elements";
-import CButton from "./CButton";
 import { connect } from "react-redux";
 import { addUser } from "../Actions/friendship";
 import { Ionicons } from "@expo/vector-icons";
@@ -48,7 +44,6 @@ class FriendCard extends React.Component {
               style={styles.image}
               resizeMode="cover"
               source={avatarSource()}
-              // source={require("../assets/images/profile.jpg")}
             />
           </View>
           <View style={styles.textContainer}>
@@ -85,10 +80,6 @@ class FriendCard extends React.Component {
                       resizeMode="contain"
                       style={modalstyle.image}
                       source={avatarSource()}
-                      // source={{
-                      //   uri:
-                      //     "https://pbs.twimg.com/profile_images/461277151514222593/xYCOja56_400x400.jpeg"
-                      // }}
                     />
                   </View>
                   <Text style={modalstyle.groupName}>
@@ -140,11 +131,6 @@ class FriendCard extends React.Component {
                         {this.props.user.company}
                       </Text>
                     </View>
-
-                    {/* <Button
-                      title="Get Directions"
-                      onPress={this._handlePressButtonAsync}
-                    /> */}
                   </View>
                 </View>
               </View>

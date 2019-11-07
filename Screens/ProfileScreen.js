@@ -18,10 +18,6 @@ class ProfileScreen extends React.Component {
     }
   };
 
-  componentDidMount() {
-    console.log("profile mounted");
-  }
-
   render() {
     return (
       <View>

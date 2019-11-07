@@ -1,8 +1,12 @@
-import { INITIAL_FETCH, UPDATE_PROFILE } from "../Constants/actionCreators";
+import {
+  INITIAL_FETCH,
+  UPDATE_PROFILE,
+  URL
+} from "../Constants/actionCreators";
 
 export function getData() {
   return function(dispatch) {
-    return fetch("http://localhost:3000/users")
+    return fetch(`${URL}users`)
       .then(resp => resp.json())
       .then(data => {
         dispatch({ type: "INITIAL_FETCH", payload: data });
@@ -12,7 +16,7 @@ export function getData() {
 
 export function updateProfile(user) {
   return function(dispatch) {
-    return fetch(`http://localhost:3000/users/${user.id}`, {
+    return fetch(`${URL}users/${user.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

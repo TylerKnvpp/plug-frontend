@@ -26,3 +26,5 @@ export const COLLECT_INVITE_INVITED_USERS_STATE =
 export const FETCH_USER_INVITES = "FETCH_USER_INVITES";
 export const ACCEPT_INVITE = "ACCEPT_INVITE";
 export const FETCH_USER_PLANS = "FETCH_USER_PLANS";
+
+export const URL = "http://192.168.2.105:3000/";

@@ -218,14 +218,6 @@ class InviteCategorySelector extends React.Component {
   }
 }
 
-// const mdp = dispatch => {
-//   return {
-//     // postInvite: invite => dispatch(postInvite(invite))
-//     collectInviteStateCategory: category =>
-//       dispatch(collectInviteStateCategory(category))
-//   };
-// };
-
 export default InviteCategorySelector;
 
 const styles = StyleSheet.create({

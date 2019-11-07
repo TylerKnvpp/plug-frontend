@@ -1,14 +1,14 @@
 import {
   USER_SIGN_UP,
   USER_LOGIN,
-  FETCH_USER
+  FETCH_USER,
+  URL
 } from "../Constants/actionCreators";
 import { AsyncStorage } from "react-native";
-import { fetchUserPlans } from "./invite";
 
 export function userSignUp(user) {
   return function(dispatch) {
-    return fetch("http://localhost:3000/users", {
+    return fetch(`${URL}users`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -39,7 +39,7 @@ export function userSignUp(user) {
 
 export function userLogin(user) {
   return function(dispatch) {
-    return fetch("http://localhost:3000/login", {
+    return fetch(`${URL}login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -68,7 +68,7 @@ export function userLogin(user) {
 
 export function getUserProfile(id) {
   return function(dispatch) {
-    return fetch(`http://localhost:3000/users/${id}`)
+    return fetch(`${URL}users/${id}`)
       .then(resp => resp.json())
       .then(data => {
         dispatch({ type: FETCH_USER, payload: data });

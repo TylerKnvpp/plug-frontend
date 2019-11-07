@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { acceptFriendRequest } from "../Actions/friendship";
 import { Ionicons } from "@expo/vector-icons";
 import moment from "moment";
+import { URL } from "../Constants/actionCreators";
 
 class PlanCard extends React.Component {
   handleAccept = id => {
@@ -27,7 +28,7 @@ class PlanCard extends React.Component {
   };
 
   componentDidMount() {
-    fetch(`http://localhost:3000/users/${this.props.invite.user_id}`)
+    fetch(`${URL}users/${this.props.invite.user_id}`)
       .then(resp => resp.json())
       .then(res => {
         this.setState({

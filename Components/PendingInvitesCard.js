@@ -6,11 +6,8 @@ import {
   Image,
   Button,
   Modal,
-  TouchableOpacity,
-  TouchableHighlight
+  TouchableOpacity
 } from "react-native";
-// import { Image } from "react-native";
-// import { Card, ListItem, Button, Icon } from "react-native-elements";
 import CButton from "./CButton";
 import { connect } from "react-redux";
 import { acceptInvite } from "../Actions/invite";
@@ -18,6 +15,7 @@ import { Ionicons } from "@expo/vector-icons";
 import moment from "moment";
 import _ from "lodash";
 import * as WebBrowser from "expo-web-browser";
+import { URL } from "../Constants/actionCreators";
 
 class PendingInvitesCard extends React.Component {
   handleAccept = id => {
@@ -50,7 +48,7 @@ class PendingInvitesCard extends React.Component {
   };
 
   componentDidMount() {
-    fetch(`http://localhost:3000/users/${this.props.invite.user_id}`)
+    fetch(`${URL}users/${this.props.invite.user_id}`)
       .then(resp => resp.json())
       .then(res => {
         this.setState({
@@ -116,10 +114,6 @@ class PendingInvitesCard extends React.Component {
                 resizeMode="contain"
                 style={styles.image}
                 source={avatarSource()}
-                // source={{
-                //   uri:
-                //     "https://pbs.twimg.com/profile_images/461277151514222593/xYCOja56_400x400.jpeg"
-                // }}
               />
             </View>
             <Text style={styles.senderInfo}>
@@ -180,10 +174,6 @@ class PendingInvitesCard extends React.Component {
                       resizeMode="contain"
                       style={modalstyle.image}
                       source={avatarSource()}
-                      // source={{
-                      //   uri:
-                      //     "https://pbs.twimg.com/profile_images/461277151514222593/xYCOja56_400x400.jpeg"
-                      // }}
                     />
                   </View>
                   <Text style={modalstyle.groupName}>

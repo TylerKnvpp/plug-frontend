@@ -31,19 +31,6 @@ class InviteScreen extends React.Component {
     this.props.navigation.navigate("AddFriends");
   };
 
-  // handleSubmit = plan => {
-  //   const cat = this.state.category;
-  //   const user = { ...this.props.user };
-  //   const createdPlan = {
-  //     user_id: user.id,
-  //     category: cat.category,
-  //     time: plan.time,
-  //     location: plan.location,
-  //     details: plan.details
-  //   };
-  //   this.props.postInvite(createdPlan);
-  // };
-
   render() {
     return (
       <SafeAreaView style={styles.container}>
@@ -57,7 +44,6 @@ class InviteScreen extends React.Component {
 
 const mdp = dispatch => {
   return {
-    // postInvite: invite => dispatch(postInvite(invite))
     collectInviteStateCategory: category =>
       dispatch(collectInviteStateCategory(category))
   };

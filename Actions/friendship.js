@@ -3,12 +3,13 @@ import {
   FRIEND_REQUEST,
   FETCH_FRIEND_REQUESTS,
   ACCEPT_FRIEND_REQUEST,
-  FETCH_FRIENDS
+  FETCH_FRIENDS,
+  URL
 } from "../Constants/actionCreators";
 
 export function fetchUsers() {
   return function(dispatch) {
-    return fetch("http://localhost:3000/users")
+    return fetch(`${URL}users`)
       .then(resp => resp.json())
       .then(res => {
         dispatch({ type: FETCH_USERS, payload: res });
@@ -18,7 +19,7 @@ export function fetchUsers() {
 
 export function addUser(request) {
   return function(dispatch) {
-    return fetch(`http://localhost:3000/friends/`, {
+    return fetch(`${URL}friends/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -35,7 +36,7 @@ export function addUser(request) {
 
 export function fetchFriendRequests(id) {
   return function(dispatch) {
-    return fetch(`http://localhost:3000/users/${id}/friends`)
+    return fetch(`${URL}users/${id}/friends`)
       .then(resp => resp.json(id))
       .then(res => {
         dispatch({ type: FETCH_FRIEND_REQUESTS, payload: res });
@@ -46,7 +47,7 @@ export function fetchFriendRequests(id) {
 export function acceptFriendRequest(users) {
   return function(dispatch) {
     return fetch(
-      `http://localhost:3000/users/${users.user_id}/friends/${users.friend}/add-friend/`,
+      `${URL}users/${users.user_id}/friends/${users.friend}/add-friend/`,
       {
         method: "POST",
         headers: {
@@ -65,7 +66,7 @@ export function acceptFriendRequest(users) {
 
 export function fetchFriends(id) {
   return function(dispatch) {
-    return fetch(`http://localhost:3000/users/${id}/friends`)
+    return fetch(`${URL}users/${id}/friends`)
       .then(resp => resp.json(id))
       .then(res => {
         dispatch({ type: FETCH_FRIENDS, payload: res });
