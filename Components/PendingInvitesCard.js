@@ -16,6 +16,7 @@ import moment from "moment";
 import _ from "lodash";
 import * as WebBrowser from "expo-web-browser";
 import { URL } from "../Constants/actionCreators";
+import InviteModal from "./InviteModal";
 
 class PendingInvitesCard extends React.Component {
   handleAccept = id => {
@@ -63,6 +64,7 @@ class PendingInvitesCard extends React.Component {
     this.setState({
       modalVisible: !this.state.modalVisible
     });
+    console.log(this.state.modalVisible);
   };
 
   setModalVisible(visible) {
@@ -146,100 +148,15 @@ class PendingInvitesCard extends React.Component {
           </View>
         </TouchableOpacity>
         {this.state.modalVisible ? (
-          <Modal
-            animationType={"slide"}
-            transparent={false}
-            visible={this.state.modalVisible}
-            onRequestClose={() => {
-              alert("Modal has been closed.");
-            }}
-          >
-            <View style={modalstyle.container}>
-              <View style={modalstyle.detailsContainer}>
-                <TouchableOpacity
-                  onPress={() => {
-                    this.setModalVisible(!this.state.modalVisible);
-                  }}
-                >
-                  <Ionicons
-                    name="ios-arrow-down"
-                    style={{ marginLeft: 300 }}
-                    size={40}
-                    color="white"
-                  />
-                </TouchableOpacity>
-                <View style={modalstyle.align}>
-                  <View style={modalstyle.imageCropper}>
-                    <Image
-                      resizeMode="contain"
-                      style={modalstyle.image}
-                      source={avatarSource()}
-                    />
-                  </View>
-                  <Text style={modalstyle.groupName}>
-                    {this.state.user} & {Math.floor(Math.random() * 10)} others
-                  </Text>
-                  <View style={styles.sender}></View>
-                  <View
-                    style={{
-                      marginBottom: 30,
-                      marginTop: 30,
-                      alignItems: "center"
-                    }}
-                  >
-                    <Text style={modalstyle.categoryname}>
-                      {this.props.invite.category.toUpperCase()}
-                    </Text>
-                    <View style={modalstyle.location}>
-                      <Ionicons
-                        name="ios-clock"
-                        style={{ marginRight: 15 }}
-                        size={30}
-                        color="grey"
-                      />
-
-                      <Text
-                        style={modalstyle.headerInfo}
-                      >{`${days[eventDay]} @ ${eventTime}`}</Text>
-                    </View>
-
-                    <TouchableOpacity style={modalstyle.location}>
-                      <Ionicons
-                        name="ios-pin"
-                        style={{ marginRight: 20 }}
-                        size={30}
-                        color="grey"
-                      />
-                      <Text style={modalstyle.headerInfo}>
-                        {this.props.invite.location}
-                      </Text>
-                    </TouchableOpacity>
-                    <Text>
-                      {this.state.result && JSON.stringify(this.state.result)}
-                    </Text>
-                    <Button
-                      title="Get Directions"
-                      onPress={this._handlePressButtonAsync}
-                    />
-                  </View>
-
-                  <CButton text="Accept" onPress={this.handleAccept} />
-                </View>
-              </View>
-              <TouchableOpacity
-                style={{ marginTop: 150 }}
-                onPress={() => {
-                  this.setModalVisible(!this.state.modalVisible);
-                }}
-              >
-                <Text
-                  style={{ color: "white", fontWeight: "900", fontSize: 24 }}
-                >
-                  CLOSE
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </Modal>
+          <InviteModal
+            days={days}
+            eventDay={eventDay}
+            eventTime={eventTime}
+            createdAt={createdAt}
+            handleAccept={this.handleAccept}
+            modalVisible={this.state.modalVisible}
+            invite={this.props.invite}
+          />
         ) : null}
       </View>
     );
@@ -259,10 +176,7 @@ const mdp = dispatch => {
   };
 };
 
-export default connect(
-  msp,
-  mdp
-)(PendingInvitesCard);
+export default connect(msp, mdp)(PendingInvitesCard);
 
 const styles = StyleSheet.create({
   revealContainer: {
@@ -406,68 +320,5 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     backgroundColor: "#25aae1"
-  }
-});
-
-const modalstyle = StyleSheet.create({
-  categoryname: {
-    color: "#25aae1",
-    fontSize: 30,
-    fontWeight: "900",
-    marginBottom: 20
-  },
-  headerInfo: {
-    color: "white",
-    fontSize: 24,
-    fontWeight: "900",
-    marginTop: 3
-    // marginBottom: 10
-    // marginBottom: 20,
-    // marginLeft: "auto",
-    // marginRight: "auto"
-  },
-  location: {
-    flexDirection: "row",
-    alignItems: "flex-start",
-
-    marginBottom: 20
-  },
-  groupName: {
-    color: "white",
-    fontWeight: "900",
-    fontSize: 18,
-    marginTop: 20,
-    marginBottom: 20
-  },
-  align: {
-    alignItems: "center"
-  },
-  detailsContainer: {
-    marginTop: 65
-  },
-  container: {
-    alignItems: "center",
-    backgroundColor: "#010112",
-    flex: 1
-  },
-  imageCropper: {
-    borderColor: "#25aae1",
-    borderWidth: 3,
-    width: 150,
-    height: 150,
-    marginLeft: 0,
-    marginRight: 15,
-    // marginTop: 20,
-    // marginBottom: 10,
-    position: "relative",
-    overflow: "hidden",
-    borderRadius: 150
-  },
-  image: {
-    display: "flex",
-    margin: "auto",
-    marginLeft: "0%",
-    height: "100%",
-    width: "auto"
   }
 });

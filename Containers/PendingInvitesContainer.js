@@ -94,7 +94,10 @@ class PendingInvitesContainer extends React.Component {
               />
               <Text style={styles.brunch}>BRUNCH</Text>
             </View>
-            <CategoryCardContainer invites={this.state.brunch} />
+            <CategoryCardContainer
+              handleUpdateCollection={this.handleUpdateCollection}
+              invites={this.state.brunch}
+            />
           </View>
         ) : null}
         {this.state.happyHour.length > 0 ? (
@@ -107,7 +110,10 @@ class PendingInvitesContainer extends React.Component {
               />
               <Text style={styles.happyHour}>HAPPY HOUR</Text>
             </View>
-            <CategoryCardContainer invites={this.state.happyHour} />
+            <CategoryCardContainer
+              handleUpdateCollection={this.handleUpdateCollection}
+              invites={this.state.happyHour}
+            />
           </View>
         ) : null}
         {this.state.dinner.length > 0 ? (
@@ -120,7 +126,10 @@ class PendingInvitesContainer extends React.Component {
               />
               <Text style={styles.dinner}>DINNER</Text>
             </View>
-            <CategoryCardContainer invites={this.state.dinner} />
+            <CategoryCardContainer
+              handleUpdateCollection={this.handleUpdateCollection}
+              invites={this.state.dinner}
+            />
           </View>
         ) : null}
         {this.state.pregame.length > 0 ? (
@@ -133,7 +142,10 @@ class PendingInvitesContainer extends React.Component {
               />
               <Text style={styles.pregame}>PREGAME</Text>
             </View>
-            <CategoryCardContainer invites={this.state.pregame} />
+            <CategoryCardContainer
+              handleUpdateCollection={this.handleUpdateCollection}
+              invites={this.state.pregame}
+            />
           </View>
         ) : null}
         {this.state.party.length > 0 ? (
@@ -146,7 +158,10 @@ class PendingInvitesContainer extends React.Component {
               />
               <Text style={styles.party}>PARTY</Text>
             </View>
-            <CategoryCardContainer invites={this.state.party} />
+            <CategoryCardContainer
+              handleUpdateCollection={this.handleUpdateCollection}
+              invites={this.state.party}
+            />
           </View>
         ) : null}
         {this.state.goOut.length > 0 ? (
@@ -159,7 +174,10 @@ class PendingInvitesContainer extends React.Component {
               />
               <Text style={styles.goOut}>GO OUT</Text>
             </View>
-            <CategoryCardContainer invites={this.state.goOut} />
+            <CategoryCardContainer
+              handleUpdateCollection={this.handleUpdateCollection}
+              invites={this.state.goOut}
+            />
           </View>
         ) : null}
         {this.state.postgame.length > 0 ? (
@@ -172,7 +190,10 @@ class PendingInvitesContainer extends React.Component {
               />
               <Text style={styles.postgame}>POSTGAME</Text>
             </View>
-            <CategoryCardContainer invites={this.state.postgame} />
+            <CategoryCardContainer
+              handleUpdateCollection={this.handleUpdateCollection}
+              invites={this.state.postgame}
+            />
           </View>
         ) : null}
         {this.state.other.length > 0 ? (
@@ -185,7 +206,10 @@ class PendingInvitesContainer extends React.Component {
               />
               <Text style={styles.other}>OTHER</Text>
             </View>
-            <CategoryCardContainer invites={this.state.other} />
+            <CategoryCardContainer
+              handleUpdateCollection={this.handleUpdateCollection}
+              invites={this.state.other}
+            />
           </View>
         ) : null}
       </View>

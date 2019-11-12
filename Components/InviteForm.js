@@ -5,6 +5,7 @@ import CButton from "./CButton";
 import { connect } from "react-redux";
 import { collectInviteStateDetails, postInvite } from "../Actions/invite";
 import { StackActions, NavigationActions } from "react-navigation";
+import _ from "lodash";
 
 class InviteForm extends React.Component {
   static navigationOptions = {
@@ -44,14 +45,19 @@ class InviteForm extends React.Component {
 
   handleSubmit = e => {
     if (this.state.time && this.state.location && this.state.details) {
+      const clone = _.clone(this.props.fullInvite.invitedUsers);
+      const invitedUserString = clone.join(",");
+
       const invite = {
         user_id: this.props.user.id,
         time: this.state.time,
         location: this.state.location,
         details: this.state.details,
         category: this.props.fullInvite.inviteCategory,
+        invited_users: invitedUserString,
         invitedUsers: this.props.fullInvite.invitedUsers
       };
+
       this.props.postInvite(invite);
       alert("Your invite has been sent!");
       this.props.navigation.navigate("Plans");
@@ -126,10 +132,7 @@ const msp = state => {
   };
 };
 
-export default connect(
-  msp,
-  mdp
-)(InviteForm);
+export default connect(msp, mdp)(InviteForm);
 
 const styles = StyleSheet.create({
   map: {
