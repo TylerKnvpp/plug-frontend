@@ -18,9 +18,6 @@ class PendingInvitesContainer extends React.Component {
   };
 
   componentDidMount() {
-    this._loadResourcesAsync();
-    console.log("mount");
-
     if (this.props.invites) {
       // copy
       const invitesClone = _.clone(this.props.invites);
@@ -72,22 +69,6 @@ class PendingInvitesContainer extends React.Component {
       }
     }
   }
-
-  _loadResourcesAsync = async () => {
-    console.log("async");
-    return Promise.all([
-      Asset.loadAsync([
-        require("../assets/images/brunch.png"),
-        require("../assets/images/happy-hour.png"),
-        require("../assets/images/dinner.png"),
-        require("../assets/images/pregame.png"),
-        require("../assets/images/party.png"),
-        require("../assets/images/go-out.png"),
-        require("../assets/images/postgame.png"),
-        require("../assets/images/other.png")
-      ])
-    ]);
-  };
 
   handleUpdateCollection = inviteObj => {
     if (this.state.invites) {

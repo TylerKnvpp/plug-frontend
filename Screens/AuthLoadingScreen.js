@@ -15,6 +15,7 @@ import { fetchUserPlans } from "../Actions/invite";
 class AuthLoadingScreen extends React.Component {
   componentDidMount() {
     this._bootstrapAsync();
+    this._loadResourcesAsync();
   }
 
   // Fetch the token from storage then navigate to our appropriate screen
@@ -30,6 +31,30 @@ class AuthLoadingScreen extends React.Component {
     } else {
       this.props.navigation.navigate("LoginScreen");
     }
+  };
+
+  _loadResourcesAsync = async () => {
+    console.log("async");
+    return Promise.all([
+      Asset.loadAsync([
+        require("../assets/images/brunch.png"),
+        require("../assets/images/happy-hour.png"),
+        require("../assets/images/dinner.png"),
+        require("../assets/images/pregame.png"),
+        require("../assets/images/party.png"),
+        require("../assets/images/go-out.png"),
+        require("../assets/images/postgame.png"),
+        require("../assets/images/other.png"),
+        require("../assets/brunch.png"),
+        require("../assets/happy-hour.png"),
+        require("../assets/dinner.png"),
+        require("../assets/pregame.png"),
+        require("../assets/party.png"),
+        require("../assets/go-out.png"),
+        require("../assets/postgame.png"),
+        require("../assets/other.png")
+      ])
+    ]);
   };
 
   render() {
@@ -62,10 +87,7 @@ const msp = state => {
   };
 };
 
-export default connect(
-  msp,
-  mdp
-)(AuthLoadingScreen);
+export default connect(msp, mdp)(AuthLoadingScreen);
 
 const styles = StyleSheet.create({
   container: {
