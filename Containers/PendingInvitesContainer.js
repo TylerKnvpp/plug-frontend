@@ -1,25 +1,93 @@
 import React from "react";
 import { View, TextInput, Image, Text, StyleSheet } from "react-native";
 import { connect } from "react-redux";
-import PendingInvitesCard from "../Components/PendingInvitesCard";
+import CategoryCardContainer from "./CategoryCardContainer";
 import _ from "lodash";
 
 class PendingInvitesContainer extends React.Component {
   state = {
-    invites: []
+    invites: [],
+    brunch: [],
+    happyHour: [],
+    dinner: [],
+    pregame: [],
+    party: [],
+    goOut: [],
+    postgame: [],
+    other: []
   };
 
   componentDidMount() {
-    if (this.props.invites) {
-      const invitesCopy = [...this.props.invites];
+    this._loadResourcesAsync();
+    console.log("mount");
 
+    if (this.props.invites) {
+      // copy
+      const invitesClone = _.clone(this.props.invites);
+      // sort by time
+      const sorted = invitesClone.sort(function(a, b) {
+        return new Date(b.time) - new Date(a.time);
+      });
+      // seperate
+      let brunchArr = _.clone(invitesClone);
+      brunchArr = brunchArr.filter(invite => invite.category === "brunch");
+
+      let happyArr = _.clone(invitesClone);
+      happyHourArr = happyArr.filter(
+        invite => invite.category === "happy-hour"
+      );
+
+      let dinnerArr = _.clone(invitesClone);
+      dinnerArr = dinnerArr.filter(invite => invite.category === "dinner");
+
+      let pregameArr = _.clone(invitesClone);
+      pregameArr = pregameArr.filter(invite => invite.category === "pregame");
+
+      let partyArr = _.clone(invitesClone);
+      partyArr = partyArr.filter(invite => invite.category === "party");
+
+      let goArr = _.clone(invitesClone);
+      goOutArr = goArr.filter(invite => invite.category === "go-out");
+
+      let postgameArr = _.clone(invitesClone);
+      postgameArr = postgameArr.filter(
+        invite => invite.category === "postgame"
+      );
+
+      let otherArr = _.clone(invitesClone);
+      otherArr = otherArr.filter(invite => invite.category === "other");
+      // setState
       if (this.state.invites.length === 0) {
         this.setState({
-          invites: invitesCopy
+          invites: sorted,
+          brunch: brunchArr,
+          happyHour: happyHourArr,
+          dinner: dinnerArr,
+          pregame: pregameArr,
+          party: partyArr,
+          goOut: goOutArr,
+          postgame: postgameArr,
+          other: otherArr
         });
       }
     }
   }
+
+  _loadResourcesAsync = async () => {
+    console.log("async");
+    return Promise.all([
+      Asset.loadAsync([
+        require("../assets/images/brunch.png"),
+        require("../assets/images/happy-hour.png"),
+        require("../assets/images/dinner.png"),
+        require("../assets/images/pregame.png"),
+        require("../assets/images/party.png"),
+        require("../assets/images/go-out.png"),
+        require("../assets/images/postgame.png"),
+        require("../assets/images/other.png")
+      ])
+    ]);
+  };
 
   handleUpdateCollection = inviteObj => {
     if (this.state.invites) {
@@ -33,126 +101,9 @@ class PendingInvitesContainer extends React.Component {
   };
 
   render() {
-    // const renderEvents = this.state.invites.map(inviteObj => {
-    //   return <PendingInvitesCard key={inviteObj.id} invite={inviteObj} />;
-    // });
-
-    const copy = [...this.state.invites];
-    const copy1 = [...this.state.invites];
-    const copy2 = [...this.state.invites];
-    const copy3 = [...this.state.invites];
-    const copy4 = [...this.state.invites];
-    const copy5 = [...this.state.invites];
-    const copy6 = [...this.state.invites];
-    const copy7 = [...this.state.invites];
-
-    const brunchArray = copy.filter(invite => invite.category === "brunch");
-    const renderBrunch = brunchArray.map(inviteObj => {
-      return (
-        <PendingInvitesCard
-          key={inviteObj.id}
-          invite={inviteObj}
-          handleUpdateCollection={this.handleUpdateCollection}
-        />
-      );
-    });
-
-    const happyHourArray = copy1.filter(
-      invite => invite.category === "happy-hour"
-    );
-
-    const renderHappyHour = happyHourArray.map(inviteObj => {
-      return (
-        <PendingInvitesCard
-          key={inviteObj.id}
-          invite={inviteObj}
-          handleUpdateCollection={this.handleUpdateCollection}
-        />
-      );
-    });
-
-    const dinnerArray = copy2.filter(invite => invite.category === "dinner");
-
-    const renderDinner = dinnerArray.map(inviteObj => {
-      return (
-        <PendingInvitesCard
-          key={inviteObj.id}
-          invite={inviteObj}
-          handleUpdateCollection={this.handleUpdateCollection}
-        />
-      );
-    });
-
-    const pregameArray = copy3.filter(invite => invite.category === "pregame");
-
-    const renderPregame = pregameArray.map(inviteObj => {
-      return (
-        <PendingInvitesCard
-          key={inviteObj.id}
-          invite={inviteObj}
-          handleUpdateCollection={this.handleUpdateCollection}
-        />
-      );
-    });
-
-    const partyArray = copy4.filter(invite => invite.category === "party");
-    const renderParty = partyArray.map(inviteObj => {
-      return (
-        <PendingInvitesCard
-          key={inviteObj.id}
-          invite={inviteObj}
-          handleUpdateCollection={this.handleUpdateCollection}
-        />
-      );
-    });
-
-    const goOutArray = copy5.filter(invite => invite.category === "go-out");
-
-    const renderGoOut = goOutArray.map(inviteObj => {
-      return (
-        <PendingInvitesCard
-          key={inviteObj.id}
-          invite={inviteObj}
-          handleUpdateCollection={this.handleUpdateCollection}
-        />
-      );
-    });
-
-    const postgameArray = copy6.filter(
-      invite => invite.category === "postgame"
-    );
-
-    const renderPostgame = postgameArray.map(inviteObj => {
-      return (
-        <PendingInvitesCard
-          key={inviteObj.id}
-          invite={inviteObj}
-          handleUpdateCollection={this.handleUpdateCollection}
-        />
-      );
-    });
-    const otherArray = copy7.filter(invite => invite.category === "other");
-
-    const renderOther = otherArray.map(inviteObj => {
-      return (
-        <PendingInvitesCard
-          key={inviteObj.id}
-          invite={inviteObj}
-          handleUpdateCollection={this.handleUpdateCollection}
-        />
-      );
-    });
-
-    // const renderRequests = copy8.map(inviteObj => {
-    //   return <PendingInvitesCard key={inviteObj.id} invite={inviteObj} />;
-    // });
     return (
       <View style={styles.container}>
-        {/* <View style={styles.catContainer}>
-           <Text style={styles.brunch}>BRUNCH</Text>
-           {renderEvents}
-         </View> */}
-        {brunchArray.length > 0 ? (
+        {this.state.brunch.length > 0 ? (
           <View style={styles.catContainer}>
             <View style={styles.iconContainer}>
               <Image
@@ -162,10 +113,10 @@ class PendingInvitesContainer extends React.Component {
               />
               <Text style={styles.brunch}>BRUNCH</Text>
             </View>
-            {renderBrunch}
+            <CategoryCardContainer invites={this.state.brunch} />
           </View>
         ) : null}
-        {happyHourArray.length > 0 ? (
+        {this.state.happyHour.length > 0 ? (
           <View style={styles.catContainer}>
             <View style={styles.hhContainer}>
               <Image
@@ -175,10 +126,10 @@ class PendingInvitesContainer extends React.Component {
               />
               <Text style={styles.happyHour}>HAPPY HOUR</Text>
             </View>
-            {renderHappyHour}
+            <CategoryCardContainer invites={this.state.happyHour} />
           </View>
         ) : null}
-        {dinnerArray.length > 0 ? (
+        {this.state.dinner.length > 0 ? (
           <View style={styles.catContainer}>
             <View style={styles.iconContainer}>
               <Image
@@ -188,10 +139,10 @@ class PendingInvitesContainer extends React.Component {
               />
               <Text style={styles.dinner}>DINNER</Text>
             </View>
-            {renderDinner}
+            <CategoryCardContainer invites={this.state.dinner} />
           </View>
         ) : null}
-        {pregameArray.length > 0 ? (
+        {this.state.pregame.length > 0 ? (
           <View style={styles.catContainer}>
             <View style={styles.iconContainer}>
               <Image
@@ -201,10 +152,10 @@ class PendingInvitesContainer extends React.Component {
               />
               <Text style={styles.pregame}>PREGAME</Text>
             </View>
-            {renderPregame}
+            <CategoryCardContainer invites={this.state.pregame} />
           </View>
         ) : null}
-        {partyArray.length > 0 ? (
+        {this.state.party.length > 0 ? (
           <View style={styles.catContainer}>
             <View style={styles.iconContainer}>
               <Image
@@ -214,10 +165,10 @@ class PendingInvitesContainer extends React.Component {
               />
               <Text style={styles.party}>PARTY</Text>
             </View>
-            {renderParty}
+            <CategoryCardContainer invites={this.state.party} />
           </View>
         ) : null}
-        {goOutArray.length > 0 ? (
+        {this.state.goOut.length > 0 ? (
           <View style={styles.catContainer}>
             <View style={styles.iconContainer}>
               <Image
@@ -227,10 +178,10 @@ class PendingInvitesContainer extends React.Component {
               />
               <Text style={styles.goOut}>GO OUT</Text>
             </View>
-            {renderGoOut}
+            <CategoryCardContainer invites={this.state.goOut} />
           </View>
         ) : null}
-        {postgameArray.length > 0 ? (
+        {this.state.postgame.length > 0 ? (
           <View style={styles.catContainer}>
             <View style={styles.iconContainer}>
               <Image
@@ -240,10 +191,10 @@ class PendingInvitesContainer extends React.Component {
               />
               <Text style={styles.postgame}>POSTGAME</Text>
             </View>
-            {renderPostgame}
+            <CategoryCardContainer invites={this.state.postgame} />
           </View>
         ) : null}
-        {otherArray.length > 0 ? (
+        {this.state.other.length > 0 ? (
           <View style={styles.catContainer}>
             <View style={styles.iconContainer}>
               <Image
@@ -253,7 +204,7 @@ class PendingInvitesContainer extends React.Component {
               />
               <Text style={styles.other}>OTHER</Text>
             </View>
-            {renderOther}
+            <CategoryCardContainer invites={this.state.other} />
           </View>
         ) : null}
       </View>
@@ -267,16 +218,7 @@ const msp = state => {
   };
 };
 
-// const mdp = dispatch => {
-//   return {
-//     fetchUserInvites: id => dispatch(fetchUserInvites(id))
-//   };
-// };
-
-export default connect(
-  msp,
-  null
-)(PendingInvitesContainer);
+export default connect(msp, null)(PendingInvitesContainer);
 
 const styles = StyleSheet.create({
   hhContainer: {

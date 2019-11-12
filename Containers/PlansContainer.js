@@ -13,10 +13,12 @@ class PlansContainer extends React.Component {
   componentDidMount() {
     if (this.props.invites) {
       const acceptedInvites = [...this.props.invites];
+      const sorted = acceptedInvites.sort(function(a, b) {
+        return new Date(b.time) - new Date(a.time);
+      });
       if (this.state.invites.length === 0) {
-        // setting state
         this.setState({
-          invites: acceptedInvites
+          invites: sorted
         });
       }
     }
@@ -52,10 +54,7 @@ const mdp = dispatch => {
   };
 };
 
-export default connect(
-  msp,
-  mdp
-)(PlansContainer);
+export default connect(msp, mdp)(PlansContainer);
 
 const styles = StyleSheet.create({
   iconContainer: {
