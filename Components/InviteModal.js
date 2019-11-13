@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Button,
   Image,
   Modal,
   Text,
-  TouchableHighlight,
+  SafeAreaView,
   StyleSheet,
   TouchableOpacity,
   View
@@ -12,11 +12,14 @@ import {
 import CButton from "../Components/CButton";
 import { acceptInvite } from "../Actions/invite";
 import { Ionicons } from "@expo/vector-icons";
-import moment from "moment";
+import _ from "lodash";
+import InvitedUserPic from "./InvitedUserPic";
+import { ScrollView } from "react-native-gesture-handler";
 
 export default function InviteModal(props) {
   const [modalVisible, setModalVisible] = useState(true);
   const [result, setResult] = useState(null);
+  const [inviteesArray, setInvitees] = useState([]);
 
   const _handlePressButtonAsync = async () => {
     this.setModalVisible(!setModalVisible);
@@ -29,6 +32,34 @@ export default function InviteModal(props) {
     }
   };
 
+  useEffect(() => {
+    if (props) {
+      setInvitees(props.invitedUsers);
+    }
+  }, []);
+
+  const avatarsArray = [];
+
+  if (inviteesArray) {
+    inviteesArray.forEach(user => {
+      avatarsArray.push({ avatar: user.avatar, username: user.username });
+    });
+  }
+
+  const renderAvatars = avatarsArray.map(pic => {
+    return (
+      <InvitedUserPic
+        key={pic.username}
+        source={pic.avatar}
+        username={pic.username}
+      />
+    );
+  });
+
+  // Sender's profile pic
+  const avatarSource = function(options) {
+    return { uri: `${props.source}` };
+  };
   return (
     <Modal
       animationType={"slide"}
@@ -61,12 +92,17 @@ export default function InviteModal(props) {
               />
             </View>
             <Text style={modalstyle.groupName}>
-              {props.invite.user} & {Math.floor(Math.random() * 10)} others
+              {props.user} &{" "}
+              {inviteesArray.length ? `${inviteesArray.length} others` : null}
             </Text>
+            <View style={modalstyle.scrollContainer}>
+              <ScrollView style={modalstyle.scroll} horizontal>
+                {renderAvatars}
+              </ScrollView>
+            </View>
             <View
               style={{
                 marginBottom: 30,
-                marginTop: 30,
                 alignItems: "center"
               }}
             >
@@ -108,7 +144,7 @@ export default function InviteModal(props) {
           </View>
         </View>
         <TouchableOpacity
-          style={{ marginTop: 150 }}
+          style={{ marginTop: 80 }}
           onPress={() => {
             setModalVisible(!modalVisible);
           }}
@@ -123,6 +159,15 @@ export default function InviteModal(props) {
 }
 
 const modalstyle = StyleSheet.create({
+  scrollContainer: {
+    height: 75,
+    width: "100%",
+    marginLeft: 20,
+    marginBottom: 10
+  },
+  scroll: {
+    marginLeft: 10
+  },
   categoryname: {
     color: "#25aae1",
     fontSize: 30,
@@ -166,8 +211,8 @@ const modalstyle = StyleSheet.create({
   imageCropper: {
     borderColor: "#25aae1",
     borderWidth: 3,
-    width: 150,
-    height: 150,
+    width: 100,
+    height: 100,
     marginLeft: 0,
     marginRight: 15,
     // marginTop: 20,

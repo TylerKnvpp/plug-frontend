@@ -1,14 +1,5 @@
 import React from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  Button,
-  Modal,
-  TouchableOpacity
-} from "react-native";
-import CButton from "./CButton";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
 import { acceptInvite } from "../Actions/invite";
 import { Ionicons } from "@expo/vector-icons";
@@ -45,7 +36,8 @@ class PendingInvitesCard extends React.Component {
     user: "",
     avatar: "",
     result: null,
-    modalVisible: false
+    modalVisible: false,
+    invitedUsers: []
   };
 
   componentDidMount() {
@@ -57,6 +49,16 @@ class PendingInvitesCard extends React.Component {
           avatar: res.avatar
         });
       });
+    //
+    fetch(`${URL}invites/${this.props.invite.id}/invited_users`)
+      .then(resp => resp.json())
+      .then(data => {
+        if (data) {
+          this.setState({
+            invitedUsers: data.invited_users
+          });
+        }
+      });
   }
 
   handlePress = e => {
@@ -64,7 +66,6 @@ class PendingInvitesCard extends React.Component {
     this.setState({
       modalVisible: !this.state.modalVisible
     });
-    console.log(this.state.modalVisible);
   };
 
   setModalVisible(visible) {
@@ -105,7 +106,6 @@ class PendingInvitesCard extends React.Component {
       };
     }
     //
-
     return (
       <View style={styles.container}>
         <TouchableOpacity style={styles.card} onPress={this.handlePress}>
@@ -122,7 +122,10 @@ class PendingInvitesCard extends React.Component {
               {this.state.user.length > 10
                 ? this.state.user.substring(0, 10).concat("...")
                 : this.state.user}{" "}
-              & {Math.floor(Math.random() * 10)} others
+              &{" "}
+              {this.state.invitedUsers
+                ? `${this.state.invitedUsers.length} others`
+                : null}
             </Text>
           </View>
           <View style={styles.location}>
@@ -149,6 +152,9 @@ class PendingInvitesCard extends React.Component {
         </TouchableOpacity>
         {this.state.modalVisible ? (
           <InviteModal
+            user={this.state.user}
+            source={this.state.avatar}
+            invitedUsers={this.state.invitedUsers}
             days={days}
             eventDay={eventDay}
             eventTime={eventTime}
