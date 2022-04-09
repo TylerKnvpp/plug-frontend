@@ -13,7 +13,7 @@
     "expo": "^35.0.0",
     "expo-web-browser": "^7.0.1",
     "formik": "^1.5.8",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "react": "16.8.3",
     "react-dom": "16.8.3",
     "react-moment": "^0.9.6",
